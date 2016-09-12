@@ -1,0 +1,163 @@
+		<nav>
+			<div class="container">
+			    <div class="nav-wrapper">
+			      <div class="col s12">
+			        <a class="page-title">CLIENTE</a> 
+					<a class="modal-trigger" href="#agregar"><i class="material-icons right">add</i></a>
+			      </div>
+			    </div>
+			</div>
+	    </nav>
+		<table class="bordered responsive-table centered">
+	        <thead>
+	          <tr>
+	              <th data-field="id">Id</th>
+	              <th data-field="nombre">Nombre</th>
+	              <th data-field="telefono">Telefono</th>
+	              <th data-field="saldo">Saldo</th>
+	              <th data-field="saldo">Editar</th>
+	              <th data-field="saldo">Eliminar</th>
+	          </tr>
+	        </thead>
+
+	        <tbody>
+	          <tr>
+	            <td>00017</td>
+	            <td>Jorge Mendoza</td>
+	            <td>2553-8990</td>
+	            <td>Lps. 500.00</td>
+	            <td><a class="btn-floating btn-large waves-effect waves-light  blue darken-4 modal-trigger" href="#editar"><i class="material-icons">mode_edit</i></a></td>
+	            <td><a class="btn-floating btn-large waves-effect waves-light  blue darken-4 modal-trigger" href="#eliminar"><i class="material-icons">delete</i></a></td>
+	          </tr>
+	          <tr>
+	            <td>00018</td>
+	            <td>Mariela Carcamo</td>
+	            <td>2558-8888</td>
+	            <td>Lps. 800.00</td>
+	            <td><a class="btn-floating btn-large waves-effect waves-light  blue darken-4 modal-trigger" href="#editar"><i class="material-icons">mode_edit</i></a></td>
+	            <td><a class="btn-floating btn-large waves-effect waves-light  blue darken-4 modal-trigger" href="#eliminar"><i class="material-icons">delete</i></a></td>
+	          </tr>
+	          <tr>
+	            <td>00019</td>
+	            <td>Felipe Sandoval</td>
+	            <td>2545-7477</td>
+	            <td>Lps. 185.00</td>
+	           	<td><a class="btn-floating btn-large waves-effect waves-light  blue darken-4 modal-trigger" href="#editar"><i class="material-icons">mode_edit</i></a></td>
+	            <td><a class="btn-floating btn-large waves-effect waves-light  blue darken-4 modal-trigger" href="#eliminar"><i class="material-icons">delete</i></a></td>
+	          </tr>
+	          <tr>
+	            <td>00020</td>
+	            <td>Marcela Funez</td>
+	            <td>2556-0520</td>
+	            <td>Lps. 185.00</td>
+	            <td><a class="btn-floating btn-large waves-effect waves-light  blue darken-4 modal-trigger" href="#editar"><i class="material-icons">mode_edit</i></a></td>
+	            <td><a class="btn-floating btn-large waves-effect waves-light  blue darken-4 modal-trigger" href="#eliminar"><i class="material-icons">delete</i></a></td>
+	          </tr>
+	        </tbody>
+    </table>
+
+		<!-- Modal CREAR -->
+		<div id="agregar" class="modal">
+		    <div class="modal-content">
+		      <h5>CREAR</h5>
+		      <p>Formulario de creaci&#243;n de cliente</p>
+		      <!--txt Nombre-->
+		      <row>
+		      	<div class="input-field col s12">
+		      		<i class="material-icons prefix">account_circle</i>
+		        	<input placeholder="Nombre" id="nombre" type="text" class="validate">
+		        	<label for="nombre">Nombre</label>
+		        </div>
+		      </row>
+		      <!--txt Telefono-->
+		      <row>
+		      	<div class="input-field col s12">
+			        <i class="material-icons prefix">phone</i>  
+			        <input placeholder="Telefono" id="telefono" type="text" class="validate">
+			        <label for="telefono">Telefono</label>
+		        </div>
+		      </row>
+		      <!--txt Saldo-->
+		      <row>
+		      	<div class="input-field col s12">
+		      		<i class="material-icons prefix">credit_card</i>  
+		        	<input placeholder="Saldo" id="saldo" type="text" class="validate">
+		        	<label for="saldo">Saldo</label>
+		        </div>
+		      </row>
+		    </div>
+		    <div class="modal-footer">
+		    	<a href="#!" class=" modal-action modal-close waves-effect waves-blue darken-4 btn-flat">SALIR</a>
+		      	<a href="#!" class=" modal-action modal-close waves-effect waves-blue darken-4 btn-flat">CREAR</a>
+		    </div>
+		</div>
+
+		<!-- Modal EDITAR -->
+		<div id="editar" class="modal">
+		    <div class="modal-content">
+		      <h5>EDITAR</h5>
+		      <p>Formulario de edici&#243;n de cliente</p>
+		      <!--txt Nombre-->
+		      <row>
+		      	<div class="input-field col s12">
+		      		<i class="material-icons prefix">account_circle</i>
+		        	<input placeholder="Nombre" id="nombre" type="text" class="validate">
+		        	<label for="nombre">Nombre</label>
+		        </div>
+		      </row>
+		      <!--txt Telefono-->
+		      <row>
+		      	<div class="input-field col s12">
+			        <i class="material-icons prefix">phone</i>  
+			        <input placeholder="Telefono" id="telefono" type="text" class="validate">
+			        <label for="telefono">Telefono</label>
+		        </div>
+		      </row>
+		      <!--txt Saldo-->
+		      <row>
+		      	<div class="input-field col s12">
+		      		<i class="material-icons prefix">credit_card</i>  
+		        	<input placeholder="Saldo" id="saldo" type="text" class="validate">
+		        	<label for="saldo">Saldo</label>
+		        </div>
+		      </row>
+		    </div>
+		    <div class="modal-footer">
+		    	<a href="#!" class=" modal-action modal-close waves-effect waves-blue darken-4 btn-flat">SALIR</a>
+		      	<a href="#!" class=" modal-action modal-close waves-effect waves-blue darken-4 btn-flat">EDITAR</a>
+		    </div>
+		</div>
+
+		<!-- Modal ELIMINAR -->
+		<div id="eliminar" class="modal">
+		    <div class="modal-content">
+		      <h5>ELIMINAR</h5>
+		      <p>Esta seguro que desea eliminar al siguiente cliente?</p>
+		      <row>
+		      	<div class="col s12">
+		      		<label><i class="material-icons prefix">account_circle</i> Nombre</label>
+		      	</div>
+		      </row>
+		      <row>
+		      	<div class="col s12">
+		      		<label><i class="material-icons prefix">phone</i> Telefono</label>	
+		      	</div>
+		      </row>
+		      <row>
+		      	<div class="col s12">
+		      		<label><i class="material-icons prefix">credit_card</i> Saldo</label>
+		      	</div>
+		      </row>
+		    </div>
+		    <div class="modal-footer">
+		    	<a href="#!" class=" modal-action modal-close waves-effect waves-blue darken-4 btn-flat">SALIR</a>
+		      	<a href="#!" class=" modal-action modal-close waves-effect waves-blue darken-4 btn-flat">ELIMINAR</a>
+		    </div>
+		</div>
+
+	<!--Inicializando Modal-->
+	<script>
+		$(document).ready(function(){
+			$('.modal-trigger').leanModal();
+		});
+	</script>
