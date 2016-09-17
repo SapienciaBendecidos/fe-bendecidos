@@ -12,14 +12,14 @@
 
               <div class='row'>
                 <div class='input-field col s12'>
-                  <input class='validate' type='email' name='email' id='email' />
+                  <input class='validate' type='email' name='email' id='email' ng-model="home.username" />
                   <label for='email'>Nombre de usuario</label>
                 </div>
               </div>
 
               <div class='row'>
                 <div class='input-field col s12'>
-                  <input class='validate' type='password' name='password' id='password' />
+                  <input class='validate' type='password' name='password' id='password' ng-model="home.password" />
                   <label for='password'>Contrase&#241;a</label>
                 </div>
                 <label style='float: right;'>
@@ -30,7 +30,7 @@
               <br />
               <center>
                 <div class='row'>
-                  <button type='submit' name='btn_login' class='col s12 btn btn-large waves-effect indigo darken-3'>Iniciar</button>
+                  <button type='submit' name='btn_login' class='col s12 btn btn-large waves-effect indigo darken-3' ng-click="home.handleLogin()">Iniciar</button>
                 </div>
             </form>
           </div>

@@ -11,9 +11,11 @@ function UserService($http) {
     let url = `${apiUrl}users/login`;
 
     return new Promise((resolve, reject) => {
-      $http.post(url, credentials).success((data) => {
+      $http.post(url, credentials)
+      .success((data) => {
         resolve(data);
-      }).error((err, status) => {
+      })
+      .error((err, status) => {
         reject(err, status);
       });
     });
