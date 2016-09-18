@@ -6,21 +6,7 @@ function UserService($http) {
   const service = {};
 
   // credentials: { email, passowrd}
-  service.login = function(credentials) {
-
-    let url = `${apiUrl}users/login`;
-
-    return new Promise((resolve, reject) => {
-      $http.post(url, credentials)
-      .success((data) => {
-        resolve(data);
-      })
-      .error((err, status) => {
-        reject(err, status);
-      });
-    });
-  };
-
+  service.login = (credentials) => $http.post(`${apiUrl}users/login`, credentials);
   return service;
 }
 
