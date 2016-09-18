@@ -14,7 +14,7 @@ function LoginController(UserService) {
     let promise = UserService.login(credentials);
 
     //TODO: handle login success, and login fail
-    promise.then( response =>  window.alert('login success'), response => window.alert(response.error.message) );
+    promise.then( () =>  window.alert('login success'), response => window.alert(response.error.message) );
   };
 
   vm.handleLogin = (form) => {
