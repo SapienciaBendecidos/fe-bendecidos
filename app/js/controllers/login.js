@@ -1,5 +1,7 @@
 'use strict';
 
+import loginMaterialize from '../jQuery/views/login';
+
 function LoginController(UserService) {
   'ngInject';
   // ViewModel
@@ -12,18 +14,17 @@ function LoginController(UserService) {
     let promise = UserService.login(credentials);
 
     //TODO: handle login success, and login fail
-    promise.then( response => console.log(response), response => window.alert(response.error.message) );
+    promise.then( response =>  window.alert('login success'), response => window.alert(response.error.message) );
   };
 
-  vm.handleLogin = () => {
-    if (vm.username.length > 0 && vm.password.length > 0) {     
-      console.log(vm.username);
-      console.log(vm.password);
+  vm.handleLogin = (form) => {
+    if (!form.$valid)
+      return;
+
       vm.login(vm.username, vm.password);
-    }
   };
 
-  //vm.login('coco.napky@gmail.com', '21251122');
+  loginMaterialize.init();
 }
 
 export default {
