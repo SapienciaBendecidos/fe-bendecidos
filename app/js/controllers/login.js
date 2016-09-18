@@ -2,28 +2,47 @@
 
 import loginMaterialize from '../jQuery/views/login';
 
-function LoginController(UserService) {
+function LoginController(UserService, $timeout) {
   'ngInject';
   // ViewModel
   const vm = this;
   vm.username = '';
   vm.password = '';
+  vm.loginFailed = false;
+  vm.loading     = false;
 
   vm.login = (email, password) =>{
     let credentials = {email, password};
     let promise = UserService.login(credentials);
 
-    //TODO: handle login success, and login fail
-    promise.then( () =>  window.alert('login success'), response => window.alert(response.error.message) );
+    promise.then(vm.handleLoginSuccess, vm.handleLoginFail);
   };
 
-  vm.handleLogin = (form) => {
-    if (!form.$valid)
+  vm.handleLoginFail    = () => vm.hideLoader(true);
+  vm.handleLoginSuccess = () => vm.hideLoader(false);
+
+  vm.handleClick = (form) => {
+    if (!form.$valid || vm.loading)
       return;
 
+      vm.showLoader();
       vm.login(vm.username, vm.password);
   };
 
+  vm.showLoader = () => {
+    vm.loginFailed = false;
+    vm.loading     = true;
+  }
+
+  vm.hideLoader = loginFailed =>
+      $timeout(() => {
+        vm.loginFailed = loginFailed;
+        vm.loading     = false;
+
+        //TODO: redirect on login success
+        if(!loginFailed)
+          window.alert('Login success, take me somewhere else pl0x :v');
+      }, 1250);
   loginMaterialize.init();
 }
 
