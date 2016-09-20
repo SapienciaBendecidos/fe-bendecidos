@@ -1,37 +1,79 @@
+<main class="vw-login">
+  <div align="center"><img src="images/ebenezer.png" width="150px"/></div>
+    <div class="center container login-content">
+      <div class="z-depth-1 grey lighten-5 row" style="display: inline-block; padding: 32px 70px 0px 70px; border: 1px solid #ede7f6;">
+        <form id="login-form" class="col s12" method="post" name="loginForm">
 
-    <div align="center"><img src="images/ebenezer.png" width="150px"/></div>
-    <div class="center">
-        <div class="container">
-          <div class="z-depth-1 grey lighten-5 row" style="display: inline-block; padding: 32px 70px 0px 70px; border: 1px solid #ede7f6;">
+          <span class="red-text" ng-show="home.loginFailed">Correo o contrase&#241;a invalida</span>
 
-            <form id="login-form" class="col s12" method="post" name="loginForm">
-              <div class='row'>
-                <div class='col s12'>
-                </div>
+          <!-- TODO: Move Loader as a partial/directive -->
+          <!-- Loader -->
+          <div class="preloader-wrapper active" ng-show="home.loading">
+            <div class="spinner-layer spinner-blue">
+              <div class="circle-clipper left">
+                <div class="circle"></div>
+              </div><div class="gap-patch">
+                <div class="circle"></div>
+              </div><div class="circle-clipper right">
+                <div class="circle"></div>
               </div>
+            </div>
 
-              <div class='row'>
-                <div class='input-field col s12'>
-                  <input class="validate" type='email' name='email' id='email' ng-model="home.username" required/>
-                  <label for='email'>Correo</label>
-                </div>
+            <div class="spinner-layer spinner-red">
+              <div class="circle-clipper left">
+                <div class="circle"></div>
+              </div><div class="gap-patch">
+                <div class="circle"></div>
+              </div><div class="circle-clipper right">
+                <div class="circle"></div>
               </div>
+            </div>
 
-              <div class='row'>
-                <div class='input-field col s12'>
-                  <input class="validate" type='password' name='password' id='password' ng-model="home.password" required/>
-                  <label for='password'>Contrase&#241;a</label>
-                </div>
-                <label style='float: right;'>
-                    <a class='Roboto' href='#!'><b>Olvide mi contrase&#241;a</b></a>
-                </label>
+            <div class="spinner-layer spinner-yellow">
+              <div class="circle-clipper left">
+                <div class="circle"></div>
+              </div><div class="gap-patch">
+                <div class="circle"></div>
+              </div><div class="circle-clipper right">
+                <div class="circle"></div>
               </div>
+            </div>
 
-              <br />
-                <div class='row'>
-                  <button type='submit' name='btn_login' class='col s12 btn btn-large waves-effect indigo darken-3' ng-click="home.handleLogin(loginForm)">Iniciar</button>
-                </div>
-            </form>
+            <div class="spinner-layer spinner-green">
+              <div class="circle-clipper left">
+                <div class="circle"></div>
+              </div><div class="gap-patch">
+                <div class="circle"></div>
+              </div><div class="circle-clipper right">
+                <div class="circle"></div>
+              </div>
+            </div>
           </div>
-        </div>
+          <!-- End of Loader -->
+
+          <div class='row'>
+            <div class='input-field col s12'>
+              <input class="validate" type='email' name='email' id='email' ng-model="home.username" required/>
+              <label for='email'>Correo</label>
+            </div>
+          </div>
+
+          <div class='row'>
+            <div class='input-field col s12'>
+              <input class="validate" type='password' name='password' id='password' ng-model="home.password" required/>
+              <label for='password'>Contrase&#241;a</label>
+            </div>
+            <label style='float: right;'>
+              <a class='Roboto' href='#!'><b>Olvide mi contrase&#241;a</b></a>
+            </label>
+          </div>
+
+          <br />
+          <div class='row'>
+            <button type='submit' name='btn_login' class='col s12 btn btn-large waves-effect indigo darken-3' ng-click="home.handleClick(loginForm)">Iniciar</button>
+          </div>
+
+        </form>
       </div>
+    </div>
+</main>
