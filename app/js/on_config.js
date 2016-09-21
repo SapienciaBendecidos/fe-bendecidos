@@ -14,6 +14,12 @@ function OnConfig($stateProvider, $locationProvider, $urlRouterProvider, $compil
     controller: 'LoginController as home',
     templateUrl: 'login.html',
     title: 'Home'
+  })
+  .state('Client',{
+    url: '/clientes',
+    controller: 'ClientController as client',
+    templateUrl: 'cliente.html',
+    title: 'Clientes'
   });
 
   $urlRouterProvider.otherwise('/');
