@@ -16,10 +16,10 @@ function ClientService($http) {
 	  }
 	]
   */
-  service.clients = () => $http.get(`${apiUrl}clientes`);
+  service.getClients = () => $http.get(`${apiUrl}clientes`);
 
   // client: { "primerNombre,segundoNombre,primerApellido,segundoApellido}
-  service.clients = (client) => $http.post(`${apiUrl}clientes`, client);
+  service.postClients = (client) => $http.post(`${apiUrl}clientes`, client);
   return service;
 }
 
