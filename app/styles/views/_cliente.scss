@@ -2,10 +2,10 @@ nav
 {
     color: #fff !important;
     background-color: #0d47a1 !important;
-    height: 40% !important;
-    font-size: 50px;
+    //height: 40% !important;
+    //font-size: 50px;
     letter-spacing: 3px;
-    line-height: 120px !important;
+    //line-height: 120px !important;
 
     top-nav
     {
@@ -46,3 +46,8 @@ input-field
         }
    } 
 } 
+
+body
+{
+    padding: 0px !important;
+}
