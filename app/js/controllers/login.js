@@ -2,7 +2,7 @@
 
 import loginMaterialize from '../jQuery/views/login';
 
-function LoginController(UserService, $timeout) {
+function LoginController(UserService, SessionService, $timeout) {
   'ngInject';
   // ViewModel
   const vm = this;
@@ -15,7 +15,13 @@ function LoginController(UserService, $timeout) {
     let credentials = {email, password};
     let promise = UserService.login(credentials);
 
-    promise.then(vm.handleLoginSuccess, vm.handleLoginFail);
+    promise.then(response => {
+      let { id, userId, ttl } = response.data;
+      SessionService.setSession({userId, email, accessToken: id, ttl});
+      vm.handleLoginSuccess();
+    } );
+
+    promise.catch(vm.handleLoginFail)
   };
 
   vm.handleLoginFail    = () => vm.hideLoader(true);
@@ -43,6 +49,7 @@ function LoginController(UserService, $timeout) {
         if(!loginFailed)
           window.alert('Login success, take me somewhere else pl0x :v');
       }, 1250);
+
   loginMaterialize.init();
 }
 
