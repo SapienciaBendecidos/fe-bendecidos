@@ -1,6 +1,9 @@
+import customInterceptors from './interceptors/index';
 
-function OnConfig($stateProvider, $locationProvider, $urlRouterProvider, $compileProvider) {
+function OnConfig($stateProvider, $locationProvider, $urlRouterProvider, $compileProvider, $httpProvider) {
   'ngInject';
+
+  $httpProvider.interceptors.push(...customInterceptors);
 
   if (process.env.NODE_ENV === 'production') {
     $compileProvider.debugInfoEnabled(false);
@@ -9,11 +12,17 @@ function OnConfig($stateProvider, $locationProvider, $urlRouterProvider, $compil
   $locationProvider.html5Mode(true);
 
   $stateProvider
-  .state('Home', {
+  .state('Login', {
     url: '/',
-    controller: 'ExampleCtrl as home',
+    controller: 'LoginController as ctrl',
     templateUrl: 'login.html',
-    title: 'Home'
+    title: 'Login'
+  })
+  .state('Client',{
+    url: '/clientes',
+    controller: 'ClientController as client',
+    templateUrl: 'cliente.html',
+    title: 'Clientes'
   });
 
   $urlRouterProvider.otherwise('/');

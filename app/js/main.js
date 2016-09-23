@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import materialize from 'materialize';
+import 'materialize';
 import angular from 'angular';
 
 $(document).ready(function(){
@@ -7,7 +7,6 @@ $(document).ready(function(){
 $('.modal-trigger').leanModal();
 });
 
-console.log(materialize);
 // angular modules
 import constants from './constants';
 import onConfig  from './on_config';

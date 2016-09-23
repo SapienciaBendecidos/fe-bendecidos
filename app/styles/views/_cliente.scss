@@ -1,0 +1,62 @@
+nav
+{
+    color: #fff !important;
+    background-color: #0d47a1 !important;
+    //height: 40% !important;
+    //font-size: 50px;
+    letter-spacing: 3px;
+    //line-height: 120px !important;
+
+    top-nav
+    {
+        height: 40% !important;
+        box-shadow: none !important;
+        line-height: 55% !important;
+    }
+
+    nav-wrapper
+    {
+        i
+        {
+            line-height: 120px !important;
+        }
+    }
+
+    a
+    {
+        button-collapse
+        {
+            i
+            {
+                line-height: 120px !important;
+            }
+
+            line-height: 120px !important;
+        }
+    }
+}
+
+input-field
+{
+   .prefix 
+   {
+        .active
+        {
+            color: #0d47a1 !important;
+        }
+   } 
+} 
+
+body
+{
+    padding: 0px !important;
+}
+
+.pagination
+{
+    li.active
+    {
+        background-color: #0d47a1 !important;
+    }
+        
+}
