@@ -4,7 +4,7 @@
       <div class="z-depth-1 grey lighten-5 row" style="display: inline-block; padding: 32px 70px 0px 70px; border: 1px solid #ede7f6;">
         <form id="login-form" class="col s12" method="post" name="loginForm">
 
-          <span class="red-text" ng-show="ctrl.loginFailed">Correo o contrase&#241;a invalida</span>
+          <span class="red-text" ng-show="ctrl.errorMessage.length"> {{ctrl.errorMessage}} </span>
 
           <!-- TODO: Move Loader as a partial/directive -->
           <!-- Loader -->
