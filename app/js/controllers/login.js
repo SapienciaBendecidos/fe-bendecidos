@@ -12,7 +12,7 @@ function LoginController(UserService, SessionService, $timeout, $state) {
   vm.loading     = false;
   vm.errorMessage = $state.params.redirected ? 'Inicie sesión para continuar' : '';
 
-  vm.login = (email, password) =>{
+  vm.login = (email, password) => {
     let credentials = {email, password};
     let promise = UserService.login(credentials);
 
@@ -55,7 +55,6 @@ function LoginController(UserService, SessionService, $timeout, $state) {
       }, 1250);
 
   loginMaterialize.init();
-  console.log($state);
 }
 
 export default {
