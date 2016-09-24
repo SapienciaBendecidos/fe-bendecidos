@@ -14,6 +14,7 @@ function OnConfig($stateProvider, $locationProvider, $urlRouterProvider, $compil
   $stateProvider
   .state('Login', {
     url: '/',
+    params: { redirected: false },
     controller: 'LoginController as ctrl',
     templateUrl: 'login.html',
     title: 'Login'
