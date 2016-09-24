@@ -1,14 +1,15 @@
+<main class="vw-client">
 		<nav>
 			<div class="container">
 			    <div class="nav-wrapper">
 				    <div class="col s5">
-					    <a class="page-title">CLIENTE</a> 
+					    <a class="page-title">CLIENTE</a>
 						<a class="modal-trigger" href="#agregar"><i class="material-icons right">playlist_add</i></a>
 					</div>
 			    </div>
 			</div>
 	    </nav>
-		<table class="vw-client bordered centered" >
+		<table class="bordered centered striped" >
 	        <thead>
 	          <tr>
 	              <th data-field="nombre">Nombre</th>
@@ -20,8 +21,9 @@
 	        </thead>
 
 	        <tbody>
-	          <tr nr-repear="client in clients track by $idCliente(client)">
-	            <td>{{client.primerNombre}}</td>
+	          <tr ng-repeat="client in ctrl.clients">
+	            <td>{{client.primerNombre + " " + client.segundoNombre + " "
+								    + client.primerApellido + " " + client.segundoApellido}}</td>
 	            <td>2553-8990</td>
 	            <td>Lps. 500.00</td>
 	            <td><a class="btn-floating btn-large waves-effect waves-light  blue darken-4 modal-trigger" href="#editar"><i class="material-icons">mode_edit</i></a></td>
@@ -31,13 +33,25 @@
     </table>
 
     <ul class="pagination center-align">
-	    <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
-	    <li class="active"><a href="#!">1</a></li>
-	    <li class="waves-effect"><a href="#!">2</a></li>
-	    <li class="waves-effect"><a href="#!">3</a></li>
-	    <li class="waves-effect"><a href="#!">4</a></li>
-	    <li class="waves-effect"><a href="#!">5</a></li>
-	    <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+	    <li class="{{ctrl.activePage == 0 ? 'disabled' : ''}}"
+			    data-control="back" data-active="{{ctrl.activePage != 0}}"
+					ng-click="ctrl.handlePageControlClick($event)">
+				<a href="#!">
+					<i class="material-icons">chevron_left</i>
+				</a>
+			</li>
+			<li class="waves-effect {{$index == ctrl.activePage ? 'active' : ''}}"
+					ng-repeat="n in ctrl.range" data-index="{{n}}" ng-click="ctrl.handlePageIndexClick($event)">
+				<a href="#!">{{n}}</a>
+			</li>
+
+	    <li class="waves-effect {{ctrl.activePage == ctrl.range.length - 1 ? 'disabled' : ''}}"
+			    data-control="foward" data-active="{{ctrl.activePage != ctrl.range.length - 1}}"
+					ng-click="ctrl.handlePageControlClick($event)">
+				<a href="#!">
+					<i class="material-icons">chevron_right</i>
+				</a>
+			</li>
   	</ul>
 
 		<!-- Modal CREAR -->
@@ -55,14 +69,14 @@
 		      <!--txt Telefono-->
 		      <row>
 		      	<div class="input-field col s12">
-			        <i class="material-icons prefix">phone</i>  
+			        <i class="material-icons prefix">phone</i>
 			        <input placeholder="Telefono" id="telefono" type="text" class="validate">
 		        </div>
 		      </row>
 		      <!--txt Saldo-->
 		      <row>
 		      	<div class="input-field col s12">
-		      		<i class="material-icons prefix">credit_card</i>  
+		      		<i class="material-icons prefix">credit_card</i>
 		        	<input placeholder="Saldo" id="saldo" type="text" class="validate">
 		        </div>
 		      </row>
@@ -88,14 +102,14 @@
 		      <!--txt Telefono-->
 		      <row>
 		      	<div class="input-field col s12">
-			        <i class="material-icons prefix">phone</i>  
+			        <i class="material-icons prefix">phone</i>
 			        <input placeholder="Telefono" id="telefono" type="text" class="validate">
 		        </div>
 		      </row>
 		      <!--txt Saldo-->
 		      <row>
 		      	<div class="input-field col s12">
-		      		<i class="material-icons prefix">credit_card</i>  
+		      		<i class="material-icons prefix">credit_card</i>
 		        	<input placeholder="Saldo" id="saldo" type="text" class="validate">
 		        </div>
 		      </row>
@@ -118,7 +132,7 @@
 		      </row>
 		      <row>
 		      	<div class="col s12">
-		      		<label><i class="material-icons prefix">phone</i> Telefono</label>	
+		      		<label><i class="material-icons prefix">phone</i> Telefono</label>
 		      	</div>
 		      </row>
 		      <row>
@@ -139,3 +153,4 @@
 			$('.modal-trigger').leanModal();
 		});
 	</script>
+</main>
