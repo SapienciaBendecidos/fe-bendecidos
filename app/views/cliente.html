@@ -8,7 +8,7 @@
 			    </div>
 			</div>
 	    </nav>
-		<table class="bordered centered">
+		<table class="vw-client bordered centered" >
 	        <thead>
 	          <tr>
 	              <th data-field="nombre">Nombre</th>
@@ -20,31 +20,10 @@
 	        </thead>
 
 	        <tbody>
-	          <tr>
-	            <td>Jorge Mendoza</td>
+	          <tr nr-repear="client in clients track by $idCliente(client)">
+	            <td>{{client.primerNombre}}</td>
 	            <td>2553-8990</td>
 	            <td>Lps. 500.00</td>
-	            <td><a class="btn-floating btn-large waves-effect waves-light  blue darken-4 modal-trigger" href="#editar"><i class="material-icons">mode_edit</i></a></td>
-	            <td><a class="btn-floating btn-large waves-effect waves-light  red darken-2 modal-trigger" href="#eliminar"><i class="material-icons">delete</i></a></td>
-	          </tr>
-	          <tr>
-	            <td>Mariela Carcamo</td>
-	            <td>2558-8888</td>
-	            <td>Lps. 800.00</td>
-	            <td><a class="btn-floating btn-large waves-effect waves-light  blue darken-4 modal-trigger" href="#editar"><i class="material-icons">mode_edit</i></a></td>
-	            <td><a class="btn-floating btn-large waves-effect waves-light  red darken-2 modal-trigger" href="#eliminar"><i class="material-icons">delete</i></a></td>
-	          </tr>
-	          <tr>
-	            <td>Felipe Sandoval</td>
-	            <td>2545-7477</td>
-	            <td>Lps. 185.00</td>
-	           	<td><a class="btn-floating btn-large waves-effect waves-light  blue darken-4 modal-trigger" href="#editar"><i class="material-icons">mode_edit</i></a></td>
-	            <td><a class="btn-floating btn-large waves-effect waves-light  red darken-2 modal-trigger" href="#eliminar"><i class="material-icons">delete</i></a></td>
-	          </tr>
-	          <tr>
-	            <td>Marcela Funez</td>
-	            <td>2556-0520</td>
-	            <td>Lps. 185.00</td>
 	            <td><a class="btn-floating btn-large waves-effect waves-light  blue darken-4 modal-trigger" href="#editar"><i class="material-icons">mode_edit</i></a></td>
 	            <td><a class="btn-floating btn-large waves-effect waves-light  red darken-2 modal-trigger" href="#eliminar"><i class="material-icons">delete</i></a></td>
 	          </tr>
