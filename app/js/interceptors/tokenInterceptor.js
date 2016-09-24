@@ -3,9 +3,9 @@ const tokenInterceptor = (SessionService) => {
 
   return {
     request: function(config) {
-      let { accessToken } = SessionService.getSession();
-      if(accessToken)
-        config.headers.authorization = accessToken;
+      let session = SessionService.getSession();
+      if(session && session.accessToken)
+        config.headers.authorization = session.accessToken;
       return config;
     }
   }

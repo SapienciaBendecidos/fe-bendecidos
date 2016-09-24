@@ -2,7 +2,7 @@
 
 import loginMaterialize from '../jQuery/views/login';
 
-function LoginController(UserService, SessionService, $timeout) {
+function LoginController(UserService, SessionService, $timeout, $state) {
   'ngInject';
   // ViewModel
   const vm = this;
@@ -10,8 +10,9 @@ function LoginController(UserService, SessionService, $timeout) {
   vm.password = '';
   vm.loginFailed = false;
   vm.loading     = false;
+  vm.errorMessage = $state.params.redirected ? 'Inicie sesión para continuar' : '';
 
-  vm.login = (email, password) =>{
+  vm.login = (email, password) => {
     let credentials = {email, password};
     let promise = UserService.login(credentials);
 
@@ -36,8 +37,9 @@ function LoginController(UserService, SessionService, $timeout) {
   };
 
   vm.showLoader = () => {
-    vm.loginFailed = false;
-    vm.loading     = true;
+    vm.errorMessage = '';
+    vm.loginFailed  = false;
+    vm.loading      = true;
   }
 
   vm.hideLoader = loginFailed =>
@@ -47,7 +49,9 @@ function LoginController(UserService, SessionService, $timeout) {
 
         //TODO: redirect on login success
         if(!loginFailed)
-          window.alert('Login success, take me somewhere else pl0x :v');
+          $state.go('Client');
+        else
+          vm.errorMessage = 'Correo o contraseña invalida';
       }, 1250);
 
   loginMaterialize.init();
