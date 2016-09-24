@@ -15,8 +15,12 @@ function ClientService($http) {
 	    "segundoApellido": "string"
 	  }
 	]
-  */
-  service.getClients = () => $http.get(`${apiUrl}clientes`);
+  
+  page = {
+    "limit":perPage,
+    "skip":currentPos
+  } */
+  service.getClients = (page) => $http.get(`${apiUrl}clientes`,page);
 
   // client: { "primerNombre,segundoNombre,primerApellido,segundoApellido}
   service.postClients = (client) => $http.post(`${apiUrl}clientes`, client);
