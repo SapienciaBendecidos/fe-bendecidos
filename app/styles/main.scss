@@ -7,5 +7,9 @@ body {
   font-family: Helvetica, sans-serif;
   color: $font-color--dark;
   background-color: $background--light;
-  padding: $half-space;
+  padding: 0px !important;
+}
+
+main {
+  height: 100%;
 }
