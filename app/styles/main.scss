@@ -3,6 +3,10 @@
 @import './materialize/sass/master';
 @import './views/master';
 
+html, .ng-scope, body {
+  height: 100%;
+}
+
 body {
   font-family: Helvetica, sans-serif;
   color: $font-color--dark;
