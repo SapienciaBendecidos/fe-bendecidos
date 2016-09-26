@@ -20,13 +20,14 @@ function ClientController(ClientService, $q) {
   };
 
 vm.getClients = (page) => {
-  let skip = page * vm.perPage;
-  let limit = vm.perPage;
-  return ClientService.getClients({ limit, skip });
+  let skip = page * vm.perPage,
+      limit = vm.perPage,
+      include = ['tarjetas'];
+  return ClientService.getClients({ limit, skip, include });
 };
 
 vm.loadClients = () =>  vm.getClients(vm.activePage)
-.then(response => vm.clients = response.data);
+.then(response => vm.clients = response.data.map(map));
 
 vm.handlePageControlClick = (event) => {
   let active = event.currentTarget.attributes['data-active'].value;
@@ -59,10 +60,17 @@ vm.searchClients = () => {
       { telefono: { regexp } }
     ]
   };
-  let promise = ClientService.getClients({where});
-  promise.then( response => vm.clients = response.data);
-  promise.catch( () => Materialize.toast('Error al agregar cliente', 5000));
+  let include = ['tarjetas'];
+  let promise = ClientService.getClients({ include, where});
+  promise.then( response =>  vm.clients = response.data.map(mapClient));
+  promise.catch( () => Materialize.toast('Error al realizar busqueda', 5000));
 };
+
+const mapClient = client => {
+  if(client.tarjetas[0])
+    client.saldo = client.tarjetas[0].saldo;
+  return client;
+}
 
 vm.submitClient = (form) => {
   console.log(form.$valid);
@@ -95,7 +103,7 @@ $q.all([getCount, getClients]).then( responses => {
   for (let i = 0; i < vm.pages; i++)
   vm.range.push(i);
 
-  vm.clients = responses[1].data;
+  vm.clients = responses[1].data.map(mapClient);
 });
 }
 
