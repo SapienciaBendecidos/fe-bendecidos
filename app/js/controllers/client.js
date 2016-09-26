@@ -69,6 +69,9 @@ vm.searchClients = () => {
 const mapClient = client => {
   if(client.tarjetas[0])
     client.saldo = client.tarjetas[0].saldo;
+  else
+    client.saldo = 0;
+
   return client;
 }
 
