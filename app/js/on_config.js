@@ -21,7 +21,7 @@ function OnConfig($stateProvider, $locationProvider, $urlRouterProvider, $compil
   })
   .state('Client',{
     url: '/clientes',
-    controller: 'ClientController as client',
+    controller: 'ClientController as ctrl',
     templateUrl: 'cliente.html',
     title: 'Clientes'
   });

@@ -5,20 +5,12 @@ function ClientService($http) {
 
   const service = {};
 
-  /*
-	[
-	  {
-	    "idCliente": 0,
-	    "primerNombre": "string",
-	    "segundoNombre": "string",
-	    "primerApellido": "string",
-	    "segundoApellido": "string"
-	  }
-	]
-  */
-  service.getClients = () => $http.get(`${apiUrl}clientes`);
+  service.countClients = () => $http.get(`${apiUrl}clientes/count`);
 
-  // client: { "primerNombre,segundoNombre,primerApellido,segundoApellido}
+  service.getClients = (limit, skip) =>
+    $http.get(`${apiUrl}clientes?filter[limit]=${limit}&filter[skip]=${skip}`);
+
+  // client: { "primerNombre, segundoNombre, primerApellido, segundoApellido }
   service.postClients = (client) => $http.post(`${apiUrl}clientes`, client);
   return service;
 }
