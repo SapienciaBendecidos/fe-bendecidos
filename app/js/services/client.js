@@ -7,11 +7,15 @@ function ClientService($http) {
 
   service.countClients = () => $http.get(`${apiUrl}clientes/count`);
 
-  service.getClients = (limit, skip) =>
-    $http.get(`${apiUrl}clientes?filter[limit]=${limit}&filter[skip]=${skip}`);
+  service.getClients = filter => {
+    if(!filter)
+      return $http.get(`${apiUrl}clientes`);
+    return $http.get(`${apiUrl}clientes?filter=${JSON.stringify(filter)}`);
+  }
 
-  // client: { "primerNombre, segundoNombre, primerApellido, segundoApellido }
-  service.postClients = (client) => $http.post(`${apiUrl}clientes`, client);
+
+  // client: { "primerNombre, segundoNombre, primerApellido, segundoApellido, telefono, saldo }
+  service.postClient = (client) => $http.post(`${apiUrl}clientes/createClient`, client);
   return service;
 }
 
