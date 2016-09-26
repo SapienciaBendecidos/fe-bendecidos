@@ -27,7 +27,7 @@ vm.getClients = (page) => {
 };
 
 vm.loadClients = () =>  vm.getClients(vm.activePage)
-.then(response => vm.clients = response.data.map(map));
+.then(response => vm.clients = response.data.map(mapClient));
 
 vm.handlePageControlClick = (event) => {
   let active = event.currentTarget.attributes['data-active'].value;
