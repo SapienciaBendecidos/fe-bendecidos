@@ -15,7 +15,10 @@ function ClientService($http) {
 
 
   // client: { "primerNombre, segundoNombre, primerApellido, segundoApellido, telefono, saldo }
-  service.postClient = (client) => $http.post(`${apiUrl}clientes/createClient`, client);
+  // service.postClient = (client) => $http.post(`${apiUrl}clientes/createClient`, client);
+  
+  // client: { "primerNombre, segundoNombre, primerApellido, segundoApellido, telefono }
+  service.postClient = (client) => $http.post(`${apiUrl}clientes`, client);
   return service;
 }
 
