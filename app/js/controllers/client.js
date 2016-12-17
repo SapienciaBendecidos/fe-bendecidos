@@ -21,13 +21,14 @@ function ClientController(ClientService, $q) {
 
 vm.getClients = (page) => {
   let skip = page * vm.perPage,
-      limit = vm.perPage,
-      include = ['tarjetas'];
-  return ClientService.getClients({ limit, skip, include });
+      limit = vm.perPage;
+      // include = ['tarjetas'];
+  return ClientService.getClientsWithSaldo(limit,skip,null);
+  // return ClientService.getClientsWithSaldo();
 };
 
 vm.loadClients = () =>  vm.getClients(vm.activePage)
-.then(response => vm.clients = response.data.map(mapClient));
+.then(response => vm.clients = response.data.getWithSaldo);
 
 vm.handlePageControlClick = (event) => {
   let active = event.currentTarget.attributes['data-active'].value;
@@ -60,20 +61,20 @@ vm.searchClients = () => {
       { telefono: { regexp } }
     ]
   };
-  let include = ['tarjetas'];
-  let promise = ClientService.getClients({ include, where});
-  promise.then( response =>  vm.clients = response.data.map(mapClient));
+  // let include = ['tarjetas'];
+  let promise = ClientService.getClientsWithSaldo(0,0,{where});
+  promise.then( response =>  vm.clients = response.data.getWithSaldo);//.map(mapClient));
   promise.catch( () => Materialize.toast('Error al realizar busqueda', 5000));
 };
 
-const mapClient = client => {
-  if(client.tarjetas[0])
-    client.saldo = client.tarjetas[0].saldo;
-  else
-    client.saldo = 0;
+// const mapClient = client => {
+//   if(client.tarjetas[0])
+//     client.saldo = client.tarjetas[0].saldo;
+//   else
+//     client.saldo = 0;
 
-  return client;
-}
+//   return client;
+// }
 
 vm.submitClient = (form) => {
   console.log(form.$valid);
@@ -104,9 +105,11 @@ $q.all([getCount, getClients]).then( responses => {
   vm.range = [];
 
   for (let i = 0; i < vm.pages; i++)
-  vm.range.push(i);
+    vm.range.push(i);
 
-  vm.clients = responses[1].data.map(mapClient);
+  vm.clients = responses[1].data.getWithSaldo;//.map(mapClient);
+  console.log(vm.clients.length)
+  console.log(vm.clients)
 });
 }
 

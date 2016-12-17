@@ -1,8 +1,8 @@
 export default {
 
-  browserPort: 3000,
-  UIPort: 3001,
-  testPort: 3002,
+  browserPort: 3005,
+  UIPort: 3006,
+  testPort: 3007,
 
   sourceDir: './app/',
   buildDir: './build/',
