@@ -39,7 +39,7 @@
 	          <tr ng-repeat="client in ctrl.clients">
 	            <td>{{ctrl.getFullName(client)}}</td>
 	            <td>{{client.telefono ? client.telefono : 'N:A'}}</td>
-	            <td>Lps. {{client.saldo}}</td>
+	            <td>Lps. {{client.total}}</td>
 	            <td><a class="btn-floating btn-large waves-effect waves-light  blue darken-4 modal-trigger" href="#editar"><i class="material-icons">mode_edit</i></a></td>
 	            <td><a class="btn-floating btn-large waves-effect waves-light  red darken-2 modal-trigger" href="#eliminar"><i class="material-icons">delete</i></a></td>
 	          </tr>
@@ -105,15 +105,6 @@
 											 class="{{ctrl.post.phone.length > 0 ? '' : 'invalid'}}">
 							</div>
 						</div>
-						<!--txt Saldo-->
-						<div class="row">
-							<div class="input-field col s12">
-								<i class="material-icons prefix">credit_card</i>
-								<input placeholder="Saldo" id="saldo" type="number"
-											 ng-model="ctrl.post.money" required
-											 class="{{ctrl.post.money ? '' : 'invalid'}}">
-							</div>
-						</div>
 				</div>
 		    <div class="modal-footer">
 		    	<a href="#!" class=" modal-action modal-close waves-effect waves-blue darken-4 btn-flat">SALIR</a>
@@ -142,13 +133,6 @@
 		      	<div class="input-field col s12">
 			        <i class="material-icons prefix">phone</i>
 			        <input placeholder="Telefono" id="telefono" type="text" class="validate">
-		        </div>
-		      </row>
-		      <!--txt Saldo-->
-		      <row>
-		      	<div class="input-field col s12">
-		      		<i class="material-icons prefix">credit_card</i>
-		        	<input placeholder="Saldo" id="saldo" type="number" class="validate">
 		        </div>
 		      </row>
 		    </div>
@@ -188,7 +172,7 @@
 	<!--Inicializando Modal-->
 	<script>
 		$(document).ready(function(){
-			$('.modal-trigger').leanModal();
+			$('.modal').modal();
 		});
 	</script>
 </main>
