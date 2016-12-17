@@ -50,19 +50,17 @@ vm.getClientCount = () => ClientService.countClients();
 vm.postClient = (client) => ClientService.postClient(client);
 
 vm.searchClients = () => {
-  let regexp = `/${vm.search}/`;
-  let where =
-  { or :
-    [
-      { primerNombre: { regexp } },
-      { segundoNombre: { regexp } },
-      { primerApellido: { regexp } },
-      { segundoApellido: { regexp } },
-      { telefono: { regexp } }
-    ]
-  };
+  let regexp = `${vm.search}`;
+  let or =
+  [
+    { primerNombre: regexp },
+    { segundoNombre: regexp },
+    { primerApellido: regexp },
+    { segundoApellido: regexp },
+    { telefono: regexp }
+  ];
   // let include = ['tarjetas'];
-  let promise = ClientService.getClientsWithSaldo(0,0,{where});
+  let promise = ClientService.getClientsWithSaldo(0,0,{or});
   promise.then( response =>  vm.clients = response.data.getWithSaldo);//.map(mapClient));
   promise.catch( () => Materialize.toast('Error al realizar busqueda', 5000));
 };
