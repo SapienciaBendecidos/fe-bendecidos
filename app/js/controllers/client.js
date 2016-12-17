@@ -22,9 +22,7 @@ function ClientController(ClientService, $q) {
 vm.getClients = (page) => {
   let skip = page * vm.perPage,
       limit = vm.perPage;
-      // include = ['tarjetas'];
   return ClientService.getClientsWithSaldo(limit,skip,null);
-  // return ClientService.getClientsWithSaldo();
 };
 
 vm.loadClients = () =>  vm.getClients(vm.activePage)
@@ -59,25 +57,12 @@ vm.searchClients = () => {
     { segundoApellido: regexp },
     { telefono: regexp }
   ];
-  // let include = ['tarjetas'];
   let promise = ClientService.getClientsWithSaldo(0,0,{or});
-  promise.then( response =>  vm.clients = response.data.getWithSaldo);//.map(mapClient));
+  promise.then( response =>  vm.clients = response.data.getWithSaldo);
   promise.catch( () => Materialize.toast('Error al realizar busqueda', 5000));
 };
 
-// const mapClient = client => {
-//   if(client.tarjetas[0])
-//     client.saldo = client.tarjetas[0].saldo;
-//   else
-//     client.saldo = 0;
-
-//   return client;
-// }
-
-vm.submitClient = (form) => {
-  console.log(form.$valid);
-  console.log(vm.post);
-
+vm.submitClient = () => {
   let { firstname, middlename, lastname, secondLastname, phone, money } = vm.post;
   let client = {
     primerNombre: firstname,
@@ -105,9 +90,7 @@ $q.all([getCount, getClients]).then( responses => {
   for (let i = 0; i < vm.pages; i++)
     vm.range.push(i);
 
-  vm.clients = responses[1].data.getWithSaldo;//.map(mapClient);
-  console.log(vm.clients.length)
-  console.log(vm.clients)
+  vm.clients = responses[1].data.getWithSaldo
 });
 }
 
