@@ -1,0 +1,178 @@
+<main class="vw-client">
+
+		<!-- Modal Structure -->
+	<div id="search-modal" class="modal bottom-sheet">
+		<div class="modal-footer">
+			<form name="searchForm" ng-submit="ctrl.searchClients()">
+					<div class="input-field">
+						<i class="material-icons prefix">search</i>
+						<input  id="search" type="text" autocomplete="off"
+									 ng-model="ctrl.search" required>
+					</div>
+					<button type="submit" class=" modal-action modal-close waves-effect waves-green btn-flat">Buscar</button>
+      </form>
+		</div>
+	</div>
+
+	  <nav>
+			<div class="nav-wrapper">
+				<ul class="right hide-on-med-and-down">
+					<li ng-click="ctrl.showSearch()">
+						<a class="modal-trigger" href="#search-modal"> <i class="material-icons right">search</i></a>
+					</li>
+					<li><a class="modal-trigger" href="#agregar"><i class="material-icons right">playlist_add</i></a></li>
+					<li><a> Clientes </a></li>
+				</ul>
+	  </nav>
+		<table class="bordered centered striped" >
+	        <thead>
+	          <tr>
+	              <th data-field="nombre">Nombre</th>
+	              <th data-field="telefono">Telefono</th>
+	              <th data-field="saldo">Saldo</th>
+	              <th data-field="saldo">Editar</th>
+	              <th data-field="saldo">Eliminar</th>
+	          </tr>
+	        </thead>
+
+	        <tbody>
+	          <tr ng-repeat="client in ctrl.clients">
+	            <td>{{ctrl.getFullName(client)}}</td>
+	            <td>{{client.telefono ? client.telefono : 'N:A'}}</td>
+	            <td>Lps. {{client.total}}</td>
+	            <td><a class="btn-floating btn-large waves-effect waves-light  blue darken-4 modal-trigger" href="#editar"><i class="material-icons">mode_edit</i></a></td>
+	            <td><a class="btn-floating btn-large waves-effect waves-light  red darken-2 modal-trigger" href="#eliminar"><i class="material-icons">delete</i></a></td>
+	          </tr>
+	        </tbody>
+    </table>
+
+    <ul class="pagination center-align">
+	    <li class="{{ctrl.activePage == 0 ? 'disabled' : ''}}"
+			    data-control="back" ng-click="ctrl.handlePageControlClick($event)">
+				<a href="#!">
+					<i class="material-icons">chevron_left</i>
+				</a>
+		</li>
+			<li class="waves-effect {{$index == ctrl.activePage ? 'active' : ''}}"
+					ng-repeat="n in ctrl.range" data-index="{{n}}" ng-click="ctrl.handlePageIndexClick($event)">
+				<a href="#!">{{n}}</a>
+			</li>
+
+	    <li class="waves-effect {{ctrl.activePage == ctrl.range.length - 1 ? 'disabled' : ''}}"
+			    data-control="foward" ng-click="ctrl.handlePageControlClick($event)" >
+				<a href="#!">
+					<i class="material-icons">chevron_right</i>
+				</a>
+			</li>
+  	</ul>
+
+		<!-- Modal CREAR -->
+		<div id="agregar" class="modal">
+		    <div class="modal-content">
+		      <h5>Ingresar Cliente</h5>
+		      <!--txt Nombre-->
+					<form action="" name="ctrl.postClientForm" id="post-client" method="post">
+						<div class="row center">
+							<div class="input-field col s6">
+								<input placeholder="Primer Nombre" type='text'
+											 name='firstName' id='f-name' ng-model="ctrl.post.firstname" required
+											 class="{{ctrl.post.firstname.length > 0 ? '' : 'invalid'}}">
+							</div>
+							<div class="input-field col s6">
+								<input placeholder="Segundo Nombre" id="s-nombre" type="text"
+											 name='middlename' ng-model="ctrl.post.middlename">
+							</div>
+						</div>
+
+						<div class="row center">
+							<div class="input-field col s6">
+								<input placeholder="Primer Apellido" id="p-apellido" type="text"
+											 name="lastname" ng-model="ctrl.post.lastname" required
+											 class="{{ctrl.post.lastname.length > 0 ? '' : 'invalid'}}">
+							</div>
+							<div class="input-field col s6">
+								<input placeholder="Segundo Apellido" id="s-apellido" type="text"
+								       name="secondLastname" ng-model="ctrl.post.secondLastname">
+							</div>
+						</div>
+
+						<!--txt Telefono-->
+						<div class="row">
+							<div class="input-field col s12">
+								<i class="material-icons prefix">phone</i>
+								<input placeholder="Telefono" id="telefono" type="text"
+								       ng-model="ctrl.post.phone" required
+											 class="{{ctrl.post.phone.length > 0 ? '' : 'invalid'}}">
+							</div>
+						</div>
+				</div>
+		    <div class="modal-footer">
+		    	<a href="#!" class=" modal-action modal-close waves-effect waves-blue darken-4 btn-flat">SALIR</a>
+		      	<button type="submit" class=" modal-action modal-close waves-effect waves-blue darken-4 btn-flat"
+						   ng-click="ctrl.submitClient(ctrl.postClientForm)" ng-show="ctrl.postClientForm.$valid">
+							CREAR
+						</button>
+		    </div>
+				</form>
+		</div>
+
+		<!-- Modal EDITAR -->
+		<div id="editar" class="modal">
+		    <div class="modal-content">
+		      <h5>EDITAR</h5>
+		      <p>Formulario de edici&#243;n de cliente</p>
+		      <!--txt Nombre-->
+		      <row>
+		      	<div class="input-field col s12">
+		      		<i class="material-icons prefix">account_circle</i>
+		        	<input placeholder="Nombre" id="nombre" type="text" class="validate">
+		        </div>
+		      </row>
+		      <!--txt Telefono-->
+		      <row>
+		      	<div class="input-field col s12">
+			        <i class="material-icons prefix">phone</i>
+			        <input placeholder="Telefono" id="telefono" type="text" class="validate">
+		        </div>
+		      </row>
+		    </div>
+		    <div class="modal-footer">
+		    	<a href="#!" class=" modal-action modal-close waves-effect waves-blue darken-4 btn-flat">SALIR</a>
+		      	<a href="#!" class=" modal-action modal-close waves-effect waves-blue darken-4 btn-flat">EDITAR</a>
+		    </div>
+		</div>
+
+		<!-- Modal ELIMINAR -->
+		<div id="eliminar" class="modal">
+		    <div class="modal-content">
+		      <h5>ELIMINAR</h5>
+		      <p>Esta seguro que desea eliminar al siguiente cliente?</p>
+		      <row>
+		      	<div class="col s12">
+		      		<label><i class="material-icons prefix">account_circle</i> Nombre</label>
+		      	</div>
+		      </row>
+		      <row>
+		      	<div class="col s12">
+		      		<label><i class="material-icons prefix">phone</i> Telefono</label>
+		      	</div>
+		      </row>
+		      <row>
+		      	<div class="col s12">
+		      		<label><i class="material-icons prefix">credit_card</i> Saldo</label>
+		      	</div>
+		      </row>
+		    </div>
+		    <div class="modal-footer">
+		    	<a href="#!" class=" modal-action modal-close waves-effect waves-blue darken-4 btn-flat">SALIR</a>
+		      	<a href="#!" class=" modal-action modal-close waves-effect waves-blue darken-4 btn-flat">ELIMINAR</a>
+		    </div>
+		</div>
+
+	<!--Inicializando Modal-->
+	<script>
+		$(document).ready(function(){
+			$('.modal').modal();
+		});
+	</script>
+</main>

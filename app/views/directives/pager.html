@@ -1,0 +1,15 @@
+<ul class="pagination center-align">
+  <li class="waves-effect" ng-click="back()">
+    <a href="#!">
+      <i class="material-icons">chevron_left</i>
+    </a>
+  </li>
+  <li class="waves-effect" ng-repeat="n in range" data-index="{{n}}" ng-click="ctrl.pageHandler(n)">
+    <a href="#!"> {{n}} </a>
+  </li>
+  <li class="waves-effect" ng-click="foward()">
+    <a href="#!">
+      <i class="material-icons">chevron_right</i>
+    </a>
+  </li>
+</ul>
