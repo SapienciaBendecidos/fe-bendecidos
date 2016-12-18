@@ -8,7 +8,7 @@ class ReportController {
     this.viajes = [];
     this.filter = {};
     this.pageIndex = 0;
-    this.pageSize  = 250;
+    this.pageSize  = 200;
     this.range = [];
     this.count = 0;
     this.filter = $stateParams.filter;
@@ -24,8 +24,9 @@ class ReportController {
   }
 
   setPageCount() {
-    this.TripService.getCount().then(response => {
-      this.count = response.data.count/this.pageSize;
+    this.TripService.getTripsCount(this.filter).then(response => {
+      let data = response.data.getReportCount[0];
+      this.count = data['count(*)']/this.pageSize;
       for (var i = 0; i < this.count; ++i)
         this.range.push(i);
     });
