@@ -2,27 +2,82 @@
 
 class ReportGenerationController {
 
-  constructor() {
+  constructor($state) {
     'ngInject';
-    this.intialDate = '';
-    this.limitDate = '';
-    this.driver = '';
-    this.busPlate = '';
-    this.route = '';
+
+    //default empty attribute value for /Viajes/getreports/filter{} :(
+    this.defaultInitialDate = '06660101';
+    this.defaultValue = '';
+    this.defaultFilterValue = '.*';
+    this.initialDate = this.defaultValue;
+    this.limitDate = this.defaultValue;
+    this.driver = this.defaultValue;
+    this.busPlate = this.defaultValue;
+    this.route = this.defaultValue;
+    this.filter = null;
+    this.$state = $state;
   }
 
   handleSubmit() {
-    let validDates = this.isValidDateInput();
-
-    console.log(this.intialDate, this.limitDate, this.driver, this.busPlate, this.route);
-
-    if(!validDates)
+    this.filter = null;
+    if(!this.isValidDateInput()){
       Materialize.toast('Seleccione ambas fechas', 5000);
+      return;
+    }
+    this.setFilter();
+    this.$state.go('Report');
+  }
+
+  setFilter() {
+
+    if(this.isAnySet())
+    {
+
+      this.initialDate = this.isSet(this.initialDate) ?
+          this.getDateValue(new Date(this.initialDate)) : this.defaultInitialDate;
+
+      this.limitDate =  this.isSet(this.limitDate) ?
+          this.getDateValue(new Date(this.limitDate)) : this.getDateValue(new Date());
+
+      this.route = this.getFilterValue(this.route);
+      this.driver = this.getFilterValue(this.driver);
+      this.busPlate = this.getFilterValue(this.busPlate);
+      let and =
+      [
+        { 'fecha_inicial': this.initialDate },
+        { 'fecha_limite': this.limitDate },
+        { 'nombre': this.route },
+        { 'bus_conductor': this.driver },
+        { 'tipo_movimiento': this.defaultFilterValue },
+        { 'bus_placa': this.busPlate },
+      ];
+      this.filter = {and};
+    }
+  }
+
+  isAnySet() {
+    return this.isSet(this.initialDate)
+        || this.isSet(this.limitDate)
+        || this.isSet(this.driver)
+        || this.isSet(this.route)
+        || this.isSet(this.busPlate);
+  }
+
+  getFilterValue(input) {
+      return this.isSet(input) ? input : this.defaultFilterValue;
+  }
+
+  getDateValue(date) {
+    return `${date.getFullYear()}${date.getMonth()}${date.getDate()}`;
+  }
+
+  isSet(input) {
+    return input != this.defaultValue;
   }
 
   isValidDateInput() {
-    return !(this.intialDate != '' && this.limitDate == ''
-           || this.limitDate != '' && this.intialDate == '')
+    return  !(this.isSet(this.initialDate) && !this.isSet(this.limitDate)
+           || this.isSet(this.limitDate) && !this.isSet(this.initialDate))
   }
 }
 
