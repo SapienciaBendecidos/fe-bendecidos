@@ -25,7 +25,11 @@ class ReportGenerationController {
       return;
     }
     this.setFilter();
-    this.$state.go('Report');
+
+    if(this.filter != null)
+      this.$state.go('Report', {filter: JSON.stringify(this.filter)});
+    else
+      this.$state.go('Report');
   }
 
   setFilter() {
@@ -51,6 +55,7 @@ class ReportGenerationController {
         { 'tipo_movimiento': this.defaultFilterValue },
         { 'bus_placa': this.busPlate },
       ];
+
       this.filter = {and};
     }
   }
@@ -68,7 +73,17 @@ class ReportGenerationController {
   }
 
   getDateValue(date) {
-    return `${date.getFullYear()}${date.getMonth()}${date.getDate()}`;
+    let year = '' + date.getFullYear();
+    let month = '' + (date.getMonth() + 1);
+    let day = '' + date.getDate();
+
+    if(day.length < 2)
+      day = '0' + day;
+
+    if(month.length < 2)
+      month = '0' + month;
+
+    return `${year}${month}${day}`;
   }
 
   isSet(input) {

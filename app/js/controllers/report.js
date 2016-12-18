@@ -2,22 +2,23 @@
 
 class ReportController {
 
-  constructor(TripService, $state) {
+  constructor(TripService, $stateParams) {
     'ngInject';
     this.TripService = TripService;
     this.viajes = [];
     this.filter = {};
     this.pageIndex = 0;
-    this.pageSize  = 10;
+    this.pageSize  = 250;
     this.range = [];
     this.count = 0;
+    this.filter = $stateParams.filter;
     this.getTrips();
     this.setPageCount();
   }
 
   getTrips() {
     let offset = this.pageIndex * this.pageSize;
-    this.TripService.getTrips(offset,this.pageSize, null).then(response => {
+    this.TripService.getTrips(offset,this.pageSize, this.filter).then(response => {
       this.viajes = response.data.getReport;
     });
   }
@@ -27,7 +28,6 @@ class ReportController {
       this.count = response.data.count/this.pageSize;
       for (var i = 0; i < this.count; ++i)
         this.range.push(i);
-        console.log(this.range);
     });
   }
 
@@ -42,7 +42,6 @@ class ReportController {
 
   dateToString(date) {
     date = new Date(date);
-
     return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
   }
 }

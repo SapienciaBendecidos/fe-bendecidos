@@ -10,10 +10,16 @@ class TripService {
     return this.$http.get(`${apiUrl}viajes/count`);
   }
 
+  getTripsCount(skip,limit,filter) {
+    if(!filter)
+      return this.$http.get(`${apiUrl}viajes/getReport/count?skip=${skip}&limit=${limit}`);
+    return this.$http.get(`${apiUrl}viajes/getReport/count?filter=${filter}&skip=${skip}&limit=${limit}`);
+  }
+
   getTrips(skip,limit,filter) {
     if(!filter)
       return this.$http.get(`${apiUrl}viajes/getReport?skip=${skip}&limit=${limit}`);
-    return this.$http.get(`${apiUrl}viajes/getReport?filter=${JSON.stringify(filter)}`);
+    return this.$http.get(`${apiUrl}viajes/getReport?filter=${filter}&skip=${skip}&limit=${limit}`);
   }
 }
 
