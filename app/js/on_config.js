@@ -1,8 +1,9 @@
 import customInterceptors from './interceptors/index';
 
-function OnConfig($stateProvider, $locationProvider, $urlRouterProvider, $compileProvider, $httpProvider) {
+function OnConfig($stateProvider, $locationProvider, $urlRouterProvider, $compileProvider, $httpProvider, $qProvider) {
   'ngInject';
 
+  $qProvider.errorOnUnhandledRejections(false);
   $httpProvider.interceptors.push(...customInterceptors);
 
   if (process.env.NODE_ENV === 'production') {
@@ -18,6 +19,18 @@ function OnConfig($stateProvider, $locationProvider, $urlRouterProvider, $compil
     controller: 'LoginController as ctrl',
     templateUrl: 'login.html',
     title: 'Login'
+  })
+  .state('ReportGeneration', {
+    url: '/generacion-reporte',
+    controller: 'ReportGenerationController as ctrl',
+    templateUrl: 'report_generation.html',
+    title: 'Reporte de viajes'
+  })
+  .state('Report', {
+    url: '/reporte?filter',
+    controller: 'ReportController as ctrl',
+    templateUrl: 'report.html',
+    title: 'Reporte de viajes'
   })
   .state('Client',{
     url: '/clientes',

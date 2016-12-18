@@ -1,0 +1,41 @@
+<main class="vw-generacion-reporte">
+  <div class="col s9">
+      <h3 class="thin">Reportes</h3>
+      <p>&nbsp;</p>
+      <div class="row">
+        <form class="col s10">
+          <div class="row">
+            <div class="input-field col s6">
+              <h6 class="thin">Fecha inicial</h6>
+              <input type="date" class="datepicker" ng-model="ctrl.intialDate">
+            </div>
+            <div class="input-field col s6">
+              <h6 class="thin">Fecha inicial</h6>
+              <input type="date" class="datepicker" ng-model="ctrl.limitDate">
+            </div>
+            <div class="input-field col s6">
+		        	<input placeholder="Ruta" type="text" class="validate" ng-model="ctrl.route">
+            </div>
+            <div class="input-field col s6">
+		        	<input placeholder="Conductor" type="text" class="validate" ng-model="ctrl.driver">
+            </div>
+            <div class="input-field col s6">
+		        	<input placeholder="Numero de placa" type="text" class="validate" ng-model="ctrl.busPlate">
+            </div>
+            <div class="input-field col s12 center">
+              <button class="waves-effect waves-light btn blue-grey" ng-click="ctrl.handleSubmit()">
+                <i class="material-icons left">assignment</i>
+                Generar Reporte
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+  </div>
+  <script>
+    $('.datepicker').pickadate({
+      selectMonths: true, // Creates a dropdown to control month
+      selectYears: 15 // Creates a dropdown of 15 years to control year
+    });
+  </script>
+</main>
