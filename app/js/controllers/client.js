@@ -9,6 +9,7 @@ function ClientController(ClientService, $q) {
   vm.perPage = 100;
   vm.range = [];
   vm.activePage = 0;
+  vm.focusedClient = {};
   vm.clientForm = {};
 
   vm.getFullName = (client) => {
@@ -19,79 +20,128 @@ function ClientController(ClientService, $q) {
     return fullname;
   };
 
-vm.getClients = (page) => {
-  let skip = page * vm.perPage,
-      limit = vm.perPage;
-  return ClientService.getClientsWithSaldo(limit,skip,null);
-};
+  vm.setFocusedClient = id => vm.focusedClient = vm.getClientById(id);
 
-vm.loadClients = () =>  vm.getClients(vm.activePage)
-.then(response => vm.clients = response.data.getWithSaldo);
+  vm.edit = () => {
+    let promise = vm.postClient(vm.focusedClient);
+    promise.then(() => {
+      Materialize.toast('Cliente editado exitosamente',5000);
+      vm.loadClients();
+    });
+    promise.catch(() => {
+      Materialize.toast('Error al editar cliente',5000);
+      vm.loadClients();
+    });
+  }
 
-vm.handlePageControlClick = (event) => {
-  let active = event.currentTarget.attributes['data-control'].value;
-  if(active.toLowerCase() === 'false')
-  return;
+  vm.delete = () => {
+    let promise = vm.deleteById(vm.focusedClient.idCliente);
+    promise.then(() => {
+      Materialize.toast('Cliente eliminado exitosamente', 5000);
+      vm.loadClients();
+    });
+    promise.catch(() => {
+      Materialize.toast('Error al eliminar cliente', 5000);
+      vm.loadClients();
+    });
+  }
 
-  let control = event.currentTarget.attributes['data-control'].value;
-  let page = parseInt(vm.activePage);
-  vm.activePage = control === 'foward' ? page + 1 : page - 1;
-  vm.loadClients();
-}
+  vm.deleteById = id => ClientService.deleteById(id);
 
-vm.handlePageIndexClick = (event) => {
-  vm.activePage = event.currentTarget.attributes['data-index'].value;
-  vm.loadClients();
-}
+  vm.getClientById = id => {
+    for (let i = 0; i < vm.clients.length; ++i)
+      if(vm.clients[i].id_cliente == id) {
+          let client = vm.clients[i];
+          return  {
+            idCliente: client.id_cliente,
+            primerNombre: client.primer_nombre,
+            segundoNombre: client.segundo_nombre,
+            primerApellido: client.primer_apellido,
+            segundoApellido: client.segundo_apellido,
+            telefono: client.telefono,
+          }
+      }
+  }
 
-vm.getClientCount = () => ClientService.countClients();
-vm.postClient = (client) => ClientService.postClient(client);
-
-vm.searchClients = () => {
-  let regexp = `${vm.search}`;
-  let or =
-  [
-    { primerNombre: regexp },
-    { segundoNombre: regexp },
-    { primerApellido: regexp },
-    { segundoApellido: regexp },
-    { telefono: regexp }
-  ];
-  let promise = ClientService.getClientsWithSaldo(0,0,{or});
-  promise.then( response =>  vm.clients = response.data.getWithSaldo);
-  promise.catch( () => Materialize.toast('Error al realizar busqueda', 5000));
-};
-
-vm.submitClient = () => {
-  let { firstname, middlename, lastname, secondLastname, phone, money } = vm.post;
-  let client = {
-    primerNombre: firstname,
-    segundoNombre: middlename ? middlename : '',
-    primerApellido: lastname,
-    segundoApellido: secondLastname ? secondLastname : '',
-    telefono: phone,
-    saldo: money,
+  vm.getClients = (page) => {
+    let skip = page * vm.perPage,
+        limit = vm.perPage;
+    return ClientService.getClientsWithSaldo(limit,skip,null);
   };
 
-  let promise = vm.postClient(client);
-  promise.then(() => Materialize.toast('Cliente agregado exitosamente', 5000));
-  promise.catch(() => Materialize.toast('Error al agregar cliente', 5000));
-  vm.post = {};
-}
+  vm.loadClients = () =>  vm.getClients(vm.activePage)
+  .then(response => vm.clients = response.data.getWithSaldo);
 
-let getCount   = vm.getClientCount(),
-getClients = vm.getClients(0);
+  vm.handlePageControlClick = (event) => {
+    let active = event.currentTarget.attributes['data-control'].value;
+    if(active.toLowerCase() === 'false')
+    return;
 
-$q.all([getCount, getClients]).then( responses => {
-  let { count } = responses[0].data;
-  vm.pages = Math.ceil(count/vm.perPage);
-  vm.range = [];
+    let control = event.currentTarget.attributes['data-control'].value;
+    let page = parseInt(vm.activePage);
+    vm.activePage = control === 'foward' ? page + 1 : page - 1;
+    vm.loadClients();
+  }
 
-  for (let i = 0; i < vm.pages; i++)
-    vm.range.push(i);
+  vm.handlePageIndexClick = (event) => {
+    vm.activePage = event.currentTarget.attributes['data-index'].value;
+    vm.loadClients();
+  }
 
-  vm.clients = responses[1].data.getWithSaldo
-});
+  vm.getClientCount = () => ClientService.countClients();
+  vm.postClient = (client) => ClientService.postClient(client);
+
+  vm.searchClients = () => {
+    let regexp = `${vm.search}`;
+    let or =
+    [
+      { primerNombre: regexp },
+      { segundoNombre: regexp },
+      { primerApellido: regexp },
+      { segundoApellido: regexp },
+      { telefono: regexp }
+    ];
+    let promise = ClientService.getClientsWithSaldo(0,0,{or});
+    promise.then( response =>  vm.clients = response.data.getWithSaldo);
+    promise.catch( () => Materialize.toast('Error al realizar busqueda', 5000));
+  };
+
+  vm.submitClient = () => {
+    let { firstname, middlename, lastname, secondLastname, phone, money } = vm.post;
+    let client = {
+      primerNombre: firstname,
+      segundoNombre: middlename ? middlename : '',
+      primerApellido: lastname,
+      segundoApellido: secondLastname ? secondLastname : '',
+      telefono: phone,
+      saldo: money,
+    };
+
+    let promise = vm.postClient(client);
+    promise.then(() => {
+      Materialize.toast('Cliente agregado exitosamente', 5000);
+      vm.loadClients();
+    });
+    promise.catch(() => {
+      Materialize.toast('Error al agregar cliente', 5000);
+      vm.loadClients();
+    });
+    vm.post = {};
+  }
+
+  let getCount   = vm.getClientCount(),
+  getClients = vm.getClients(0);
+
+  $q.all([getCount, getClients]).then( responses => {
+    let { count } = responses[0].data;
+    vm.pages = Math.ceil(count/vm.perPage);
+    vm.range = [];
+
+    for (let i = 0; i < vm.pages; i++)
+      vm.range.push(i);
+
+    vm.clients = responses[1].data.getWithSaldo
+  });
 }
 
 export default {
