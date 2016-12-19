@@ -1,4 +1,4 @@
-export const apiUrl   = 'http://0.0.0.0:3000/api/';
+export const apiUrl   = 'http://localhost:3000/api/';
 export const appTitle = 'Ebenezer';
 
 const AppSettings = {

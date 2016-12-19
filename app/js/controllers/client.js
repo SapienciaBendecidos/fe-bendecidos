@@ -29,7 +29,7 @@ vm.loadClients = () =>  vm.getClients(vm.activePage)
 .then(response => vm.clients = response.data.getWithSaldo);
 
 vm.handlePageControlClick = (event) => {
-  let active = event.currentTarget.attributes['data-active'].value;
+  let active = event.currentTarget.attributes['data-control'].value;
   if(active.toLowerCase() === 'false')
   return;
 
