@@ -1,0 +1,28 @@
+<main class="vw-report">
+		<table class="bordered centered highlight" >
+	        <thead>
+	          <tr>
+                <th data-field="ruta">Ruta</th>
+                <th data-field="bus">Bus</th>
+	              <th data-field="fecha">Fecha</th>
+	              <th data-field="conductor">Conductor</th>
+	              <th data-field="personas">Personas</th>
+	              <th data-field="descripcion">Descripcion</th>
+	              <th data-field="movimiento">Movimiento</th>
+	          </tr>
+	        </thead>
+	        <tbody>
+	          <tr ng-repeat="viaje in ctrl.viajes">
+              <td>{{viaje.nombre}}</td>
+              <td>{{viaje.bus_placa}}</td>
+	            <td>{{ctrl.dateToString(viaje.fecha)}}</td>
+              <td>{{viaje.bus_conductor}}</td>
+	            <td>{{viaje.cantidad}}</td>
+              <td>{{viaje.descripcion}}</td>
+              <td>{{viaje.tipo_movimiento}}</td>
+	          </tr>
+	        </tbody>
+    </table>
+		<!-- Pagination -->
+		<div pager-directive range="ctrl.range" ctrl="ctrl"> </div>
+</main>
