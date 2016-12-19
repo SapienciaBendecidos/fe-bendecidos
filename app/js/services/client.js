@@ -18,7 +18,8 @@ function ClientService($http) {
     return $http.get(`${apiUrl}clientes/getWithSaldo?filter=${JSON.stringify(filter)}`);
   }
 
-  service.postClient = (client) => $http.post(`${apiUrl}clientes`, client);
+  service.postClient = (client) => $http.post(`${apiUrl}clientes/replaceOrCreate`, client);
+  service.deleteById = id => $http.delete(`${apiUrl}clientes/${id}`);
   return service;
 }
 

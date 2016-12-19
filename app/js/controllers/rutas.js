@@ -54,7 +54,6 @@ function RutasController (RutasService, $q) {
             descripcion: ruta.descripcion,
           }
       }
-
   }
 
   vm.getRutas = (page) => {

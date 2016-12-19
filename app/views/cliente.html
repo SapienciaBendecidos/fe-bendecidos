@@ -40,8 +40,8 @@
 	            <td>{{ctrl.getFullName(client)}}</td>
 	            <td>{{client.telefono ? client.telefono : 'N:A'}}</td>
 	            <td>Lps. {{client.total}}</td>
-	            <td><a class="btn-floating btn-large waves-effect waves-light  blue darken-4 modal-trigger" href="#editar"><i class="material-icons">mode_edit</i></a></td>
-	            <td><a class="btn-floating btn-large waves-effect waves-light  red darken-2 modal-trigger" href="#eliminar"><i class="material-icons">delete</i></a></td>
+	            <td><a class="btn-floating btn-large waves-effect waves-light  blue darken-4 modal-trigger" href="#editar" ng-click="ctrl.setFocusedClient(client.id_cliente)"><i class="material-icons">mode_edit</i></a></td>
+	            <td><a class="btn-floating btn-large waves-effect waves-light  red darken-2 modal-trigger" href="#eliminar" ng-click="ctrl.setFocusedClient(client.id_cliente)"><i class="material-icons">delete</i></a></td>
 	          </tr>
 	        </tbody>
     </table>
@@ -121,25 +121,41 @@
 		    <div class="modal-content">
 		      <h5>EDITAR</h5>
 		      <p>Formulario de edici&#243;n de cliente</p>
+		      <div class="row center">
 		      <!--txt Nombre-->
-		      <row>
-		      	<div class="input-field col s12">
-		      		<i class="material-icons prefix">account_circle</i>
-		        	<input placeholder="Nombre" id="nombre" type="text" class="validate">
-		        </div>
-		      </row>
-		      <!--txt Telefono-->
-		      <row>
-		      	<div class="input-field col s12">
-			        <i class="material-icons prefix">phone</i>
-			        <input placeholder="Telefono" id="telefono" type="text" class="validate">
-		        </div>
-		      </row>
-		    </div>
+		      	<row>
+			      	<div class="input-field col s6">
+						<input placeholder="Primer Nombre" type='text' id='primer-nombre' ng-model="ctrl.focusedClient.primerNombre" required class="{{ctrl.focusedClient.primerNombre.length > 0 ? '' : 'invalid'}}">
+					</div>
+					<div class="input-field col s6">
+						<input placeholder="Segundo Nombre" id="segundo-nombre" type="text" ng-model="ctrl.focusedClient.segundoNombre">
+					</div>
+				</row>
+				<row>
+					<div class="row center">
+						<div class="input-field col s6">
+							<input placeholder="Primer Apellido" id="primer-apellido" type="text" ng-model="ctrl.focusedClient.primerApellido" required class="{{ctrl.focusedClient.primerApellido.length > 0 ? '' : 'invalid'}}">
+						</div>
+						<div class="input-field col s6">
+							<input placeholder="Segundo Apellido" id="segundo-apellido" type="text" ng-model="ctrl.focusedClient.segundoApellido">
+						</div>
+					</div>
+				</row>
+				<row>
+					<!--txt Telefono-->
+					<div class="row">
+						<div class="input-field col s12">
+							<i class="material-icons prefix">phone</i>
+							<input placeholder="telefono" id="telefono" type="text" ng-model="ctrl.focusedClient.telefono" required class="{{ctrl.focusedClient.telefono.length > 0 ? '' : 'invalid'}}">
+						</div>
+					</div>
+				</row>
 		    <div class="modal-footer">
 		    	<a href="#!" class=" modal-action modal-close waves-effect waves-blue darken-4 btn-flat">SALIR</a>
-		      	<a href="#!" class=" modal-action modal-close waves-effect waves-blue darken-4 btn-flat">EDITAR</a>
+		      	<a href="#!" class=" modal-action modal-close waves-effect waves-blue darken-4 btn-flat" ng-click="ctrl.edit()">EDITAR</a>
 		    </div>
+		    </div>
+		</div>
 		</div>
 
 		<!-- Modal ELIMINAR -->
@@ -149,23 +165,18 @@
 		      <p>Esta seguro que desea eliminar al siguiente cliente?</p>
 		      <row>
 		      	<div class="col s12">
-		      		<label><i class="material-icons prefix">account_circle</i> Nombre</label>
+		      		<label><i class="material-icons prefix">account_circle</i> {{ctrl.getFullName(ctrl.focusedClient)}}</label>
 		      	</div>
 		      </row>
 		      <row>
 		      	<div class="col s12">
-		      		<label><i class="material-icons prefix">phone</i> Telefono</label>
-		      	</div>
-		      </row>
-		      <row>
-		      	<div class="col s12">
-		      		<label><i class="material-icons prefix">credit_card</i> Saldo</label>
+		      		<label><i class="material-icons prefix">phone</i> {{ctrl.focusedClient.telefono}}</label>
 		      	</div>
 		      </row>
 		    </div>
 		    <div class="modal-footer">
 		    	<a href="#!" class=" modal-action modal-close waves-effect waves-blue darken-4 btn-flat">SALIR</a>
-		      	<a href="#!" class=" modal-action modal-close waves-effect waves-blue darken-4 btn-flat">ELIMINAR</a>
+		      	<a href="#!" class=" modal-action modal-close waves-effect waves-blue darken-4 btn-flat" ng-click="ctrl.delete()">ELIMINAR</a>
 		    </div>
 		</div>
 
