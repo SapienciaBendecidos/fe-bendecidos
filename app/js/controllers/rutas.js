@@ -9,11 +9,53 @@ function RutasController (RutasService, $q) {
   vm.perPage = 100;
   vm.range = [];
   vm.activePage = 0;
-
+  vm.focusedRoute = {};
   vm.buttonText = 'Salir';
 
   vm.nombre = '';
   vm.descripcion = '';
+
+  vm.setFocusedRoute = id => vm.focusedRoute = vm.getRouteById(id);
+
+  vm.edit = () => {
+    let promise = vm.postRuta(vm.focusedRoute);
+    promise.then(() => {
+      Materialize.toast('Ruta editada exitosamente', 5000);
+      vm.loadRutas();
+    });
+    promise.catch(() => {
+      Materialize.toast('Error al editar ruta', 5000);
+      vm.loadRutas();
+    });
+  }
+
+  vm.delete = () => {
+    console.log(vm.focusedRoute);
+    let promise = vm.deleteById(vm.focusedRoute.idRuta);
+    promise.then(() => {
+      Materialize.toast('Ruta eliminada exitosamente', 5000);
+      vm.loadRutas();
+    });
+    promise.catch(() => {
+      Materialize.toast('Error al eliminar ruta', 5000);
+      vm.loadRutas();
+    });
+  }
+
+  vm.deleteById = id => RutasService.deleteById(id);
+
+  vm.getRouteById = id => {
+    for (let i = 0; i < vm.rutas.length; ++i)
+      if(vm.rutas[i].idRuta == id) {
+          let ruta = vm.rutas[i];
+          return {
+            idRuta: ruta.idRuta,
+            nombre: ruta.nombre,
+            descripcion: ruta.descripcion,
+          }
+      }
+
+  }
 
   vm.getRutas = (page) => {
     let skip = page * vm.perPage,
@@ -56,13 +98,8 @@ function RutasController (RutasService, $q) {
     promise.then(response => vm.rutas = response.data);
     promise.catch( () => Materialize.toast('Error al realizar busqueda', 5000));
   };
-  
-  vm.submitRuta = (form) => {
-      console.log('Submit');
-      console.log(form.$valid);
-      console.log(vm.post);
-      console.log(form)
 
+  vm.submitRuta = () => {
       let { name, description } = vm.post;
       let ruta = {
         nombre: name,
@@ -70,8 +107,14 @@ function RutasController (RutasService, $q) {
       };
 
       let promise = vm.postRuta(ruta);
-      promise.then(() => Materialize.toast('Ruta agregada exitosamente', 5000));
-      promise.catch(() => Materialize.toast('Error al agregar ruta', 5000));
+      promise.then(() => {
+        Materialize.toast('Ruta agregada exitosamente', 5000);
+        vm.loadRutas();
+      });
+      promise.catch(() => {
+        Materialize.toast('Error al agregar ruta', 5000);
+        vm.loadRutas();
+      });
       vm.post = {};
     }
 
@@ -88,6 +131,7 @@ function RutasController (RutasService, $q) {
 
       vm.rutas = responses[1].data;
   });
+
 }
 
 

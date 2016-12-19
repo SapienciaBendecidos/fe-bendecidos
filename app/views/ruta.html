@@ -32,8 +32,18 @@
             <tr ng-repeat="ruta in ctrl.rutas">
               <td>{{ruta.nombre}}</td>
               <td>{{ruta.descripcion}}</td>
-              <td><a class="btn-floating btn-large waves-effect waves-light  blue darken-4 modal-trigger" href="#editar"><i class="material-icons">mode_edit</i></a></td>
-            <td><a class="btn-floating btn-large waves-effect waves-light  red darken-2 modal-trigger" href="#eliminar"><i class="material-icons">delete</i></a></td>
+              <td>
+                <a class="btn-floating btn-large waves-effect waves-light  blue darken-4 modal-trigger" href="#editar" ng-click="ctrl.setFocusedRoute(ruta.idRuta)">
+                  <i class="material-icons">mode_edit</i>
+                </a>
+              </td>
+            <td>
+              <a class="btn-floating btn-large waves-effect waves-light  red darken-2 modal-trigger" href="#eliminar" ng-click="ctrl.setFocusedRoute(ruta.idRuta)">
+                <i class="material-icons">
+                  delete
+                </i>
+              </a>
+            </td>
             </tr>
           </tbody>
       </table>
@@ -79,7 +89,7 @@
                 <input type='text'
                        name='description' id='description' ng-model="ctrl.post.description" required
                        class="validate">
-               <label for="description">Zona</label>
+               <label for="description">Descripcion</label>
               </div>
             </div>
         </div>
@@ -95,48 +105,48 @@
     <!-- Modal EDITAR -->
     <div id="editar" class="modal">
         <div class="modal-content">
-          <h3 class="Grey thin">EDITAR</h3>
           <p>Formulario de edici&#243;n de ruta</p>
           <row>
             <div class="input-field col s12">
               <i class="material-icons prefix">directions_bus</i>
-              <input placeholder="Ruta" id="nombre" type="text" class="validate">
+              <input placeholder="Ruta" id="nombre" type="text" class="validate" ng-model="ctrl.focusedRoute.nombre">
             </div>
           </row>
           <row>
             <div class="input-field col s12">
               <i class="material-icons prefix">assignment</i>
-              <input placeholder="Zona" id="descripcion" type="text" class="validate">
+              <input placeholder="Zona" id="descripcion" type="text" class="validate" ng-model="ctrl.focusedRoute.descripcion">
             </div>
           </row>
         </div>
         <div class="modal-footer">
           <a href="#!" class=" modal-action modal-close waves-effect waves-light btn blue-grey">SALIR</a>
-
-          <a href="#!" class=" modal-action modal-close waves-effect waves-light btn blue-grey">EDITAR</a>
+          <a href="#!" style="margin-right: 1rem" class=" modal-action modal-close waves-effect waves-light btn blue-grey" ng-click="ctrl.edit()">
+            EDITAR
+          </a>
         </div>
     </div>
 
     <!-- Modal ELIMINAR -->
     <div id="eliminar" class="modal">
         <div class="modal-content">
-          <h5>ELIMINAR</h5>
           <p>Esta seguro que desea eliminar la siguiente ruta?</p>
           <row>
             <div class="col s12">
-              <label><i class="material-icons prefix">directions_bus</i> Ruta</label>
+              <label>
+                <i class="material-icons prefix">directions_bus </i> <span style="color:black; font-size:1.5rem;"> {{ctrl.focusedRoute.nombre}} </span> </label>
             </div>
           </row>
           <row>
             <div class="col s12">
-              <label><i class="material-icons prefix">assignment</i> Zona</label>
+              <label>
+                <i class="material-icons prefix">assignment </i> <span style="color:black; font-size:1.5rem;"> {{ctrl.focusedRoute.descripcion}} </span></label>
             </div>
           </row>
         </div>
         <div class="modal-footer">
           <a href="#!" class=" modal-action modal-close waves-effect waves-light btn blue-grey">SALIR</a>
-
-          <a href="#!" class=" modal-action modal-close waves-effect waves-light btn blue-grey">ELIMINAR</a>
+          <a href="#!" style="margin-right: 1rem" class=" modal-action modal-close waves-effect waves-light btn blue-grey" ng-click="ctrl.delete()">ELIMINAR</a>
         </div>
     </div>
 

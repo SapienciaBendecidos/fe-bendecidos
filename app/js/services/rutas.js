@@ -8,16 +8,18 @@ function RutasService($http) {
 	const service = {};
 
 	service.countRutas = () => $http.get(`${apiUrl}rutas/count`);
+	service.postRuta = (rutas) => $http.post(`${apiUrl}rutas/replaceOrCreate`, rutas);
+	service.deleteById = id => $http.delete(`${apiUrl}rutas/${id}`);
 
 	service.getRutas = filter => {
-	    if(!filter)
-	      return $http.get(`${apiUrl}rutas`);
-	    return $http.get(`${apiUrl}rutas?filter=${JSON.stringify(filter)}`);
-  	}
+    if(!filter)
+      return $http.get(`${apiUrl}rutas`);
+    return $http.get(`${apiUrl}rutas?filter=${JSON.stringify(filter)}`);
+  }
 
-  	service.postRuta = (rutas) => $http.post(`${apiUrl}rutas/replaceOrCreate`, rutas);
 
-  	return service;
+
+  return service;
 }
 
 export default {
