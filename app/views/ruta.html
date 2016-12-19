@@ -1,5 +1,4 @@
 <main class="vw-rutas">
-
     <!-- Modal Structure -->
   <div id="search-modal" class="modal bottom-sheet">
     <div class="modal-footer">
@@ -16,24 +15,27 @@
 
     <div class="col s9">
       <h3 class="thin">Rutas</h3>
-      <div class="right"><a class="modal-trigger btn-floating btn-small waves-effect waves-light blue-grey" href="#agregar"><i class="material-icons">add</i></a></div>
+      <div class="add-button">
+        <a class="modal-trigger btn-floating btn-large waves-effect waves-light blue-grey" href="#agregar">
+          <i class="material-icons">add</i>
+        </a>
+      </div>
 
       <table class="bordered centered">
-            <thead>
-              <tr>
-                  <th data-field="nombre">Rutas</th>
-                  <th data-field="descripcion">Zona</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              <tr ng-repeat="ruta in ctrl.rutas">
-                <td>{{ruta.nombre}}</td>
-                <td>{{ruta.descripcion}}</td>
-                <td><a class="btn-floating btn-large waves-effect waves-light  blue darken-4 modal-trigger" href="#editar"><i class="material-icons">mode_edit</i></a></td>
-              <td><a class="btn-floating btn-large waves-effect waves-light  red darken-2 modal-trigger" href="#eliminar"><i class="material-icons">delete</i></a></td>
-              </tr>
-            </tbody>
+          <thead>
+            <tr>
+                <th data-field="nombre">Rutas</th>
+                <th data-field="descripcion">Zona</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="ruta in ctrl.rutas">
+              <td>{{ruta.nombre}}</td>
+              <td>{{ruta.descripcion}}</td>
+              <td><a class="btn-floating btn-large waves-effect waves-light  blue darken-4 modal-trigger" href="#editar"><i class="material-icons">mode_edit</i></a></td>
+            <td><a class="btn-floating btn-large waves-effect waves-light  red darken-2 modal-trigger" href="#eliminar"><i class="material-icons">delete</i></a></td>
+            </tr>
+          </tbody>
       </table>
     </div>
 
