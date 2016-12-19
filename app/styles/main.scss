@@ -17,3 +17,12 @@ body {
 main {
   height: 100%;
 }
+.pagination li.active a {
+  background-color: #0D47A1;
+}
+
+
+
+table.striped > tbody > tr:nth-child(odd) {
+  background-color: #f7f7f7;
+}
