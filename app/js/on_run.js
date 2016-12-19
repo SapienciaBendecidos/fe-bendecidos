@@ -22,6 +22,7 @@ function OnRun($rootScope, AppSettings, $state, SessionService) {
     }
  })
 
+ 
  setInterval(() => {
    let session = SessionService.getSession();
    if($state.current.name !== 'Login' && !session){
