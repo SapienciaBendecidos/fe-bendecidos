@@ -15,37 +15,37 @@
     </head>
     <body>
 
-      <div class="row">
+    <div id="mySidenavN" class="sidenavN">
 
-       <!-- <div class="col s2 blue-grey darken-3">-->
-       <div class="col s12 m4 l3 blue-grey darken-3">
-          <!-- Grey navigation panel -->
-         <section class="blue-grey darken-3">
-            <div class="center"><a href="dashboard.html"><img src="images/ebenezer.png" width="100"></a></div>
-            <div class="center"><h5 style="color:white;">Brandon Napky</h5></div>
-          </section>
-      <section> 
-        <p><a href="hermanos.html" class="waves-effect waves-light btn blue-grey darken-1"><i class="material-icons left">assignment_ind</i>Hermanos</a></p>
-          <p><a href="tarjetas.html" class="waves-effect waves-light btn blue-grey darken-1"><i class="material-icons left">payment</i>Tarjetas</a></p>
-          <p><a href="rutas.html" class="waves-effect waves-light btn blue-grey darken-1"><i class="material-icons left">directions_bus</i>Rutas</a></p>
-          <p><a href="reportes.html" class="waves-effect waves-light btn blue-grey darken-1"><i class="material-icons left">assignment</i>Reportes</a></p>
-          <p><a href="contrasena.html" class="waves-effect waves-light btn blue-grey darken-1"><i class="material-icons left">close</i>Contrase&#241;a</a></p>
-         <p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
-         <p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
+<ul>
+  
+   <div class="center"><a href="dashboard.html"><img src="images/logo.png" width="100"></a></div>
+   <div class="center"><h5 style="color:white;">Brandon Napky</h5></div>
 
-      </section>
+   <div class="card blue-grey darken-1"><a href="hermanos.html"  class="waves-effect waves-light thin blue-grey darken-1"><i class="material-icons">assignment_ind</i> <span class="card-title">Hermanos</span></a></div>
 
-        </div>
+   <div class="card blue-grey darken-1"><a href="tarjetas.html"  class="waves-effect waves-light thin blue-grey darken-1"><i class="material-icons">payment</i><span class="card-title">Tarjetas</span></a></div>
 
-        <div class="col s12 m8 l9">
-        <!--<div class="col s9">-->
+   <div class="card blue-grey darken-1"><a href="rutas.html"  class="waves-effect waves-light thin blue-grey darken-1"><i class="material-icons">directions_bus</i><span class="card-title">Rutas</span></a></div>
+
+   <div class="card blue-grey darken-1"><a href="reportes.html" class="waves-effect waves-light thin blue-grey darken-1"><i class="material-icons left">assignment</i><span class="card-title">Reportes</span></a></div>
+
+   <div class="card blue-grey darken-1"><a href="contrasena.html" class="waves-effect waves-light thin blue-grey darken-1"><i class="material-icons left">vpn_key</i><span class="card-title">Contrase&#241;a</span></a></div>
+
+   <div class="card blue-grey darken-1"><a href="login.html" class="waves-effect waves-light thin blue-grey darken-1"><i class="material-icons left">close</i><span class="card-title">Cerrar</span></a></div>
+
+
+  </ul>
+</div>
+
+        <div id="main">
+ 
+  <span style="font-size:10px;cursor:pointer" onclick="openNav()">&#9776;</span>
 
         <div ui-view></div>
         <script src="js/main.js"></script>
 
         </div>
-
-      </div>
 
         
     </body>
