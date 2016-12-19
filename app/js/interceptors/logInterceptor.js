@@ -4,7 +4,10 @@ const logInterceptor = () => {
   return {
     request: function(config) {
       if (process.env.NODE_ENV !== 'production')
-        console.log(config);
+    		if(Object.keys(localStorage.getItem('session')).length >=1) {
+    			$('#main-nav').removeClass('hidden');
+    			$('#mySidenavN').removeClass('hidden');
+    		}
       return config;
     }
   }

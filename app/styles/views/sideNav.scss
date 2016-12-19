@@ -32,6 +32,10 @@
     margin-left: 50px;
 }
 
+.hidden {
+    display: none;
+}
+
 #main {
     transition: margin-left .5s;
     padding: 16px;

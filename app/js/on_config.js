@@ -26,6 +26,8 @@ function OnConfig($stateProvider, $locationProvider, $urlRouterProvider, $compil
     title: 'Clientes'
   });
 
+  console.log('hey');
+
   $urlRouterProvider.otherwise('/');
 
 }
