@@ -29,7 +29,6 @@ function OnRun($rootScope, AppSettings, $state, SessionService) {
      $state.go('Login', { redirected: true });
    }
  }, 3000)
-
 }
 
 export default OnRun;
