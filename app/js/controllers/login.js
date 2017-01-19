@@ -26,7 +26,9 @@ function LoginController(UserService, SessionService, $timeout, $state) {
   };
 
   vm.handleLoginFail    = () => vm.hideLoader(true);
-  vm.handleLoginSuccess = () => vm.hideLoader(false);
+  vm.handleLoginSuccess = () => {
+    vm.hideLoader(false);
+  }
 
   vm.handleClick = (form) => {
     if (!form.$valid || vm.loading)

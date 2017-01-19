@@ -1,23 +1,32 @@
 .sidenavN {
     height: 100%;
-    width: 0;
+    width: 20rem;
     position: fixed;
     z-index: 1;
     top: 0;
     left: 0;
+    z-index: 2;
     background-color: #37474f;
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 60px;
+    .material-icons {
+        margin-right: 15px;
+    }
+    a {
+        padding: 8px 8px 8px 32px;
+        text-decoration: none;
+        font-size: 25px;
+        color: #ffffff;
+        display: block;
+        transition: 0.3s
+    }
 }
 
-.sidenavN a {
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 25px;
-    color: #ffffff;
-    display: block;
-    transition: 0.3s
+.logo {
+    img {
+        transform: translateX(-10%);
+    }
 }
 
 .sidenavN a:hover, .offcanvas a:focus{
@@ -39,6 +48,13 @@
 #main {
     transition: margin-left .5s;
     padding: 16px;
+}
+
+#sidebar-ico {
+    left: 2rem;
+    z-index: 1;
+    font-size: 2.5rem;
+    cursor: pointer;
 }
 
 @media screen and (max-height: 450px) {

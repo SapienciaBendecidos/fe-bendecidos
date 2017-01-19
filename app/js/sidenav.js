@@ -1,12 +1,17 @@
+$('#sidebar-ico').click(()=> $('#mySidenavN').removeClass('hidden'));
 
-// function openNav() {
-//     document.getElementById("mySidenavN").style.width = "250px";
-//     document.getElementById("main").style.marginLeft = "250px";
-//     document.body.style.backgroundColor = "rgba(0,0,0,0.0)";
-// }
+$('#Login').click(()=> {
+	$('#mySidenavN').addClass('hidden');
+	$('#sidebar-ico').addClass('hidden');
+});
 
-// function closeNav() {
-//     document.getElementById("mySidenavN").style.width = "0";
-//     document.getElementById("main").style.marginLeft= "0";
-//     document.body.style.backgroundColor = "white";
-// }
+$(document).mouseup(function (e)
+{
+    var container = $('#mySidenavN');
+
+    if (!container.hasClass('hidden') && !container.is(e.target) // if the target of the click isn't the container...
+        && container.has(e.target).length === 0) // ... nor a descendant of the container
+    {
+        container.addClass('hidden');
+    }
+});
