@@ -1,6 +1,9 @@
+export const apiUrl   = 'http://localhost:3000/api/';
+export const appTitle = 'Ebenezer';
+
 const AppSettings = {
-  appTitle: 'Example Application',
-  apiUrl: '/api/v1'
+  appTitle,
+  apiUrl
 };
 
 export default AppSettings;

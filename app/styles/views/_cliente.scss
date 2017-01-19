@@ -1,0 +1,54 @@
+.vw-client {
+   background-color: white;
+   nav
+   {
+      color: #fff !important;
+      background-color: #0d47a1 !important;
+      letter-spacing: 3px;
+
+
+      top-nav
+      {
+         height: 40% !important;
+         box-shadow: none !important;
+         line-height: 55% !important;
+      }
+
+      nav-wrapper
+      {
+         i
+         {
+            line-height: 120px !important;
+         }
+      }
+
+      a
+      {
+         button-collapse
+         {
+            i
+            {
+               line-height: 120px !important;
+            }
+
+            line-height: 120px !important;
+         }
+      }
+   }
+
+   input-field
+   {
+      .prefix
+      {
+         .active
+         {
+            color: #0d47a1 !important;
+         }
+      }
+   }
+   .pagination
+   {
+      li.active
+      { background-color: #0d47a1 !important; }
+   }
+}
