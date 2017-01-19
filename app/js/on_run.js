@@ -11,6 +11,9 @@ function OnRun($rootScope, AppSettings, $state, SessionService) {
     }
 
     $rootScope.pageTitle += AppSettings.appTitle;
+    if (Object.keys(localStorage.getItem('session')).length >= 1 && toState.name != 'Login') {
+        $('#sidebar-ico').removeClass('hidden');
+    }
   });
 
   $rootScope.$on('$stateChangeStart', function(event, toState){
@@ -28,8 +31,16 @@ function OnRun($rootScope, AppSettings, $state, SessionService) {
    if($state.current.name !== 'Login' && !session){
      $state.go('Login', { redirected: true });
    }
- }, 3000)
+ }, 3000);
 
+ $('.navList li').click(function() {
+  // $state.go('Login', { redirected: true })
+    var isValid = $(this).hasClass('State');
+    if (isValid) {
+      $state.go($(this).attr('id'), {redirected: true});
+      $('#mySidenavN').addClass('hidden');
+    }
+  });
 }
 
 export default OnRun;

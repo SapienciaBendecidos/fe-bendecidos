@@ -1,13 +1,13 @@
 const logInterceptor = () => {
-  'ngInject';
+    'ngInject';
 
-  return {
-    request: function(config) {
-      if (process.env.NODE_ENV !== 'production')
-        console.log(config);
-      return config;
+    return {
+        request: function(config) {
+            if (process.env.NODE_ENV !== 'production') {
+                return config;
+            }
+        }
     }
-  }
 }
 
 export default logInterceptor;

@@ -12,6 +12,7 @@ import './filters';
 import './controllers';
 import './services';
 import './directives';
+import './sidenav';
 
 
 
