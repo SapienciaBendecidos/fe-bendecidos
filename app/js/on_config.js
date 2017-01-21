@@ -44,6 +44,12 @@ function OnConfig($stateProvider, $locationProvider, $urlRouterProvider, $compil
     controller: 'RutasController as ctrl',
     templateUrl: 'ruta.html',
     title: 'Rutas'
+  })
+  .state('Cards', {
+    url: '/clientes/:clientId/tarjetas',
+    controller: 'CardController as ctrl',
+    templateUrl: 'card.html',
+    title: 'Tarjetas'
   });
 
   $urlRouterProvider.otherwise('/');
