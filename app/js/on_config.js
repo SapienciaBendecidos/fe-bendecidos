@@ -44,6 +44,14 @@ function OnConfig($stateProvider, $locationProvider, $urlRouterProvider, $compil
     controller: 'RutasController as ctrl',
     templateUrl: 'ruta.html',
     title: 'Rutas'
+  })
+
+   .state('dashboard', {
+    url: '/dashboard',
+    params: { redirected: false },
+    controller: 'RutasController as ctrl',
+    templateUrl: 'dashboard.html',
+    title: 'dashboard'
   });
 
   $urlRouterProvider.otherwise('/');
