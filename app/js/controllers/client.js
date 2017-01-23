@@ -147,4 +147,4 @@ function ClientController(ClientService, $q) {
 export default {
   name: 'ClientController',
   fn: ClientController
-};
+  };

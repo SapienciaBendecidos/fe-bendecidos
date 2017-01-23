@@ -6,9 +6,8 @@ function OnConfig($stateProvider, $locationProvider, $urlRouterProvider, $compil
   $qProvider.errorOnUnhandledRejections(false);
   $httpProvider.interceptors.push(...customInterceptors);
 
-  if (process.env.NODE_ENV === 'production') {
+  if (process.env.NODE_ENV === 'production')
     $compileProvider.debugInfoEnabled(false);
-  }
 
   $locationProvider.html5Mode(true);
 
@@ -49,11 +48,21 @@ function OnConfig($stateProvider, $locationProvider, $urlRouterProvider, $compil
     url: '/clientes/:clientId/tarjetas',
     controller: 'CardController as ctrl',
     templateUrl: 'card.html',
-    title: 'Tarjetas'
+    title: 'Tarjetas',
+    resolve: {
+      client: function($stateParams, ClientService) {
+        'ngInject'
+        let id = $stateParams.clientId;
+        return ClientService.getClientById(id);
+      },
+      cards: function($stateParams, ClientService) {
+        'ngInject'
+        let id = $stateParams.clientId;
+        return ClientService.getCards(id);
+      }
+    }
   });
-
   $urlRouterProvider.otherwise('/');
-
 }
 
 export default OnConfig;
