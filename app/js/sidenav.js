@@ -1,17 +1,42 @@
-$('#sidebar-ico').click(()=> $('#mySidenavN').removeClass('hidden'));
+$('#sidebar-ico').click(()=> {
+	let $nav = $('#mySidenavN');
+	if($nav.hasClass('hidden')) {
+		$nav.removeClass('hidden') 
+		} else {
+			$nav.css('display', 'block');
+			$('.nav-wrapper')
+			.css({
+				'z-index':'3',
+				'display': 'block'
+			});
+		} 
+});
 
 $('#Login').click(()=> {
 	$('#mySidenavN').addClass('hidden');
-	$('#sidebar-ico').addClass('hidden');
 });
 
-$(document).mouseup(function (e)
-{
-    var container = $('#mySidenavN');
-
-    if (!container.hasClass('hidden') && !container.is(e.target) // if the target of the click isn't the container...
-        && container.has(e.target).length === 0) // ... nor a descendant of the container
-    {
-        container.addClass('hidden');
-    }
+$('.State').click(()=> {
+	let $nav = $('#mySidenavN');
+	let $navIco = $('#sidebar-ico');
+	if ($navIco.css('display')!=='none') {
+		$nav.css('display', 'none');
+		$('.nav-wrapper')
+			.css({
+				'z-index':'-1',
+				'display': 'none'
+			});
+	}
 });
+
+$('.nav-wrapper').click(()=> {
+	let $nav = $('#mySidenavN');
+	$nav.css('display', 'none');
+	$('.nav-wrapper')
+		.css({
+			'z-index':'-1',
+			'display': 'none'
+		});
+});
+
+

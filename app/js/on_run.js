@@ -12,7 +12,7 @@ function OnRun($rootScope, AppSettings, $state, SessionService) {
 
     $rootScope.pageTitle += AppSettings.appTitle;
     if (Object.keys(localStorage.getItem('session')).length >= 1 && toState.name != 'Login') {
-        $('#sidebar-ico').removeClass('hidden');
+        $('#mySidenavN').removeClass('hidden');
     }
   });
 
@@ -23,6 +23,7 @@ function OnRun($rootScope, AppSettings, $state, SessionService) {
       event.preventDefault();
       $state.go('Login', { redirected: true });
     }
+    checker(toState);
  })
 
  
@@ -38,9 +39,26 @@ function OnRun($rootScope, AppSettings, $state, SessionService) {
     var isValid = $(this).hasClass('State');
     if (isValid) {
       $state.go($(this).attr('id'), {redirected: true});
-      $('#mySidenavN').addClass('hidden');
+      // $('#mySidenavN').addClass('hidden');
     }
   });
+
+  let checker = (toState) => {
+     if (toState.name !== 'Login' && toState.name !== 'Client') {
+        $('#sidebar-ico').css({
+          'top': '.5%',
+          'left': '1%',
+          'color': '#000'
+        })
+     } else if (toState.name === 'Client') {
+      $('#sidebar-ico').css({
+          'top': '2.5%',
+          'left': '4%',
+          'color': '#fff'
+        })
+     }
+   };
+
 }
 
 export default OnRun;
