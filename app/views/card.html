@@ -1,5 +1,11 @@
-<main class="vw-card">
+<main class="vw-cliente-tarjetas">
   <h3 class="Grey thin">Tarjetas</h3>
+  <div class="add-button">
+    <a class="modal-trigger btn-floating btn-large waves-effect waves-light blue-grey" href="#agregar">
+      <i class="material-icons">add</i>
+    </a>
+  </div>
+
   <div class="row">
 
     <div class="row center">
@@ -15,6 +21,7 @@
     <table class="bordered centered striped">
       <thead>
         <tr>
+            <th data-field="id_pokemon"><h6>Codigo</h6></th>
             <th data-field="id_pokemon"><h6>Estado</h6></th>
             <th data-field="actualizar"><h6>Editar</h6></th>
             <th data-field="reporte"><h6>Reporte</h6></th>
@@ -22,6 +29,7 @@
       </thead>
       <tbody>
         <tr ng-repeat="card in ctrl.cards track by card.idTarjeta">
+          <td>{{card.idTarjeta}}</td>
           <td>{{card.estado}}</td>
           <td>
             <a class="btn-floating btn-small waves-effect waves-light  blue darken-4 modal-trigger"
@@ -50,7 +58,7 @@
         <!--txt Telefono-->
         <div class="row">
           <!-- Switch -->
-          <div class="switch left">
+          <div class="switch left col s12">
             <label>
               Desactivar
               <input type="checkbox" ng-checked="ctrl.state" ng-model="ctrl.state">
@@ -65,6 +73,28 @@
         </div>
       </div>
     </div>
+  </div>
+
+  <!-- Modal CREAR -->
+  <div id="agregar" class="modal">
+      <form class="col s12" name="ctrl.postRutaForm" id="post-ruta" method="post">
+      <div class="modal-content">
+        <h3 class="Grey thin">Ingresar codigo de tarjeta</h3>
+          <div class="row">
+            <div class="input-field col s12">
+              <input type='text'
+                     name='code' id='name' ng-model="ctrl.post.code" required
+                     class="validate">
+             <label for="code">Codigo</label>
+            </div>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class=" modal-action modal-close waves-effect waves-blue darken-4 btn-flat">SALIR</a>
+        <a href="#!" class=" modal-action modal-close waves-effect waves-blue darken-4 btn-flat"
+        ng-click="ctrl.post()" ng-show="ctrl.post.code.length > 0">GUARDAR</a>
+      </div>
+      </form>
   </div>
 </main>
 
