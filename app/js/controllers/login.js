@@ -51,7 +51,7 @@ function LoginController(UserService, SessionService, $timeout, $state) {
 
         //TODO: redirect on login success
         if(!loginFailed)
-          $state.go('Client');
+          $state.go('dashboard');
         else
           vm.errorMessage = 'Correo o contraseña invalida';
       }, 1250);

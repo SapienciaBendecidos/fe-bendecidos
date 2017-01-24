@@ -60,7 +60,13 @@ function OnConfig($stateProvider, $locationProvider, $urlRouterProvider, $compil
         let id = $stateParams.clientId;
         return ClientService.getCards(id);
       }
-    }
+    }})
+   .state('dashboard', {
+    url: '/dashboard',
+    params: { redirected: false },
+    controller: 'RutasController as ctrl',
+    templateUrl: 'dashboard.html',
+    title: 'dashboard'
   });
   $urlRouterProvider.otherwise('/');
 }
