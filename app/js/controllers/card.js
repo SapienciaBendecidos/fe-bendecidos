@@ -20,8 +20,8 @@ function CardController(client, cards, CardService) {
 		data.estado = estado;
 		let promise = CardService.updateCard(data);
 
-		promise.then(() => Materialize.toast('Tarjeta modificada'));
-		promise.catch(() => Materialize.toast('Error al guardar tarjeta'));
+		promise.then(() => Materialize.toast('Tarjeta modificada', 5000));
+		promise.catch(() => Materialize.toast('Error al guardar tarjeta', 5000));
 		promise.finally(() => vm.loadCards());
 	}
 

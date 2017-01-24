@@ -34,10 +34,9 @@
 	              <th data-field="saldo">Eliminar</th>
 	          </tr>
 	        </thead>
-
 	        <tbody>
 	          <tr ng-repeat="client in ctrl.clients">
-	            <td>{{ctrl.getFullName(client)}}</td>
+	            <td><a href="/clientes/{{client.id_cliente}}/tarjetas" class="waves-effect waves-blue darken-4 btn-flat">{{ctrl.getFullName(client)}}</a></td>
 	            <td>{{client.telefono ? client.telefono : 'N:A'}}</td>
 	            <td>Lps. {{client.total}}</td>
 	            <td><a class="btn-floating btn-large waves-effect waves-light  blue darken-4 modal-trigger" href="#editar" ng-click="ctrl.setFocusedClient(client.id_cliente)"><i class="material-icons">mode_edit</i></a></td>
@@ -152,7 +151,7 @@
 				</row>
 		    <div class="modal-footer">
 		    	<a href="#!" class=" modal-action modal-close waves-effect waves-blue darken-4 btn-flat">SALIR</a>
-		      	<a href="#!" class=" modal-action modal-close waves-effect waves-blue darken-4 btn-flat" ng-click="ctrl.edit()">EDITAR</a>
+		      <a href="#!" class=" modal-action modal-close waves-effect waves-blue darken-4 btn-flat" ng-click="ctrl.edit()">EDITAR</a>
 		    </div>
 		    </div>
 		</div>

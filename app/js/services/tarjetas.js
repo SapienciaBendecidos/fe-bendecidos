@@ -11,6 +11,8 @@ function CardService($http) {
 
   //{ idTarjeta, estado ...}
   service.updateCard = data => $http.patch(`${apiUrl}tarjetas`, data);
+
+  service.postCard = data => $http.post(`${apiUrl}tarjetas`, data);
   return service;
 }
 
