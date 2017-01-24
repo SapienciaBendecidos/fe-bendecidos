@@ -10,7 +10,7 @@ function UserService($http) {
   // credentials: { email, passowrd }
   service.login = credentials => $http.post(`${apiUrl}users/login`, credentials);
 
-  service.getUserById = id => $http.get(`${apiUrl}users/${id}`, credentials);
+  service.getUserById = id => $http.get(`${apiUrl}users/${id}`, id);
   return service;
 }
 
