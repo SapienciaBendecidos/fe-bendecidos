@@ -1,4 +1,4 @@
-export const apiUrl   = 'http://fiasps.unitec.edu:8060/api/';
+export const apiUrl   = 'http://localhost:3000/api/';
 export const appTitle = 'Ebenezer';
 
 const AppSettings = {
