@@ -12,7 +12,7 @@ function UserService($http) {
 
   service.getUserById = id => $http.get(`${apiUrl}users/${id}`, id);
 
-  service.logout = accesToken => $http.post(`${apiUrl}users/logout`, accesToken);
+  service.logout = () => $http.post(`${apiUrl}Users/logout`);
 
   return service;
 }

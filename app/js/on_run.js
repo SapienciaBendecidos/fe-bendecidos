@@ -40,10 +40,15 @@ function OnRun($rootScope, AppSettings, $state, SessionService, UserService) {
     if (isValid) {
       let goState = $(this).attr('id');
       if (goState === 'Login') {
-        let token = SessionService.getSession().accessToken;
         $('#mySidenavN').addClass('hidden');
-        UserService.logout(token);
-        SessionService.removeSession();
+        let promise = UserService.logout();
+        
+        promise.then(()=>{
+          SessionService.removeSession();
+        })
+        .catch(()=>{
+          console.log('Invalid Token');
+        })
       }
       $state.go(goState, {redirected: true});
     }
