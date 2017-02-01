@@ -26,12 +26,14 @@
             <tr>
                 <th data-field="nombre">Nombre</th>
                 <th data-field="descripcion">Descripcion</th>
+                <th data-field="costo">Costo</th>
             </tr>
           </thead>
           <tbody>
             <tr ng-repeat="ruta in ctrl.rutas">
               <td>{{ruta.nombre}}</td>
               <td>{{ruta.descripcion}}</td>
+              <td>Lps. {{ruta.costo}}.00</td>
               <td>
                 <a class="btn-floating btn-large waves-effect waves-light  blue darken-4 modal-trigger" href="#editar" ng-click="ctrl.setFocusedRoute(ruta.idRuta)">
                   <i class="material-icons">mode_edit</i>
@@ -92,6 +94,16 @@
                <label for="description">Descripcion</label>
               </div>
             </div>
+
+            <div class="row">
+              <div class="input-field col s6">
+                <input type='text'
+                       name='costo' id='costo' ng-model="ctrl.post.costo" required
+                       class="validate">
+               <label for="costo">Costo</label>
+              </div>
+            </div>
+
         </div>
         <div class="modal-footer">
           <a href="#!" class=" modal-action modal-close waves-effect waves-light btn blue-grey" ng-show="ctrl.postRutaForm.$invalid">SALIR</a>
