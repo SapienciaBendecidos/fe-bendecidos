@@ -1,16 +1,18 @@
 <main class="vw-client">
 
 		<!-- Modal Structure -->
-	<div id="search-modal" class="modal bottom-sheet">
-		<div class="modal-footer">
-			<form name="searchForm" ng-submit="ctrl.searchClients()">
-					<div class="input-field">
-						<i class="material-icons prefix">search</i>
-						<input  id="search" type="text" autocomplete="off"
-									 ng-model="ctrl.search" required>
-					</div>
-					<button type="submit" class=" modal-action modal-close waves-effect waves-green btn-flat">Buscar</button>
-      </form>
+	<div class="modal-wrapper">
+		<div id="search-modal" class="modal bottom-sheet">
+			<div class="modal-footer">
+				<form name="searchForm" ng-submit="ctrl.searchClients()">
+						<div class="input-field">
+							<i class="material-icons prefix">search</i>
+							<input  id="search" type="text" autocomplete="off"
+										 ng-model="ctrl.search" required>
+						</div>
+						<button type="submit" class=" modal-action modal-close waves-effect waves-green btn-flat">Buscar</button>
+	      </form>
+			</div>
 		</div>
 	</div>
 
