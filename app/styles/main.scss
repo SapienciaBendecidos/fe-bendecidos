@@ -20,6 +20,11 @@ main {
     overflow: auto;
 }
 
+#mySidenavN {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
 @media screen and (max-width: 1375px) {
 	#mySidenavN {
 		.material-icons {
