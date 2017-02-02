@@ -1,4 +1,4 @@
-function OnRun($rootScope, AppSettings, $state, SessionService) {
+function OnRun($rootScope, AppSettings, $state, SessionService, UserService) {
   'ngInject';
 
   // change page title based on state
@@ -38,8 +38,19 @@ function OnRun($rootScope, AppSettings, $state, SessionService) {
   // $state.go('Login', { redirected: true })
     var isValid = $(this).hasClass('State');
     if (isValid) {
-      $state.go($(this).attr('id'), {redirected: true});
-      // $('#mySidenavN').addClass('hidden');
+      let goState = $(this).attr('id');
+      if (goState === 'Login') {
+        $('#mySidenavN').addClass('hidden');
+        let promise = UserService.logout();
+        
+        promise.then(()=>{
+          SessionService.removeSession();
+        })
+        .catch(()=>{
+          console.log('Invalid Token');
+        })
+      }
+      $state.go(goState, {redirected: true});
     }
   });
 

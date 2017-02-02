@@ -11,6 +11,9 @@ function UserService($http) {
   service.login = credentials => $http.post(`${apiUrl}users/login`, credentials);
 
   service.getUserById = id => $http.get(`${apiUrl}users/${id}`, id);
+
+  service.logout = () => $http.post(`${apiUrl}Users/logout`);
+
   return service;
 }
 

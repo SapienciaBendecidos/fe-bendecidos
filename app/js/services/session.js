@@ -12,6 +12,10 @@ class SessionService {
   getSession(){
     return store.get('session');
   }
+
+  removeSession() {
+  	store.remove('session');
+  }
   
 }
 
