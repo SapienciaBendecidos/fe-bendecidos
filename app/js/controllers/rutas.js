@@ -52,6 +52,7 @@ function RutasController (RutasService, $q) {
             idRuta: ruta.idRuta,
             nombre: ruta.nombre,
             descripcion: ruta.descripcion,
+            costo: ruta.costo
           }
       }
   }
@@ -99,11 +100,14 @@ function RutasController (RutasService, $q) {
   };
 
   vm.submitRuta = () => {
-      let { name, description } = vm.post;
+      let { name, description, costo } = vm.post;
       let ruta = {
         nombre: name,
         descripcion: description,
+        costo: costo
       };
+
+      console.log(ruta);
 
       let promise = vm.postRuta(ruta);
       promise.then(() => {
@@ -130,7 +134,6 @@ function RutasController (RutasService, $q) {
 
       vm.rutas = responses[1].data;
   });
-
 }
 
 
