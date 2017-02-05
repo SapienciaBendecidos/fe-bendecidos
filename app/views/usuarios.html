@@ -1,0 +1,120 @@
+<div>
+<nav>
+      <div class="nav-wrapper blue-grey">
+        <ul class="right hide-on-med-and-down">
+          <li ng-click="ctrl.showSearch()">
+            <a class="modal-trigger" href="#search-modal"> <i class="material-icons right">search</i></a>
+          </li>
+          <li><a class="modal-trigger" href="#modal1"><i class="material-icons right">playlist_add</i></a></li>
+          <li><a> Usuarios </a></li>
+        </ul>
+    </nav>
+      <h3 class="Grey thin">Usuarios</h3>
+   
+      <p></p>
+        <table class="striped">
+        <thead>
+          <tr>
+              <th data-field="nombre"><h6>Nombre</h6></th>
+              <th data-field="rol"><h6>Rol</h6></th>
+              <th data-field="email"><h6>E-mail</h6></th>
+              <th data-field="actualizar"><h6>Actualizar</h6></th>
+              <th data-field="borrar"><h6>Delete</h6></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>Brandon Napky</td>
+            <td>Encargado de buses</td>
+            <td>nasky@hotmail.com</td>
+            <td><a class="btn-floating btn-small waves-effect waves-light modal-trigger blue" href="#modal2"><i class="material-icons">mode_edit</i></a></td>
+            <td><a class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">delete</i></a></td>
+          </tr>
+        </tbody>
+      </table>
+       <ul class="pagination center-align">
+      <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+      <li class="active blue-grey darken-4"><a href="#!">1</a></li>
+      <li class="waves-effect"><a href="#!">2</a></li>
+      <li class="waves-effect"><a href="#!">3</a></li>
+      <li class="waves-effect"><a href="#!">4</a></li>
+      <li class="waves-effect"><a href="#!">5</a></li>
+      <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+    </ul>
+      </div>
+
+
+  <!-- Modal nuevo usuario -->
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+
+          <h5>AGREGAR NUEVO USUARIO</h5>
+          <p>Formulario para agregar nuevo usuario</p>
+          <!--txt Nombre-->
+         <row>
+            <div class="input-field col s12">
+              <i class="material-icons prefix">picture_in_picture</i>
+              <input placeholder="nombre" id="nombre" type="text" class="validate">
+            </div>
+          </row>
+          <row>
+            <div class="input-field col s12">
+              <i class="material-icons prefix">Rol</i>  
+              <input placeholder="rol" id="rol" type="text" class="validate">
+            </div>
+          </row>
+          <row>
+            <div class="input-field col s12">
+              <i class="material-icons prefix">E-mail</i>  
+              <input placeholder="email" id="email" type="text" class="validate">
+            </div>
+          </row>
+        </div>
+        <div class="modal-footer">
+          <a href="#!" class=" modal-action modal-close waves-effect waves-blue darken-4 btn-flat">SALIR</a>
+            <a href="#!" class=" modal-action modal-close waves-effect waves-blue darken-4 btn-flat">AGREGAR</a>
+        </div>
+</div>
+    </div>
+
+      <div id="modal1" class="modal">
+    <div class="modal-content">
+
+          <h5>AGREGAR EDITAR USUARIO</h5>
+          <p>Formulario para editar un usuario</p>
+          <!--txt Nombre-->
+         <row>
+            <div class="input-field col s12">
+              <i class="material-icons prefix">picture_in_picture</i>
+              <input placeholder="nombre" id="nombre" type="text" class="validate">
+            </div>
+          </row>
+          <row>
+            <div class="input-field col s12">
+              <i class="material-icons prefix">Rol</i>  
+              <input placeholder="rol" id="rol" type="text" class="validate">
+            </div>
+          </row>
+          <row>
+            <div class="input-field col s12">
+              <i class="material-icons prefix">E-mail</i>  
+              <input placeholder="email" id="email" type="text" class="validate">
+            </div>
+          </row>
+        </div>
+        <div class="modal-footer">
+          <a href="#!" class=" modal-action modal-close waves-effect waves-blue darken-4 btn-flat">SALIR</a>
+            <a href="#!" class=" modal-action modal-close waves-effect waves-blue darken-4 btn-flat">AGREGAR</a>
+        </div>
+</div>
+    </div>
+
+<script>
+
+$(document).ready(function(){
+    $('.modal-trigger').leanModal();
+  });
+
+  </script>
+    </div>
