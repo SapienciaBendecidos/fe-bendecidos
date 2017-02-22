@@ -1,5 +1,8 @@
-let url = process.env.EBENEZER_API_URL;
-let port = process.env.EBENEZER_API_PORT;
+let url = 'EBENEZER_API_URL';
+let port = 'EBENEZER_API_PORT';
+
+//let url = 'fiasps.unitec.edu';
+//let port = '8060';
 
 if(!url)
 	throw new Error('EBENEZER_API_URL Environment Variable not set');
