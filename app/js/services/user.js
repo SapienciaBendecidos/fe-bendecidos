@@ -14,6 +14,17 @@ function UserService($http) {
 
   service.logout = () => $http.post(`${apiUrl}Users/logout`);
 
+  service.countUsers = () => $http.get(`${apiUrl}Users/count`);
+
+  service.getUsers = filter => {
+    if(!filter)
+      return $http.get(`${apiUrl}Users`);
+    return $http.get(`${apiUrl}Users?filter=${JSON.stringify(filter)}`);
+  }
+
+  service.postUser = (user) => $http.post(`${apiUrl}Users/replaceOrCreate`, user);
+  service.deleteById = id => $http.delete(`${apiUrl}Users/${id}`);
+
   return service;
 }
 
