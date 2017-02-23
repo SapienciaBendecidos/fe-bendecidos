@@ -1,5 +1,5 @@
-let url = 'EBENEZER_API_URL';
-let port = 'EBENEZER_API_PORT';
+let url = 'localhost';
+let port = '3000';
 
 //let url = 'fiasps.unitec.edu';
 //let port = '8060';

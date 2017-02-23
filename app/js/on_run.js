@@ -11,7 +11,7 @@ function OnRun($rootScope, AppSettings, $state, SessionService, UserService) {
     }
 
     $rootScope.pageTitle += AppSettings.appTitle;
-    if (Object.keys(localStorage.getItem('session')).length >= 1 && toState.name != 'Login') {
+    if (Object.keys(localStorage).length >= 1 && toState.name != 'Login') {
         $('#mySidenavN').removeClass('hidden');
     }
   });
