@@ -50,6 +50,7 @@ function UsersController(UserService, $q) {
     for (let i = 0; i < vm.users.length; ++i)
       if(vm.users[i].id == id) {
           let user = vm.users[i];
+          console.log(user)
           return  {
             id: user.id,
             firstName: user.firstName,
@@ -57,6 +58,8 @@ function UsersController(UserService, $q) {
             firstSurname: user.firstSurname,
             secondSurname: user.secondSurname,
             email: user.email,
+            type: user.roles[0].name,
+            username: user.username
           }
       }
   }
