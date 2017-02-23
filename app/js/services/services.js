@@ -8,7 +8,7 @@ function ServicesService($http) {
 
     service.countServices = () => $http.get(`${apiUrl}equiposservicios/count`);
 
-    service.postService = (client) => $http.post(`${apiUrl}equiposservicios/replaceOrCreate`, client);
+    service.postService = (service) => $http.post(`${apiUrl}equiposservicios/replaceOrCreate`, service);
 
     service.deleteById = id => $http.delete(`${apiUrl}equiposservicios/${id}`);
 
