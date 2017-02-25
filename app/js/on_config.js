@@ -47,7 +47,7 @@ function OnConfig($stateProvider, $locationProvider, $urlRouterProvider, $compil
   .state('Usuarios', {
     url: '/usuarios',
     params: { redirected: false },
-    controller: 'UsuariosController as ctrl',
+    controller: 'UsersController as ctrl',
     templateUrl: 'usuarios.html',
     title: 'Usuarios'
   })

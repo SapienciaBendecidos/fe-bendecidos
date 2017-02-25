@@ -1,5 +1,5 @@
 
-<main class="vw-user">
+<main class="vw-client">
 <div>
 
 <div class="col s9">
@@ -24,12 +24,12 @@
         </thead>
 
         <tbody>
-          <tr>
-            <td>Brandon Napky</td>
-            <td>Encargado de buses</td>
-            <td>nasky@hotmail.com</td>
-            <td><a class="btn-floating btn-small waves-effect waves-light modal-trigger blue" href="#modal2"><i class="material-icons">mode_edit</i></a></td>
-            <td><a class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">delete</i></a></td>
+          <tr ng-repeat="user in ctrl.users">
+            <td>{{ctrl.getFullName(user)}}</td>
+            <td>{{user.roles[0].name}}</td>
+            <td>{{user.email}}</td>
+            <td><a class="btn-floating btn-small waves-effect waves-light modal-trigger blue" href="#editar" ng-click="ctrl.setFocusedUser(user.id)"><i class="material-icons">mode_edit</i></a></td>
+            <td><a class="btn-floating btn-small waves-effect waves-light red" href="#eliminar" ng-click="ctrl.setFocusedUser(user.id)"><i class="material-icons">delete</i></a></td>
           </tr>
         </tbody>
       </table>
@@ -46,76 +46,182 @@
 
 
   <!-- Modal nuevo usuario -->
-  <div id="modal1" class="modal">
+  <div id="agregar" class="modal">
     <div class="modal-content">
 
-          <h5>AGREGAR NUEVO USUARIO</h5>
-          <p>Formulario para agregar nuevo usuario</p>
-          <!--txt Nombre-->
-         <row>
-            <div class="input-field col s12">
-              <i class="material-icons prefix">picture_in_picture</i>
-              <input placeholder="nombre" id="nombre" type="text" class="validate">
-            </div>
-          </row>
-          <row>
-            <div class="input-field col s12">
-              <i class="material-icons prefix">Rol</i>  
-              <input placeholder="rol" id="rol" type="text" class="validate">
-            </div>
-          </row>
-          <row>
-            <div class="input-field col s12">
-              <i class="material-icons prefix">E-mail</i>  
-              <input placeholder="email" id="email" type="text" class="validate">
-            </div>
-          </row>
+      <h5>AGREGAR NUEVO USUARIO</h5>
+      <p>Formulario para agregar nuevo usuario</p>
+      <!--txt Nombre-->
+      <form action="" name="ctrl.postUserForm" id="post-user" method="post">
+        <div class="row center">
+          <div class="input-field col s6">
+            <i class="material-icons prefix">picture_in_picture</i>
+            <input placeholder="Primer Nombre" type='text'
+                   name='firstName' id='f-name' ng-model="ctrl.post.firstname" required
+                   class="{{ctrl.post.firstname.length > 0 ? '' : 'invalid'}}">
+          </div>
+          <div class="input-field col s6">
+            <input placeholder="Segundo Nombre" id="s-nombre" type="text"
+                   name='middlename' ng-model="ctrl.post.middlename">
+          </div>
         </div>
+
+        <div class="row center">
+          <div class="input-field col s6">
+            <i class="material-icons prefix">picture_in_picture</i>
+            <input placeholder="Primer Apellido" id="p-apellido" type="text"
+                   name="lastname" ng-model="ctrl.post.lastname" required
+                   class="{{ctrl.post.lastname.length > 0 ? '' : 'invalid'}}">
+          </div>
+          <div class="input-field col s6">
+            <input placeholder="Segundo Apellido" id="s-apellido" type="text"
+                   name="secondLastname" ng-model="ctrl.post.secondLastname">
+          </div>
+        </div>
+        <row>
+          <div class="input-field col s12">
+            <i class="material-icons prefix">Usuario</i>  
+            <input placeholder="username" id="newUsername" type="text" class="validate" ng-model="ctrl.post.newUsername">
+          </div>
+        </row>
+        <row>
+          <div class="input-field col s12">
+            <i class="material-icons prefix">Contraseña</i>  
+            <input placeholder="password" id="newPassword" type="password" class="validate" ng-model="ctrl.post.newPassword">
+          </div>
+        </row>
+        <row>
+          <div class="input-field col s12">
+            <i class="material-icons prefix">E-mail</i>  
+            <input placeholder="email" id="email" type="text" class="validate" ng-model="ctrl.post.email">
+          </div>
+        </row>
+        <row>
+          <div class="input-field col s12">
+            <select id="rol" class="validate" ng-model="ctrl.post.rol">
+              <option value="" disabled selected>Seleccione el Rol</option>
+              <option ng-repeat="rol in ctrl.roles" value="{{rol}}">{{rol}}</option>
+            </select>
+          </div>
+        </row>
         <div class="modal-footer">
           <a href="#!" class=" modal-action modal-close waves-effect waves-blue darken-4 btn-flat">SALIR</a>
-            <a href="#!" class=" modal-action modal-close waves-effect waves-blue darken-4 btn-flat">AGREGAR</a>
+          <button type="submit" class=" modal-action modal-close waves-effect waves-blue darken-4 btn-flat"
+               ng-click="ctrl.submitUser(ctrl.postUserForm)" ng-show="ctrl.postUserForm.$valid">
+               AGREGAR
+          </button>
         </div>
-</div>
+      </form>
     </div>
+  </div>
 
-      <div id="modal1" class="modal">
+  <div id="editar" class="modal">
     <div class="modal-content">
-
-          <h5>AGREGAR EDITAR USUARIO</h5>
-          <p>Formulario para editar un usuario</p>
-          <!--txt Nombre-->
-         <row>
-            <div class="input-field col s12">
-              <i class="material-icons prefix">picture_in_picture</i>
-              <input placeholder="nombre" id="nombre" type="text" class="validate">
-            </div>
-          </row>
-          <row>
-            <div class="input-field col s12">
-              <i class="material-icons prefix">Rol</i>  
-              <input placeholder="rol" id="rol" type="text" class="validate">
-            </div>
-          </row>
-          <row>
-            <div class="input-field col s12">
-              <i class="material-icons prefix">E-mail</i>  
-              <input placeholder="email" id="email" type="text" class="validate">
-            </div>
-          </row>
+      <h5>EDITAR USUARIO</h5>
+      <p>Formulario para editar un usuario</p>
+      <!--txt Nombre-->
+      <div class="row center">
+        <div class="input-field col s6">
+          <i class="material-icons prefix">picture_in_picture</i>
+          <input placeholder="Primer Nombre" type='text'
+                 name='firstName' id='f-name' ng-model="ctrl.focusedUser.firstName" required
+                 class="{{ctrl.focusedUser.firstName.length > 0 ? '' : 'invalid'}}">
         </div>
-        <div class="modal-footer">
-          <a href="#!" class=" modal-action modal-close waves-effect waves-blue darken-4 btn-flat">SALIR</a>
-            <a href="#!" class=" modal-action modal-close waves-effect waves-blue darken-4 btn-flat">AGREGAR</a>
+        <div class="input-field col s6">
+          <input placeholder="Segundo Nombre" id="s-nombre" type="text"
+                 name='middlename' ng-model="ctrl.focusedUser.secondName">
         </div>
-</div>
+      </div>
+
+      <div class="row center">
+        <div class="input-field col s6">
+          <i class="material-icons prefix">picture_in_picture</i>
+          <input placeholder="Primer Apellido" id="p-apellido" type="text"
+                 name="lastname" ng-model="ctrl.focusedUser.firstSurname" required
+                 class="{{ctrl.focusedUser.firstSurname.length > 0 ? '' : 'invalid'}}">
+        </div>
+        <div class="input-field col s6">
+          <input placeholder="Segundo Apellido" id="s-apellido" type="text"
+                 name="secondLastname" ng-model="ctrl.focusedUser.secondSurname">
+        </div>
+      </div>
+      <row>
+        <div class="input-field col s12">
+          <i class="material-icons prefix">Usuario</i>  
+          <input placeholder="username" id="newUsername" type="text" class="validate" ng-model="ctrl.focusedUser.username">
+        </div>
+      </row>
+      <row>
+          <div class="input-field col s12">
+            <i class="material-icons prefix">Contraseña</i>  
+            <input placeholder="password" id="newPassword" type="password" class="{{ctrl.focusedUser.password.length > 0 ? 'validate' : 'invalid'}}" ng-model="ctrl.focusedUser.password">
+          </div>
+        </row>
+      <row>
+        <div class="input-field col s12">
+          <i class="material-icons prefix">E-mail</i>  
+          <input placeholder="email" id="email" type="text" class="validate" ng-model="ctrl.focusedUser.email">
+        </div>
+      </row>
+      <row>
+        <div class="input-field col s12">
+          <select id="rol-edit" class="validate" ng-model="ctrl.focusedUser.type">
+            <option value="" disabled selected>Seleccione el Rol</option>
+            <option ng-repeat="rol in ctrl.roles" value="{{rol}}" >{{rol}}</option>
+          </select>
+        </div>
+      </row>
+      <div class="modal-footer">
+        <a href="#!" class=" modal-action modal-close waves-effect waves-blue darken-4 btn-flat">SALIR</a>
+        <button type="submit" class=" modal-action modal-close waves-effect waves-blue darken-4 btn-flat"
+             ng-click="ctrl.edit()">
+             EDITAR
+        </button>
+      </div>
     </div>
+  </div>
 
-<script>
-
-$(document).ready(function(){
-    $('.modal-trigger').leanModal();
-  });
-
-  </script>
+  <div id="eliminar" class="modal">
+    <div class="modal-content">
+      <h5>ELIMINAR USUARIO</h5>
+      <!--txt Nombre-->
+      <row class="row">
+        <div class="col s12">
+          <label><!-- <i class="material-icons prefix"> picture_in_picture</i>--> {{ctrl.getFullName(ctrl.focusedUser)}}</label>
+        </div>
+      </row>
+      <row class="row">
+        <div class="col s12">
+          <label><!-- <i class="material-icons prefix">Usuario</i> --> {{ctrl.focusedUser.username}}</label>
+        </div>
+      </row>
+      <row class="row">
+        <div class="col s12">
+          <label><!-- <i class="material-icons prefix">E-mail</i> --> {{ctrl.focusedUser.email}}</label>
+        </div>
+      </row>
+      <row class="row">
+        <div class="col s12">
+          <label>Rol: {{ctrl.focusedUser.type}}</label>
+        </div>
+      </row>
+      <div class="modal-footer">
+        <a href="#!" class=" modal-action modal-close waves-effect waves-blue darken-4 btn-flat">SALIR</a>
+        <button type="submit" class=" modal-action modal-close waves-effect waves-blue darken-4 btn-flat"
+             ng-click="ctrl.delete()">
+             ELIMINAR
+        </button>
+      </div>
     </div>
-    </main>
+  </div>
+
+    <script>
+
+    $(document).ready(function(){
+        $('.modal').modal();
+        $('select').material_select();
+      });
+
+    </script>
+  </div>
+</main>
