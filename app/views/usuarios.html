@@ -28,7 +28,7 @@
             <td>{{ctrl.getFullName(user)}}</td>
             <td>{{user.roles[0].name}}</td>
             <td>{{user.email}}</td>
-            <td><a class="btn-floating btn-small waves-effect waves-light modal-trigger blue" href="#editar" ng-click="ctrl.setFocusedUser(user.id)"><i class="material-icons">mode_edit</i></a></td>
+            <td><a class="btn-floating btn-small waves-effect waves-light modal-trigger blue edit-button" href="#editar" ng-click="ctrl.setFocusedUser(user.id)"><i class="material-icons">mode_edit</i></a></td>
             <td><a class="btn-floating btn-small waves-effect waves-light red" href="#eliminar" ng-click="ctrl.setFocusedUser(user.id)"><i class="material-icons">delete</i></a></td>
           </tr>
         </tbody>
@@ -147,27 +147,27 @@
       </div>
       <row>
         <div class="input-field col s12">
-          <i class="material-icons prefix">Usuario</i>  
+          <i class="material-icons prefix">perm_identity</i>  
           <input placeholder="username" id="newUsername" type="text" class="validate" ng-model="ctrl.focusedUser.username">
         </div>
       </row>
       <row>
           <div class="input-field col s12">
-            <i class="material-icons prefix">Contraseña</i>  
+            <i class="material-icons prefix">vpn_key</i>  
             <input placeholder="password" id="newPassword" type="password" class="{{ctrl.focusedUser.password.length > 0 ? 'validate' : 'invalid'}}" ng-model="ctrl.focusedUser.password">
           </div>
         </row>
       <row>
         <div class="input-field col s12">
-          <i class="material-icons prefix">E-mail</i>  
+          <i class="material-icons prefix">email</i>  
           <input placeholder="email" id="email" type="text" class="validate" ng-model="ctrl.focusedUser.email">
         </div>
       </row>
       <row>
         <div class="input-field col s12">
           <select id="rol-edit" class="validate" ng-model="ctrl.focusedUser.type">
-            <option value="" disabled selected>Seleccione el Rol</option>
-            <option ng-repeat="rol in ctrl.roles" value="{{rol}}" >{{rol}}</option>
+            <option value="" disabled>Seleccione el Rol</option>
+            <option ng-repeat="rol in ctrl.roles" value="{{rol}}" {{(ctrl.fucusedUser.type==rol)?'selected':''}}>{{rol}}</option>
           </select>
         </div>
       </row>
@@ -220,6 +220,10 @@
     $(document).ready(function(){
         $('.modal').modal();
         $('select').material_select();
+
+        $('.edit-button').on('click', e => {
+          $('select').material_select();
+        })
       });
 
     </script>
