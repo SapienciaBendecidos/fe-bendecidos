@@ -1,0 +1,69 @@
+.vw-users {
+   background-color: white;
+   width: 82%;
+   left: 17%;
+
+   nav
+   {
+      color: #fff !important;
+      background-color: #0d47a1 !important;
+      letter-spacing: 3px;
+
+
+      top-nav
+      {
+         height: 40% !important;
+         box-shadow: none !important;
+         line-height: 55% !important;
+      }
+
+      nav-wrapper
+      {
+         i
+         {
+            line-height: 120px !important;
+         }
+      }
+
+      a
+      {
+         button-collapse
+         {
+            i
+            {
+               line-height: 120px !important;
+            }
+
+            line-height: 120px !important;
+         }
+      }
+   }
+
+  .modal-wrapper {
+        display: inline;
+        position: fixed;
+        height: 10rem;
+        width: 82%;
+        bottom: 0;
+        z-index: 333;
+   }
+   #search-modal {
+      position: absolute;
+   }
+
+   input-field
+   {
+      .prefix
+      {
+         .active
+         {
+            color: #0d47a1 !important;
+         }
+      }
+   }
+   .pagination
+   {
+      li.active
+      { background-color: #0d47a1 !important; }
+   }
+}
