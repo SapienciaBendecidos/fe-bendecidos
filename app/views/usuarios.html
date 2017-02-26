@@ -18,6 +18,8 @@
               <th data-field="nombre"><h6>Nombre</h6></th>
               <th data-field="rol"><h6>Rol</h6></th>
               <th data-field="email"><h6>E-mail</h6></th>
+              <th data-field="status"><h6>Estado</h6></th>
+              <th data-field="actualizar-estado"><h6>Activar/Desactivar</h6></th>
               <th data-field="actualizar"><h6>Actualizar</h6></th>
               <th data-field="borrar"><h6>Delete</h6></th>
           </tr>
@@ -28,7 +30,9 @@
             <td>{{ctrl.getFullName(user)}}</td>
             <td>{{user.roles[0].name}}</td>
             <td>{{user.email}}</td>
-            <td><a class="btn-floating btn-small waves-effect waves-light modal-trigger blue edit-button" href="#editar" ng-click="ctrl.setFocusedUser(user.id)"><i class="material-icons">mode_edit</i></a></td>
+            <td>{{user.status}}</td>
+            <td><a class="btn-floating btn-small waves-effect waves-light modal-trigger {{(user.status=='active')?'red':'green'}} darken-3" href="#" ng-click="ctrl.changeUserState(user)"><i class="material-icons">{{(user.status=='active')?'lock':'lock_open'}}</i></a></td>
+            <td><a class="btn-floating btn-small waves-effect waves-light modal-trigger blue edit-button" href="#editar" data-rol="{{user.roles[0].name}}" ng-click="updateListSelect('{{user.roles[0].name}}'); ctrl.setFocusedUser(user.id)"><i class="material-icons">mode_edit</i></a></td>
             <td><a class="btn-floating btn-small waves-effect waves-light red" href="#eliminar" ng-click="ctrl.setFocusedUser(user.id)"><i class="material-icons">delete</i></a></td>
           </tr>
         </tbody>
@@ -80,19 +84,19 @@
         </div>
         <row>
           <div class="input-field col s12">
-            <i class="material-icons prefix">Usuario</i>  
+            <i class="material-icons prefix">perm_identity</i>  
             <input placeholder="username" id="newUsername" type="text" class="validate" ng-model="ctrl.post.newUsername">
           </div>
         </row>
         <row>
           <div class="input-field col s12">
-            <i class="material-icons prefix">Contraseña</i>  
+            <i class="material-icons prefix">vpn_key</i>  
             <input placeholder="password" id="newPassword" type="password" class="validate" ng-model="ctrl.post.newPassword">
           </div>
         </row>
         <row>
           <div class="input-field col s12">
-            <i class="material-icons prefix">E-mail</i>  
+            <i class="material-icons prefix">email</i>  
             <input placeholder="email" id="email" type="text" class="validate" ng-model="ctrl.post.email">
           </div>
         </row>
@@ -152,12 +156,6 @@
         </div>
       </row>
       <row>
-          <div class="input-field col s12">
-            <i class="material-icons prefix">vpn_key</i>  
-            <input placeholder="password" id="newPassword" type="password" class="{{ctrl.focusedUser.password.length > 0 ? 'validate' : 'invalid'}}" ng-model="ctrl.focusedUser.password">
-          </div>
-        </row>
-      <row>
         <div class="input-field col s12">
           <i class="material-icons prefix">email</i>  
           <input placeholder="email" id="email" type="text" class="validate" ng-model="ctrl.focusedUser.email">
@@ -167,7 +165,7 @@
         <div class="input-field col s12">
           <select id="rol-edit" class="validate" ng-model="ctrl.focusedUser.type">
             <option value="" disabled>Seleccione el Rol</option>
-            <option ng-repeat="rol in ctrl.roles" value="{{rol}}" {{(ctrl.fucusedUser.type==rol)?'selected':''}}>{{rol}}</option>
+            <option id="{{rol + '-idRol-option'}}" class="rol-options" ng-repeat="rol in ctrl.roles" value="{{rol}}" >{{rol}}</option>
           </select>
         </div>
       </row>
@@ -224,6 +222,16 @@
         $('.edit-button').on('click', e => {
           $('select').material_select();
         })
+
+        var updateListSelect = function (rol){
+          let rolOptions = document.getElementsByClassName('rol-options')
+          for(let rol_Opt of rolOptions){
+            if (rol_Opt.value == rol)
+              rol_Opt.setAttribute('ng-selected','true')
+            else
+              rol_Opt.setAttribute('ng-selected','false')
+          }
+        }
       });
 
     </script>
