@@ -1,13 +1,7 @@
-import $ from 'jquery';
-import materialize from 'materialize';
+import 'jquery';
+import 'materialize';
 import angular from 'angular';
 
-$(document).ready(function(){
-// the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
-$('.modal-trigger').leanModal();
-});
-
-console.log(materialize);
 // angular modules
 import constants from './constants';
 import onConfig  from './on_config';
@@ -18,6 +12,7 @@ import './filters';
 import './controllers';
 import './services';
 import './directives';
+import './sidenav';
 
 
 
