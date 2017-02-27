@@ -39,9 +39,9 @@ function ServicesController(ServicesService, $q) {
           if(vm.services[i].id == id) {
               let service = vm.services[i];
               return  {
-                    id: service.id,
-                    nombre: service.nombre,
-                    creado_por: service.creado_por
+                    'id': service.id,
+                    'nombre': service.nombre,
+                    'creado_por': service.creado_por
               }
           }
     }
