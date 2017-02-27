@@ -51,6 +51,13 @@ function OnConfig($stateProvider, $locationProvider, $urlRouterProvider, $compil
     templateUrl: 'usuarios.html',
     title: 'Usuarios'
   })
+  .state('Servicios', {
+    url: '/servicios',
+    params: { redirected: false },
+    controller: 'ServicesController as ctrl',
+    templateUrl: 'services.html',
+    title: 'Servicios'
+  })
   .state('Cards', {
     url: '/clientes/:clientId/tarjetas',
     controller: 'CardController as ctrl',
