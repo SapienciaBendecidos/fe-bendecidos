@@ -31,17 +31,23 @@
 		<table class="bordered centered striped">
 	        <thead>
 	          <tr>
+	          	  <th data-field="identidad">Numero Id</th>
 	              <th data-field="nombre">Nombre</th>
 	              <th data-field="telefono">Telefono</th>
+	              <th data-field="colonia">Colonia</th>
+	              <th data-field="servicio">Equipo de Servicio</th>
 	              <th data-field="saldo">Saldo</th>
-	              <th data-field="saldo">Editar</th>
-	              <th data-field="saldo">Eliminar</th>
+	              <th data-field="editar">Editar</th>
+	              <th data-field="eliminar">Eliminar</th>
 	          </tr>
 	        </thead>
 	        <tbody>
 	          <tr ng-repeat="client in ctrl.clients">
-	            <td><a href="/clientes/{{client.id_cliente}}/tarjetas" class="waves-effect waves-blue darken-4 btn-flat">{{ctrl.getFullName(client)}}</a></td>
+	          	<td>{{client.identidad}}</td> 
+	            <td><a href="/clientes/{{client.id_cliente}}/tarjetas" class="waves-effect waves-blue darken-4 btn-flat">{{client.nombres}}</a></td>
 	            <td>{{client.telefono ? client.telefono : 'N:A'}}</td>
+	            <td>{{client.colonia}}</td>
+	            <td><a href="#" class="waves-effect waves-blue darken-4 btn-flat">{{client.id_servidor ? ctrl.getServiceById(client.id_servidor).nombre : 'No Servidor'}}</a></td>
 	            <td>Lps. {{client.total}}</td>
 	            <td><a class="btn-floating btn-large waves-effect waves-light  blue darken-4 modal-trigger" href="#editar" ng-click="ctrl.setFocusedClient(client.id_cliente)"><i class="material-icons">mode_edit</i></a></td>
 	            <td><a class="btn-floating btn-large waves-effect waves-light  red darken-2 modal-trigger" href="#eliminar" ng-click="ctrl.setFocusedClient(client.id_cliente)"><i class="material-icons">delete</i></a></td>
@@ -76,6 +82,12 @@
 		      <!--txt Nombre-->
 					<form action="" name="ctrl.postClientForm" id="post-client" method="post">
 						<div class="row center">
+							<div class="input-field col s12">
+								<input placeholder="Numero de Indentidad" type='text'
+											 name='identity' id='id-num' ng-model="ctrl.post.identity" required
+											 class="{{ctrl.post.identity.length > 0 ? '' : 'invalid'}}">
+							</div>
+
 							<div class="input-field col s6">
 								<input placeholder="Primer Nombre" type='text'
 											 name='firstName' id='f-name' ng-model="ctrl.post.firstname" required
@@ -99,15 +111,39 @@
 							</div>
 						</div>
 
+
+						<!--txt direccion-->
+						<div class="row center">
+							<div class="input-field col s6">
+								<i class="material-icons prefix">location_on</i>
+								<input placeholder="Direccion" id="direccion" type="text"
+								       ng-model="ctrl.post.address" required
+											 class="{{ctrl.post.address.length > 0 ? '' : 'invalid'}}">
+							</div>
+						
+
 						<!--txt Telefono-->
-						<div class="row">
-							<div class="input-field col s12">
+						
+							<div class="input-field col s6">
 								<i class="material-icons prefix">phone</i>
 								<input placeholder="Telefono" id="telefono" type="text"
 								       ng-model="ctrl.post.phone" required
 											 class="{{ctrl.post.phone.length > 0 ? '' : 'invalid'}}">
 							</div>
 						</div>
+
+						<!--txt Servicio-->
+						<div class="row">
+							<div class="input-field col s12">
+								<i class="material-icons prefix">work</i>
+							 	<select id="servicio" class="validate" ng-model="ctrl.post.service">
+					              <option value="" disabled selected>Seleccion Equipo de Servicio</option>
+					              <option value="">No Servidor</option>
+					              <option ng-repeat="service in ctrl.services" value="{{service.id}}">{{service.nombre}}</option>
+					            </select>
+							</div>
+						</div>
+						
 				</div>
 		    <div class="modal-footer">
 		    	<a href="#!" class=" modal-action modal-close waves-effect waves-blue darken-4 btn-flat">SALIR</a>
@@ -144,6 +180,7 @@
 						</div>
 					</div>
 				</row>
+
 				<row>
 					<!--txt Telefono-->
 					<div class="row">
@@ -187,6 +224,7 @@
 	<script>
 		$(document).ready(function(){
 			$('.modal').modal();
+			$('select').material_select();
 		});
 	</script>
 </main>

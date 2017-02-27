@@ -1,6 +1,6 @@
 'use strict';
 
-function ClientController(ClientService, $q) {
+function ClientController(ClientService, ServicesService, $q) {
   'ngInject';
   // ViewModel
   const vm = this;
@@ -11,6 +11,8 @@ function ClientController(ClientService, $q) {
   vm.activePage = 0;
   vm.focusedClient = {};
   vm.clientForm = {};
+  vm.services = [];
+
 
   vm.getFullName = (client) => {
     let fullname = '';
@@ -58,12 +60,36 @@ function ClientController(ClientService, $q) {
             segundoNombre: client.segundo_nombre,
             primerApellido: client.primer_apellido,
             segundoApellido: client.segundo_apellido,
+            equipoServicio: client.id_servidor, 
             telefono: client.telefono,
           }
       }
   }
 
+ vm.getServiceById = (id) => {
+      for (let i = 0; i < vm.services.length; ++i)
+        if(vm.services[i].id == id) {
+            let service = vm.services[i];
+            return  {
+                  'id': service.id,
+                  'nombre': service.nombre,
+                  'creado_por': service.creado_por
+            }
+        }
+  }
+
+  vm.getServices = (page) => {
+        let skip = page * vm.perPage,
+        limit = vm.perPage;
+        return ServicesService.getPagedServices(limit,skip);
+    };
+
+  vm.loadServices = () =>  vm.getServices(vm.activePage)
+    .then(response => vm.services = response.data);
+
+
   vm.getClients = (page) => {
+    vm.loadServices();
     let skip = page * vm.perPage,
         limit = vm.perPage;
     return ClientService.getClientsWithSaldo(limit,skip,null);
@@ -107,14 +133,17 @@ function ClientController(ClientService, $q) {
   };
 
   vm.submitClient = () => {
-    let { firstname, middlename, lastname, secondLastname, phone, money } = vm.post;
+    let {identity, firstname, middlename, lastname, secondLastname, address, phone, money, service } = vm.post;
     let client = {
+      identidad: identity,
       primerNombre: firstname,
       segundoNombre: middlename ? middlename : '',
       primerApellido: lastname,
       segundoApellido: secondLastname ? secondLastname : '',
+      idServidor: service == '' ? null : service,
+      colonia: address,
       telefono: phone,
-      saldo: money,
+      saldo: money
     };
 
     let promise = vm.postClient(client);
@@ -142,6 +171,7 @@ function ClientController(ClientService, $q) {
 
     vm.clients = responses[1].data.getWithSaldo
   });
+
 }
 
 export default {
