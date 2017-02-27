@@ -11,7 +11,7 @@ class ReportController {
     this.pageSize  = 200;
     this.range = [];
     this.count = 0;
-    this.filter = $stateParams.filter;
+    this.filter = $stateParams.filter
     this.getTrips();
     this.setPageCount();
   }
@@ -20,6 +20,7 @@ class ReportController {
     let offset = this.pageIndex * this.pageSize;
     this.TripService.getTrips(offset,this.pageSize, this.filter).then(response => {
       this.viajes = response.data.getReport;
+      console.log(response.data);
     });
   }
 
@@ -43,7 +44,9 @@ class ReportController {
 
   dateToString(date) {
     date = new Date(date);
-    return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+    let stringified = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+    //forgive me, for i have sinned
+    return  stringified == '31/12/1969' ? '' : stringified ;
   }
 }
 
