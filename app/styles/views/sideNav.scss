@@ -7,7 +7,7 @@
     z-index: 10;
     background-color: #37474f;
     overflow: hidden;
-    padding-top: 60px;
+    padding-top: 30px;
     .material-icons {
         margin-right: 15px;
     }
@@ -18,6 +18,12 @@
         color: #ffffff;
         display: block;
         transition: 0.3s
+    }
+    .nav-action{
+      display: flex;
+      justify-content: start;
+      width: 10rem;
+      white-space: nowrap;
     }
 }
 
