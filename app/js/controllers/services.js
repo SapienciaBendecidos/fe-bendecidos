@@ -12,10 +12,6 @@ function ServicesController(ServicesService, $q) {
     vm.focusedService = {};
     vm.serviceForm = {};
 
-    // ServicesService.getServices().then((response) => {
-    //     vm.services = response.data;
-    // });
-
     vm.getServiceCount = () => ServicesService.countServices();
 
     vm.setFocusedService = id => vm.focusedService = vm.getServiceById(id);
@@ -24,8 +20,10 @@ function ServicesController(ServicesService, $q) {
 
     vm.postService = (service) => ServicesService.postService(service);
 
+    vm.putService = (service) => ServicesService.putService(service);
+
     vm.edit = () => {
-        let promise = vm.postService(vm.focusedService);
+        let promise = vm.putService(vm.focusedService);
         promise.then(() => {
             Materialize.toast('Servicio editado exitosamente',5000);
             vm.loadServices();
@@ -67,7 +65,7 @@ function ServicesController(ServicesService, $q) {
     };
 
     vm.loadServices = () =>  vm.getServices(vm.activePage)
-    .then(response => vm.services = response.data.getWithSaldo);
+    .then(response => vm.services = response.data);
 
     vm.getServiceName = (service) => {
         if(service.nombre)
@@ -109,7 +107,7 @@ function ServicesController(ServicesService, $q) {
     }
 
     let getCount   = vm.getServiceCount(),
-    getService = vm.getServices(0);
+        getService = vm.getServices(0);
 
     $q.all([getCount, getService]).then( responses => {
         let { count } = responses[0].data;
