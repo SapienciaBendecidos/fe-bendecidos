@@ -16,8 +16,8 @@
               <td>{{viaje.nombre}}</td>
               <td>{{viaje.bus_placa}}</td>
 	            <td>{{ctrl.dateToString(viaje.fecha)}}</td>
-              <td>{{viaje.total}}</td>
-	            <td>{{viaje.cantidad}}</td>
+              <td>{{viaje.total || 0}}</td>
+	            <td>{{viaje.cantidad || 0}}</td>
               <td>{{viaje.descripcion}}</td>
               <td>{{viaje.tipo_movimiento}}</td>
 	          </tr>
