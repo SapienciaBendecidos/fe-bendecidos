@@ -92,19 +92,22 @@ function ClientController(ClientService, ServicesService, $q) {
     vm.loadServices();
     let skip = page * vm.perPage,
         limit = vm.perPage;
-    return ClientService.getClientsWithSaldo(limit,skip,null);
+    return ClientService.getClientsWithEquipoServicio(limit,skip,null);
   };
 
   vm.loadClients = () =>  vm.getClients(vm.activePage)
-  .then(response => vm.clients = response.data.getWithSaldo);
+  .then(response => vm.clients = response.data);
 
   vm.handlePageControlClick = (event) => {
+    console.log(event);
     let active = event.currentTarget.attributes['data-control'].value;
+    console.log(active);
     if(active.toLowerCase() === 'false')
     return;
 
     let control = event.currentTarget.attributes['data-control'].value;
     let page = parseInt(vm.activePage);
+    console.log(control, page);
     vm.activePage = control === 'foward' ? page + 1 : page - 1;
     vm.loadClients();
   }
@@ -121,30 +124,27 @@ function ClientController(ClientService, ServicesService, $q) {
     let regexp = `${vm.search}`;
     let or =
     [
-      { primerNombre: regexp },
-      { segundoNombre: regexp },
-      { primerApellido: regexp },
-      { segundoApellido: regexp },
-      { telefono: regexp }
+      { idCliente: {regexp}},
+      { nombres: {regexp}},
+      { telefono: {regexp}},
+      { idServidor: {regexp}},
+      { identidad: {regexp}},
+      { colonia: {regexp}}
     ];
-    let promise = ClientService.getClientsWithSaldo(0,0,{or});
-    promise.then( response =>  vm.clients = response.data.getWithSaldo);
+    let promise = ClientService.getClientsWithEquipoServicio(vm.perPage,vm.perPage*vm.page,{or});
+    promise.then( response =>  vm.clients = response.data);
     promise.catch( () => Materialize.toast('Error al realizar busqueda', 5000));
   };
 
   vm.submitClient = () => {
-    let {identity, firstname, middlename, lastname, secondLastname, address, phone, money, service } = vm.post;
+    let {identity, names, address, phone, service } = vm.post;
     let client = {
-      identidad: identity,
-      primerNombre: firstname,
-      segundoNombre: middlename ? middlename : '',
-      primerApellido: lastname,
-      segundoApellido: secondLastname ? secondLastname : '',
-      idServidor: service == '' ? null : service,
-      colonia: address,
+      nombres: names,
       telefono: phone,
-      saldo: money
-    };
+      idServidor: service,
+      identidad: identity,
+      colonia: address
+    }
 
     let promise = vm.postClient(client);
     promise.then(() => {
@@ -169,11 +169,9 @@ function ClientController(ClientService, ServicesService, $q) {
     for (let i = 0; i < vm.pages; i++)
       vm.range.push(i);
 
-    vm.clients = responses[1].data.getWithSaldo
+    vm.clients = responses[1].data;
   });
-
 }
-
 export default {
   name: 'ClientController',
   fn: ClientController

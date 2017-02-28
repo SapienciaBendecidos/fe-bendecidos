@@ -31,24 +31,24 @@
 		<table class="bordered centered striped">
 	        <thead>
 	          <tr>
+          			<th></th>
 	          	  <th data-field="identidad">Numero Id</th>
 	              <th data-field="nombre">Nombre</th>
 	              <th data-field="telefono">Telefono</th>
 	              <th data-field="colonia">Colonia</th>
 	              <th data-field="servicio">Equipo de Servicio</th>
-	              <th data-field="saldo">Saldo</th>
 	              <th data-field="editar">Editar</th>
 	              <th data-field="eliminar">Eliminar</th>
 	          </tr>
 	        </thead>
 	        <tbody>
 	          <tr ng-repeat="client in ctrl.clients">
+	          	<td> {{$index+1}} </td>
 	          	<td>{{client.identidad}}</td> 
-	            <td><a href="/clientes/{{client.id_cliente}}/tarjetas" class="waves-effect waves-blue darken-4 btn-flat">{{client.nombres}}</a></td>
+	            <td><a href="/clientes/{{client.idCliente}}/tarjetas" class="waves-effect waves-blue darken-4 btn-flat">{{client.nombres}}</a></td>
 	            <td>{{client.telefono ? client.telefono : 'N:A'}}</td>
 	            <td>{{client.colonia}}</td>
-	            <td><a href="#" class="waves-effect waves-blue darken-4 btn-flat">{{client.id_servidor ? ctrl.getServiceById(client.id_servidor).nombre : 'No Servidor'}}</a></td>
-	            <td>Lps. {{client.total}}</td>
+	            <td>{{client.id_servidor ? ctrl.getServiceById(client.id_servidor).nombre : 'No Servidor'}}</td>
 	            <td><a class="btn-floating btn-large waves-effect waves-light  blue darken-4 modal-trigger" href="#editar" ng-click="ctrl.setFocusedClient(client.id_cliente)"><i class="material-icons">mode_edit</i></a></td>
 	            <td><a class="btn-floating btn-large waves-effect waves-light  red darken-2 modal-trigger" href="#eliminar" ng-click="ctrl.setFocusedClient(client.id_cliente)"><i class="material-icons">delete</i></a></td>
 	          </tr>
