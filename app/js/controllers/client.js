@@ -22,7 +22,9 @@ function ClientController(ClientService, ServicesService, $q) {
     return fullname;
   };
 
-  vm.setFocusedClient = id => vm.focusedClient = vm.getClientById(id);
+  vm.setFocusedClient = id =>{
+  console.log(id, vm.getClientById(id), vm.focusedClient);
+   vm.focusedClient = vm.getClientById(id);};
 
   vm.edit = () => {
     let promise = vm.postClient(vm.focusedClient);
@@ -34,7 +36,7 @@ function ClientController(ClientService, ServicesService, $q) {
       Materialize.toast('Error al editar cliente',5000);
       vm.loadClients();
     });
-  }
+  };
 
   vm.delete = () => {
     let promise = vm.deleteById(vm.focusedClient.idCliente);
@@ -46,7 +48,7 @@ function ClientController(ClientService, ServicesService, $q) {
       Materialize.toast('Error al eliminar cliente', 5000);
       vm.loadClients();
     });
-  }
+  };
 
   vm.deleteById = id => ClientService.deleteById(id);
 
@@ -54,17 +56,17 @@ function ClientController(ClientService, ServicesService, $q) {
     for (let i = 0; i < vm.clients.length; ++i)
       if(vm.clients[i].id_cliente == id) {
           let client = vm.clients[i];
+          console.log(client);
           return  {
             idCliente: client.id_cliente,
-            primerNombre: client.primer_nombre,
-            segundoNombre: client.segundo_nombre,
-            primerApellido: client.primer_apellido,
-            segundoApellido: client.segundo_apellido,
-            equipoServicio: client.id_servidor, 
-            telefono: client.telefono,
+            identidad: client.identidad,
+            nombres: client.nombres,
+            colonia: client.colonia,
+            equipoServicio: client.id_servidor,
+            telefono: client.telefono
           }
       }
-  }
+  };
 
  vm.getServiceById = (id) => {
       for (let i = 0; i < vm.services.length; ++i)
@@ -76,27 +78,42 @@ function ClientController(ClientService, ServicesService, $q) {
                   'creado_por': service.creado_por
             }
         }
-  }
+  };
 
-  vm.getServices = (page) => {
-        let skip = page * vm.perPage,
-        limit = vm.perPage;
-        return ServicesService.getPagedServices(limit,skip);
-    };
+  vm.getServices = () => {
+        return ServicesService.getServices();
+  };
 
-  vm.loadServices = () =>  vm.getServices(vm.activePage)
-    .then(response => vm.services = response.data);
+  vm.loadServices = () => {
+   vm.getServices()
+    .then(response => {
+      vm.services = response.data;
+    });
 
+  };
+
+  vm.handleAgregarModal = () => {
+      vm.loadServices();
+
+      setTimeout(function() {
+      }, 100);
+
+      setTimeout(function() {
+        $('#agregar').modal('open');
+      }, 100);
+  };
 
   vm.getClients = (page) => {
-    vm.loadServices();
     let skip = page * vm.perPage,
         limit = vm.perPage;
     return ClientService.getClientsWithEquipoServicio(limit,skip,null);
   };
 
   vm.loadClients = () =>  vm.getClients(vm.activePage)
-  .then(response => vm.clients = response.data);
+  .then(response => {
+    vm.clients = response.data;
+  });
+
 
   vm.handlePageControlClick = (event) => {
     console.log(event);
@@ -107,15 +124,14 @@ function ClientController(ClientService, ServicesService, $q) {
 
     let control = event.currentTarget.attributes['data-control'].value;
     let page = parseInt(vm.activePage);
-    console.log(control, page);
-    vm.activePage = control === 'foward' ? page + 1 : page - 1;
+    vm.activePage = control === 'foward' ? page + 1 >= vm.range.length-1 ? vm.range.length-1 : page + 1 : page - 1 <= 0 ? 0 : page - 1;
     vm.loadClients();
-  }
+  };
 
   vm.handlePageIndexClick = (event) => {
     vm.activePage = event.currentTarget.attributes['data-index'].value;
     vm.loadClients();
-  }
+  };
 
   vm.getClientCount = () => ClientService.countClients();
   vm.postClient = (client) => ClientService.postClient(client);
@@ -137,11 +153,11 @@ function ClientController(ClientService, ServicesService, $q) {
   };
 
   vm.submitClient = () => {
-    let {identity, names, address, phone, service } = vm.post;
+    let {identity, name, address, phone, service } = vm.post;
     let client = {
-      nombres: names,
+      nombres: name,
       telefono: phone,
-      idServidor: service,
+      id_servidor: service==='' ? null:service,
       identidad: identity,
       colonia: address
     }
@@ -171,6 +187,8 @@ function ClientController(ClientService, ServicesService, $q) {
 
     vm.clients = responses[1].data;
   });
+
+  vm.loadServices();
 }
 export default {
   name: 'ClientController',

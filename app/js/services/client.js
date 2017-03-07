@@ -21,9 +21,9 @@ function ClientService($http) {
 
   service.getClientsWithEquipoServicio = (limit,skip,filter) => {
     if(!filter)
-      return $http.get(`${apiUrl}clientes?filter[limit]=${limit}&filter[skip]=${skip}`);
+      return $http.get(`${apiUrl}clientes?filter[limit]=${limit}&filter[skip]=${skip}&filter[include]=equiposServicio`);
     // falta el include
-    return $http.get(`${apiUrl}clientes?filter={"where":${JSON.stringify(filter)}}`);
+    return $http.get(`${apiUrl}clientes?filter={"include": ["equiposServicio"],"where":${JSON.stringify(filter)}}`);
   }
   service.postClient = (client) => $http.post(`${apiUrl}clientes/`, client);
   service.deleteById = id => $http.delete(`${apiUrl}clientes/${id}`);
