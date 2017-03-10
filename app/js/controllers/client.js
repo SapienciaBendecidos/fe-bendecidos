@@ -12,8 +12,10 @@ function ClientController(ClientService, ServicesService, $q) {
   vm.focusedClient = {};
   vm.clientForm = {};
   vm.services = [];
+  vm.dir = -1;
+  vm.filter = '';
 
-
+/*
   vm.getFullName = (client) => {
     let fullname = '';
     let keys = Object.keys(client);
@@ -21,13 +23,13 @@ function ClientController(ClientService, ServicesService, $q) {
       fullname += [client[keys[i]]] + ' ';
     return fullname;
   };
+*/
 
   vm.setFocusedClient = id =>{
-  console.log(id, vm.getClientById(id), vm.focusedClient);
    vm.focusedClient = vm.getClientById(id);};
 
   vm.edit = () => {
-    let promise = vm.postClient(vm.focusedClient);
+    let promise = vm.updateClient(vm.focusedClient);
     promise.then(() => {
       Materialize.toast('Cliente editado exitosamente',5000);
       vm.loadClients();
@@ -50,19 +52,21 @@ function ClientController(ClientService, ServicesService, $q) {
     });
   };
 
+  vm.updateClient = (client) => ClientService.updateClient(client);
   vm.deleteById = id => ClientService.deleteById(id);
+  vm.getSortedClients = (limit, skip, filter, prop, dir) => { return ClientService.sortClients(limit, skip, filter, prop, dir); };
 
   vm.getClientById = id => {
     for (let i = 0; i < vm.clients.length; ++i)
-      if(vm.clients[i].id_cliente == id) {
+      if(vm.clients[i].idCliente == id) {
           let client = vm.clients[i];
           console.log(client);
           return  {
-            idCliente: client.id_cliente,
+            idCliente: client.idCliente,
             identidad: client.identidad,
             nombres: client.nombres,
             colonia: client.colonia,
-            equipoServicio: client.id_servidor,
+            equiposServicio: client.equiposServicio,
             telefono: client.telefono
           }
       }
@@ -136,7 +140,30 @@ function ClientController(ClientService, ServicesService, $q) {
   vm.getClientCount = () => ClientService.countClients();
   vm.postClient = (client) => ClientService.postClient(client);
 
+  vm.sortClients = (prop) => {
+    if(!prop)
+      vm.loadClients();
+
+    let skip = vm.activePage * vm.perPage,
+      limit = vm.perPage;
+    vm.dir *= -1;
+    let direccion = vm.dir === 1 ? 'ASC' : 'DESC';
+    vm.getSortedClients(limit, skip, vm.filter, prop, direccion).then(response => vm.clients = response.data);
+
+
+    $('#sort-icon').remove();
+    let icon = `<i id="sort-icon" class="material-icons"> ${vm.dir === 1 ? 'keyboard_arrow_up' : 'keyboard_arrow_down'}</i>`;
+    $(`#${prop}-header`).append(icon);
+
+  };
+
   vm.searchClients = () => {
+    if(`${vm.search}` === '' || `${vm.search}` === 'undefined' || `${vm.search}` === undefined) {
+      vm.filter = '';
+      vm.loadClients();
+      return;
+    }
+
     let regexp = `${vm.search}`;
     let or =
     [
@@ -147,6 +174,7 @@ function ClientController(ClientService, ServicesService, $q) {
       { identidad: {regexp}},
       { colonia: {regexp}}
     ];
+    vm.filter = {or};
     let promise = ClientService.getClientsWithEquipoServicio(vm.perPage,vm.perPage*vm.page,{or});
     promise.then( response =>  vm.clients = response.data);
     promise.catch( () => Materialize.toast('Error al realizar busqueda', 5000));
@@ -157,10 +185,10 @@ function ClientController(ClientService, ServicesService, $q) {
     let client = {
       nombres: name,
       telefono: phone,
-      id_servidor: service==='' ? null:service,
+      'id_servidor': service==='' ? null:service,
       identidad: identity,
       colonia: address
-    }
+    };
 
     let promise = vm.postClient(client);
     promise.then(() => {
@@ -172,10 +200,11 @@ function ClientController(ClientService, ServicesService, $q) {
       vm.loadClients();
     });
     vm.post = {};
-  }
+  };
 
   let getCount   = vm.getClientCount(),
   getClients = vm.getClients(0);
+
 
   $q.all([getCount, getClients]).then( responses => {
     let { count } = responses[0].data;
