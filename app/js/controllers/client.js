@@ -170,7 +170,7 @@ function ClientController(ClientService, ServicesService, $q) {
       return;
     }
 
-    let regexp = `${vm.search}`.split(' ').join("[ a-zA-Z ]*");
+    let regexp = `${vm.search}`.split(' ').join('[ a-zA-Z ]*');
     let or =
     [
       { idCliente: {regexp}},
