@@ -14,6 +14,7 @@ function ClientController(ClientService, ServicesService, $q) {
   vm.services = [];
   vm.dir = -1;
   vm.filter = '';
+  vm.order = '';
 
 /*
   vm.getFullName = (client) => {
@@ -110,13 +111,16 @@ function ClientController(ClientService, ServicesService, $q) {
   vm.getClients = (page) => {
     let skip = page * vm.perPage,
         limit = vm.perPage;
-    return ClientService.getClientsWithEquipoServicio(limit,skip,null);
+    return ClientService.getClientsWithEquipoServicio(limit,skip, vm.filter);
   };
 
-  vm.loadClients = () =>  vm.getClients(vm.activePage)
-  .then(response => {
-    vm.clients = response.data;
-  });
+  vm.loadClients = () => {
+
+    if(vm.order !== '')
+      vm.sortClients(vm.order, true);
+    else
+      vm.getClients(vm.activePage).then(response => { vm.clients = response.data;});
+  };
 
 
   vm.handlePageControlClick = (event) => {
@@ -140,20 +144,22 @@ function ClientController(ClientService, ServicesService, $q) {
   vm.getClientCount = () => ClientService.countClients();
   vm.postClient = (client) => ClientService.postClient(client);
 
-  vm.sortClients = (prop) => {
+  vm.sortClients = (prop, keepdirection) => {
     if(!prop)
       vm.loadClients();
 
     let skip = vm.activePage * vm.perPage,
       limit = vm.perPage;
-    vm.dir *= -1;
-    let direccion = vm.dir === 1 ? 'ASC' : 'DESC';
-    vm.getSortedClients(limit, skip, vm.filter, prop, direccion).then(response => vm.clients = response.data);
+    if(!keepdirection)
+      vm.dir *= -1;
+    vm.order = prop;
+    let direction = vm.dir === 1 ? 'ASC' : 'DESC';
+    vm.getSortedClients(limit, skip, vm.filter, vm.order, direction).then(response => vm.clients = response.data);
 
 
     $('#sort-icon').remove();
     let icon = `<i id="sort-icon" class="material-icons"> ${vm.dir === 1 ? 'keyboard_arrow_up' : 'keyboard_arrow_down'}</i>`;
-    $(`#${prop}-header`).append(icon);
+    $(`#${vm.order}-header`).append(icon);
 
   };
 
@@ -164,7 +170,7 @@ function ClientController(ClientService, ServicesService, $q) {
       return;
     }
 
-    let regexp = `${vm.search}`;
+    let regexp = `${vm.search}`.split(' ').join("[ a-zA-Z ]*");
     let or =
     [
       { idCliente: {regexp}},
