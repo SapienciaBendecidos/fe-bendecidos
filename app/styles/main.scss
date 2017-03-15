@@ -60,6 +60,16 @@ main {
 	}
 }
 
+@media screen and (max-width: 1280px) {
+	#mySidenavN {
+		.card {
+			a {
+				padding-left: 18px;
+			}
+		}
+	}
+}
+
 @media screen and (max-width: 1024px) {
 	main {
 		position: static;
