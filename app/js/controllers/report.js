@@ -1,8 +1,10 @@
 'use strict';
 
+import { apiUrl } from '../constants';
+
 class ReportController {
 
-  constructor(TripService, $stateParams) {
+  constructor(TripService, $stateParams, SessionService) {
     'ngInject';
     this.TripService = TripService;
     this.viajes = [];
@@ -12,8 +14,19 @@ class ReportController {
     this.range = [];
     this.count = 0;
     this.filter = $stateParams.filter
+    this.session = SessionService.getSession();
+    this.link = `${apiUrl}Viajes/GenerateExcelReport`;
+    this.setLink(); 
+    console.log(this.link);
     this.getTrips();
     this.setPageCount();
+  }
+
+  setLink() {
+    if(this.filter)
+      this.link += `?filter=${this.filter}&access_token=${this.session.accessToken}`;
+    else
+      this.link += `?access_token=${this.session.accessToken}`;
   }
 
   getTrips() {
