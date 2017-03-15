@@ -12,7 +12,10 @@ function OnRun($rootScope, AppSettings, $state, SessionService, UserService) {
 
     $rootScope.pageTitle += AppSettings.appTitle;
     if (Object.keys(localStorage).length >= 1 && toState.name != 'Login') {
-        $('#mySidenavN').removeClass('hidden');
+        let {name} = SessionService.getSession();
+        let $sidenav = $('#mySidenavN');
+        $sidenav.removeClass('hidden');
+        $sidenav.find('.name').html(name);
     }
   });
 
@@ -26,7 +29,7 @@ function OnRun($rootScope, AppSettings, $state, SessionService, UserService) {
     checker(toState);
  })
 
- 
+
  setInterval(() => {
    let session = SessionService.getSession();
    if($state.current.name !== 'Login' && !session){
@@ -42,7 +45,7 @@ function OnRun($rootScope, AppSettings, $state, SessionService, UserService) {
       if (goState === 'Login') {
         $('#mySidenavN').addClass('hidden');
         let promise = UserService.logout();
-        
+
         promise.then(()=>{
           SessionService.removeSession();
         })

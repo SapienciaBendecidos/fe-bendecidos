@@ -11,7 +11,6 @@ class ReportGenerationController {
     this.defaultFilterValue = '.*';
     this.initialDate = this.defaultValue;
     this.limitDate = this.defaultValue;
-    this.driver = this.defaultValue;
     this.busPlate = this.defaultValue;
     this.route = this.defaultValue;
     this.filter = null;
@@ -25,6 +24,8 @@ class ReportGenerationController {
       return;
     }
     this.setFilter();
+
+    console.log(this.filter);
 
     if(this.filter != null)
       this.$state.go('Report', {filter: JSON.stringify(this.filter)});
@@ -44,14 +45,12 @@ class ReportGenerationController {
           this.getDateValue(new Date(this.limitDate)) : this.getDateValue(new Date());
 
       this.route = this.getFilterValue(this.route);
-      this.driver = this.getFilterValue(this.driver);
       this.busPlate = this.getFilterValue(this.busPlate);
       let and =
       [
         { 'fecha_inicial': this.initialDate },
         { 'fecha_limite': this.limitDate },
         { 'nombre': this.route },
-        { 'bus_conductor': this.driver },
         { 'tipo_movimiento': this.defaultFilterValue },
         { 'bus_placa': this.busPlate },
       ];
@@ -63,7 +62,6 @@ class ReportGenerationController {
   isAnySet() {
     return this.isSet(this.initialDate)
         || this.isSet(this.limitDate)
-        || this.isSet(this.driver)
         || this.isSet(this.route)
         || this.isSet(this.busPlate);
   }
