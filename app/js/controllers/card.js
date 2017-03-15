@@ -38,10 +38,9 @@ function CardController(client, cards, CardService) {
 		promise.finally(() => vm.loadCards());
 	}
 
-	vm.loadCards = () => {
-		let promise = CardService.getCardsByClient(vm.focusedCard.idCliente);
-		promise.then(response => vm.cards = response.data);
-	}
+	vm.getCards = () => CardService.getCardsByClient(vm.client.idCliente);
+
+	vm.loadCards = () => vm.getCards().then(response => vm.cards = response.data);
 }
 
 export default {
