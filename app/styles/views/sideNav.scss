@@ -61,6 +61,10 @@
     cursor: pointer;
 }
 
+.material-icons {
+    line-height: 1.3;
+}
+
 @media screen and (max-height: 450px) {
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
@@ -68,5 +72,4 @@
 
 #dash{
     margin-left: 16%;
-
 }
