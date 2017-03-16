@@ -67,24 +67,6 @@
 		</tr>
 	</tbody>
 </table>
-<ul class="pagination center-align">
-	<li class="{{ctrl.activePage == 0 ? 'disabled' : ''}}"
-		data-control="back" ng-click="ctrl.handlePageControlClick($event)">
-		<a href="#!">
-			<i class="material-icons">chevron_left</i>
-		</a>
-	</li>
-	<li class="waves-effect {{$index == ctrl.activePage ? 'active' : ''}}"
-		ng-repeat="n in ctrl.range" data-index="{{n}}" ng-click="ctrl.handlePageIndexClick($event)">
-		<a href="#!">{{n}}</a>
-	</li>
-	<li class="waves-effect {{ctrl.activePage == ctrl.range.length - 1 ? 'disabled' : ''}}"
-		data-control="foward" ng-click="ctrl.handlePageControlClick($event)" >
-		<a href="#!">
-			<i class="material-icons">chevron_right</i>
-		</a>
-	</li>
-</ul>
 <!-- Modal CREAR -->
 <div id="agregar" class="modal">
 	<div class="modal-content">
