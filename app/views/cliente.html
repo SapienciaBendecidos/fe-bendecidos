@@ -82,7 +82,7 @@
 	            <td>{{client.telefono ? client.telefono : 'N:A'}}</td>
 	            <td>{{client.colonia}}</td>
 	            <td>{{client.equiposServicio ? client.equiposServicio.nombre : 'No Servidor'}}</td>
-							<td><a id="editar-client" class="btn-floating waves-effect waves-light  blue darken-4 modal-trigger btn-small" href="/clientes/{{client.idCliente}}/tarjetas" ><i class="material-icons">search</i></a></td>
+							<td><a id="editar-client" class="btn-floating waves-effect waves-light  green darken-4 modal-trigger btn-small" href="/clientes/{{client.idCliente}}/tarjetas" ><i class="material-icons">picture_in_picture</i></a></td>
 	            <td><a id="editar-client" class="btn-floating waves-effect waves-light  blue darken-4 modal-trigger btn-small" href="#editar" ng-click="ctrl.setFocusedClient(client.idCliente)"><i class="material-icons">mode_edit</i></a></td>
 	            <td><a id="eliminar-client" class="btn-floating waves-effect waves-light  red darken-2 modal-trigger btn-small" href="#eliminar" ng-click="ctrl.setFocusedClient(client.idCliente)"><i class="material-icons">delete</i></a></td>
 	          </tr>

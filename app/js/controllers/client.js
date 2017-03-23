@@ -1,6 +1,6 @@
 'use strict';
 
-function ClientController(ClientService, ServicesService, $q) {
+function ClientController(ClientService, ServicesService, $q, services) {
   'ngInject';
   // ViewModel
   const vm = this;
@@ -11,20 +11,10 @@ function ClientController(ClientService, ServicesService, $q) {
   vm.activePage = 0;
   vm.focusedClient = {};
   vm.clientForm = {};
-  vm.services = [];
+  vm.services = services.data || [];
   vm.dir = -1;
   vm.filter = '';
   vm.order = '';
-
-/*
-  vm.getFullName = (client) => {
-    let fullname = '';
-    let keys = Object.keys(client);
-    for (var i = 1; i < 5; ++i)
-      fullname += [client[keys[i]]] + ' ';
-    return fullname;
-  };
-*/
 
   vm.setFocusedClient = id =>{
    vm.focusedClient = vm.getClientById(id);};

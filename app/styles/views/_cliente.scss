@@ -3,52 +3,18 @@
    width: 82%;
    left: 17%;
 
-   nav
-   {
-      color: #fff !important;
-      background-color: #ffffff !important;
-      letter-spacing: 3px;
-
-
-      top-nav
-      {
-         height: 40% !important;
-         box-shadow: none !important;
-         line-height: 55% !important;
-      }
-
-      nav-wrapper
-      {
-         i
-         {
-            line-height: 120px !important;
-         }
-      }
-
-      a
-      {
-         button-collapse
-         {
-            i
-            {
-               line-height: 120px !important;
-            }
-
-            line-height: 120px !important;
-         }
-      }
-   }
-
   .modal-wrapper {
-        display: inline;
+        display: inline-block;
         position: fixed;
         height: 10rem;
         width: 82%;
-        bottom: 0;
+        bottom: 4rem;
         z-index: 333;
-   }
-   #search-modal {
-      position: absolute;
+
+        .modal.bottom-sheet {
+              width: 83%;
+              left: 16%;
+        }
    }
 
    input-field

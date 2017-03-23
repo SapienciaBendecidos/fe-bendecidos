@@ -61,14 +61,12 @@ function OnRun($rootScope, AppSettings, $state, SessionService, UserService) {
      if (toState.name !== 'Login' && toState.name !== 'Client') {
         $('#sidebar-ico').css({
           'top': '.5%',
-          'left': '1%',
-          'color': '#000'
+          'color': 'black'
         })
      } else if (toState.name === 'Client') {
       $('#sidebar-ico').css({
           'top': '2.5%',
-          'left': '4%',
-          'color': '#fff'
+          'color': 'black'
         })
      }
    };

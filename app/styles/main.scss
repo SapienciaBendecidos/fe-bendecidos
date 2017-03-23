@@ -72,7 +72,7 @@ main {
 
 @media screen and (max-width: 1024px) {
 	main {
-		position: static;
+		//position: static;
 	}
 	.vw-client {
 		padding: 0;
@@ -112,7 +112,6 @@ main {
 	#sidebar-ico {
 		position: fixed;
 	    top: 2.5%;
-	    left: 4%;
 	    z-index: 2;
 	    font-size: 2.5rem;
 	    cursor: pointer;
@@ -138,7 +137,15 @@ table.striped > tbody > tr:nth-child(odd) {
   margin: 0 !important;
 }
 
-[class*=vw-] {
-	width: 84%;
-	left: 16%;
+
+.modal-overlay {
+	height: 100%;
+	background: black;
+}
+
+@media all and (min-width: 1024px) {
+	[class*=vw-] {
+		width: 84%;
+		left: 16%;
+	}
 }
