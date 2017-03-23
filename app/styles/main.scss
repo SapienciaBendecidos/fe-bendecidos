@@ -137,3 +137,8 @@ table.striped > tbody > tr:nth-child(odd) {
 .m-0 {
   margin: 0 !important;
 }
+
+[class*=vw-] {
+	width: 84%;
+	left: 16%;
+}
