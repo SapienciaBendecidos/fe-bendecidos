@@ -12,10 +12,17 @@ function OnRun($rootScope, AppSettings, $state, SessionService, UserService) {
 
     $rootScope.pageTitle += AppSettings.appTitle;
     if (Object.keys(localStorage).length >= 1 && toState.name != 'Login') {
-        let {name} = SessionService.getSession();
+        let {name,rol} = SessionService.getSession();
         let $sidenav = $('#mySidenavN');
         $sidenav.removeClass('hidden');
         $sidenav.find('.name').html(name);
+        if (rol!='admin') {
+          $sidenav.find('#Usuarios').addClass('ng-hide');
+          $sidenav.find('#ReportGeneration').addClass('ng-hide');
+        }else{
+          $sidenav.find('#Usuarios').removeClass('ng-hide');
+          $sidenav.find('#ReportGeneration').removeClass('ng-hide');
+        }
     }
   });
 
