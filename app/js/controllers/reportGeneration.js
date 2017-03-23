@@ -6,7 +6,7 @@ class ReportGenerationController {
     'ngInject';
 
     //default empty attribute value for /Viajes/getreports/filter{} :(
-    this.defaultInitialDate = '06660101';
+    this.defaultInitialDate = '0666-01-01';
     this.defaultValue = '';
     this.defaultFilterValue = '.*';
     this.initialDate = this.defaultValue;
@@ -43,6 +43,9 @@ class ReportGenerationController {
 
       this.limitDate =  this.isSet(this.limitDate) ?
           this.getDateValue(new Date(this.limitDate)) : this.getDateValue(new Date());
+      
+      this.initialDate += ' 00:00:00';
+      this.limitDate += ' 23:59:59';
 
       this.route = this.getFilterValue(this.route);
       this.busPlate = this.getFilterValue(this.busPlate);
@@ -81,7 +84,7 @@ class ReportGenerationController {
     if(month.length < 2)
       month = '0' + month;
 
-    return `${year}${month}${day}`;
+    return `${year}-${month}-${day}`;
   }
 
   isSet(input) {
