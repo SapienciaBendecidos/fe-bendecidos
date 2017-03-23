@@ -8,16 +8,19 @@ function CardController(client, cards, CardService) {
 	vm.name = `${vm.client.primerNombre} ${vm.client.primerApellido}`;
 	vm.focusedCard = null;
 	vm.state = false;
+	vm.editCode = '';
 
 	vm.setFocus = card =>  {
 		vm.focusedCard = card;
 		vm.state = vm.focusedCard.estado == 'Activo';
+		vm.editCode = vm.focusedCard.idTarjeta;
 	};
 
 	vm.edit = () => {
 		let estado = vm.state ? 'Activo' : 'Inactivo';
 		let data = Object.assign({}, vm.focusedCard);
 		data.estado = estado;
+		data.idTarjeta = vm.editCode;
 		let promise = CardService.updateCard(data);
 
 		promise.then(() => Materialize.toast('Tarjeta modificada', 5000));
