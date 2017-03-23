@@ -40,21 +40,6 @@
 		</tr>
 
 	</table>
-
-	 <!-- <nav>
-			<div class="nav-wrapper white">
-				<ul class="right hide-on-med-and-down">
-					<li ng-click="ctrl.showSearch()">
-						<a class="modal-trigger btn-small blue-grey" href="#search-modal"> <i class="material-icons right blue-grey">search</i></a>
-					</li>
-						<li>
-							<a id="agregar-client" class="modal-trigger" href="#agregar"><i class="material-icons right">playlist_add</i></a>
-						</li>
-					<li><a> Hermanos </a></li>
-				</ul>
-			</div>
-  </nav> -->
-
 		<table class="bordered centered striped">
 	        <thead>
 	          <tr>
@@ -84,6 +69,7 @@
                     Equipo de Servicio
                   </a>
                 </th>
+								<th data-field="editar">Tarjetas</th>
 	              <th data-field="editar">Editar</th>
 	              <th data-field="eliminar">Eliminar</th>
 	          </tr>
@@ -92,12 +78,13 @@
 	          <tr ng-repeat="client in ctrl.clients">
 	          	<td> {{$index+1}} </td>
 	          	<td>{{client.identidad}}</td>
-	            <td><a href="/clientes/{{client.idCliente}}/tarjetas" class="waves-effect waves-blue darken-4 btn-flat">{{client.nombres}}</a></td>
+	            <td>{{client.nombres}}</td>
 	            <td>{{client.telefono ? client.telefono : 'N:A'}}</td>
 	            <td>{{client.colonia}}</td>
 	            <td>{{client.equiposServicio ? client.equiposServicio.nombre : 'No Servidor'}}</td>
-	            <td><a id="editar-client" class="btn-floating btn-large waves-effect waves-light  blue darken-4 modal-trigger" href="#editar" ng-click="ctrl.setFocusedClient(client.idCliente)"><i class="material-icons">mode_edit</i></a></td>
-	            <td><a id="eliminar-client" class="btn-floating btn-large waves-effect waves-light  red darken-2 modal-trigger" href="#eliminar" ng-click="ctrl.setFocusedClient(client.idCliente)"><i class="material-icons">delete</i></a></td>
+							<td><a id="editar-client" class="btn-floating waves-effect waves-light  blue darken-4 modal-trigger btn-small" href="/clientes/{{client.idCliente}}/tarjetas" ><i class="material-icons">search</i></a></td>
+	            <td><a id="editar-client" class="btn-floating waves-effect waves-light  blue darken-4 modal-trigger btn-small" href="#editar" ng-click="ctrl.setFocusedClient(client.idCliente)"><i class="material-icons">mode_edit</i></a></td>
+	            <td><a id="eliminar-client" class="btn-floating waves-effect waves-light  red darken-2 modal-trigger btn-small" href="#eliminar" ng-click="ctrl.setFocusedClient(client.idCliente)"><i class="material-icons">delete</i></a></td>
 	          </tr>
 	        </tbody>
     </table>
