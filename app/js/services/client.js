@@ -11,7 +11,6 @@ function ClientService($http) {
     return $http.get(`${apiUrl}clientes?filter=${JSON.stringify(filter)}`);
   }
 
-
   service.postClient = (client) => $http.post(`${apiUrl}clientes/`, client);
   service.deleteById = id => $http.delete(`${apiUrl}clientes/${id}`);
 
