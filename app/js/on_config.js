@@ -35,7 +35,13 @@ function OnConfig($stateProvider, $locationProvider, $urlRouterProvider, $compil
     url: '/clientes',
     controller: 'ClientController as ctrl',
     templateUrl: 'cliente.html',
-    title: 'Clientes'
+    title: 'Clientes',
+    resolve: {
+      services: function(ServicesService) {
+        'ngInject'
+        return ServicesService.getServices();
+      }
+    }    
   })
   .state('Rutas', {
     url: '/rutas',
