@@ -7,8 +7,10 @@ function ClientService($http) {
 
   service.countClients = () => $http.get(`${apiUrl}clientes/count`);
 
-  service.getClients = filter => {
-    return $http.get(`${apiUrl}clientes?filter=${JSON.stringify(filter)}`);
+  service.getClients = (limit, skip, filter) => {
+    if(filter === '' || !filter)
+      return $http.get(`${apiUrl}clientes?filter[limit]=${limit}&filter[skip]=${skip}`);
+    return $http.get(`${apiUrl}clientes?filter=${JSON.stringify(filter)}&filter[limit]=${limit}&filter[skip]=${skip}`);
   }
 
   service.postClient = (client) => $http.post(`${apiUrl}clientes/`, client);
@@ -16,8 +18,8 @@ function ClientService($http) {
 
   service.sortClients = (limit, skip, filter, prop, dir) => {
     if(filter === '' || !filter)
-      return $http.get(`${apiUrl}clientes?filter[limit]=${limit}&filter[skip]=${skip}&filter[include]=equiposServicio&filter[order]=${prop} ${dir}`);
-    return $http.get(`${apiUrl}clientes?filter={"include": ["equiposServicio"],"where":${JSON.stringify(filter)},"order":["${prop} ${dir}"], "limit":[${limit}], "skip":[${skip}]}`);
+      return $http.get(`${apiUrl}clientes?filter[limit]=${limit}&filter[skip]=${skip}&filter[order]=${prop} ${dir}`);
+    return $http.get(`${apiUrl}clientes?filter=${JSON.stringify(filter)}&filter[limit]=${limit}&filter[skip]=${skip}&filter[order]=${prop} ${dir}`);
   };
   service.updateClient = (client) => $http.patch(`${apiUrl}clientes/`, client);
   service.getClientById = id => $http.get(`${apiUrl}clientes/${id}`);

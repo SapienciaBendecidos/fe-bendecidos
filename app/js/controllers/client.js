@@ -1,6 +1,6 @@
 'use strict';
 
-function ClientController(ClientService, ServicesService, $q, services) {
+function ClientController(ClientService, $q) {
   'ngInject';
   // ViewModel
   const vm = this;
@@ -11,7 +11,6 @@ function ClientController(ClientService, ServicesService, $q, services) {
   vm.activePage = 0;
   vm.focusedClient = {};
   vm.clientForm = {};
-  vm.services = services.data || [];
   vm.dir = -1;
   vm.filter = '';
   vm.order = '';
@@ -57,7 +56,6 @@ function ClientController(ClientService, ServicesService, $q, services) {
             identidad: client.identidad,
             nombres: client.nombres,
             colonia: client.colonia,
-            equiposServicio: client.equiposServicio,
             telefono: client.telefono
           }
       }
@@ -75,21 +73,7 @@ function ClientController(ClientService, ServicesService, $q, services) {
         }
   };
 
-  vm.getServices = () => {
-        return ServicesService.getServices();
-  };
-
-  vm.loadServices = () => {
-   vm.getServices()
-    .then(response => {
-      vm.services = response.data;
-    });
-
-  };
-
   vm.handleAgregarModal = () => {
-      vm.loadServices();
-
       setTimeout(function() {
       }, 100);
 
@@ -101,7 +85,7 @@ function ClientController(ClientService, ServicesService, $q, services) {
   vm.getClients = (page) => {
     let skip = page * vm.perPage,
         limit = vm.perPage;
-    return ClientService.getClientsWithEquipoServicio(limit,skip, vm.filter);
+    return ClientService.getClients(limit,skip, vm.filter);
   };
 
   vm.loadClients = () => {
@@ -166,22 +150,20 @@ function ClientController(ClientService, ServicesService, $q, services) {
       { idCliente: {regexp}},
       { nombres: {regexp}},
       { telefono: {regexp}},
-      { idServidor: {regexp}},
       { identidad: {regexp}},
       { colonia: {regexp}}
     ];
     vm.filter = {or};
-    let promise = ClientService.getClientsWithEquipoServicio(vm.perPage,vm.perPage*vm.page,{or});
+    let promise = ClientService.getClients(vm.perPage,vm.perPage*vm.page,{or});
     promise.then( response =>  vm.clients = response.data);
     promise.catch( () => Materialize.toast('Error al realizar busqueda', 5000));
   };
 
   vm.submitClient = () => {
-    let {identity, name, address, phone, service } = vm.post;
+    let {identity, name, address, phone } = vm.post;
     let client = {
       nombres: name,
       telefono: phone,
-      'id_servidor': service==='' ? null:service,
       identidad: identity,
       colonia: address
     };
@@ -212,8 +194,6 @@ function ClientController(ClientService, ServicesService, $q, services) {
 
     vm.clients = responses[1].data;
   });
-
-  vm.loadServices();
 }
 export default {
   name: 'ClientController',

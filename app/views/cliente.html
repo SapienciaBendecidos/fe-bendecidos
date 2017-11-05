@@ -17,7 +17,7 @@
 	</div>
 
 	<div class="col s9">
-      <h3 class="thin">Hermanos</h3>
+      <h3 class="thin">Clientes</h3>
         </div>
 
 
@@ -64,12 +64,7 @@
                     Colonia
                   </a>
                 </th>
-                <th data-field="servicio" name="id_servidor">
-                  <a id="id_servidor-header" ng-click="ctrl.sortClients('id_servidor')" class="waves-effect waves-blue darken-4 btn-flat">
-                    Equipo de Servicio
-                  </a>
-                </th>
-								<th data-field="editar">Tarjetas</th>
+				  <th data-field="editar">Tarjetas</th>
 	              <th data-field="editar">Editar</th>
 	              <th data-field="eliminar">Eliminar</th>
 	          </tr>
@@ -81,8 +76,7 @@
 	            <td>{{client.nombres}}</td>
 	            <td>{{client.telefono ? client.telefono : 'N:A'}}</td>
 	            <td>{{client.colonia}}</td>
-	            <td>{{client.equiposServicio ? client.equiposServicio.nombre : 'No Servidor'}}</td>
-							<td><a id="editar-client" class="btn-floating waves-effect waves-light  green darken-4 modal-trigger btn-small" href="/clientes/{{client.idCliente}}/tarjetas" ><i class="material-icons">picture_in_picture</i></a></td>
+				<td><a id="editar-client" class="btn-floating waves-effect waves-light  green darken-4 modal-trigger btn-small" href="/clientes/{{client.idCliente}}/tarjetas" ><i class="material-icons">picture_in_picture</i></a></td>
 	            <td><a id="editar-client" class="btn-floating waves-effect waves-light  blue darken-4 modal-trigger btn-small" href="#editar" ng-click="ctrl.setFocusedClient(client.idCliente)"><i class="material-icons">mode_edit</i></a></td>
 	            <td><a id="eliminar-client" class="btn-floating waves-effect waves-light  red darken-2 modal-trigger btn-small" href="#eliminar" ng-click="ctrl.setFocusedClient(client.idCliente)"><i class="material-icons">delete</i></a></td>
 	          </tr>
@@ -112,7 +106,7 @@
 		<!-- Modal CREAR -->
 		<div id="agregar" class="modal">
 		    <div class="modal-content">
-		      <h5>Ingresar Hermano</h5>
+		      <h5>Ingresar Cliente</h5>
 		      <!--txt Nombre-->
 					<form action="" name="ctrl.postClientForm" id="post-client" method="post">
 						<div class="row center">
@@ -146,18 +140,6 @@
 								<input placeholder="Telefono" id="telefono" type="text"
 								       ng-model="ctrl.post.phone" required
 											 class="{{ctrl.post.phone.length > 0 ? '' : 'invalid'}}">
-							</div>
-						</div>
-
-						<!--txt Servicio-->
-						<div class="row">
-							<div class="input-field col s12">
-								<i class="material-icons prefix">work</i>
-							 	<select id="servicio" class="validate" ng-model="ctrl.post.service">
-					              <option value="" disabled selected>Seleccion Equipo de Servicio</option>
-					              <option value="">No Servidor</option>
-					              <option ng-repeat="service in ctrl.services" value="{{service.id}}">{{service.nombre}}</option>
-					            </select>
 							</div>
 						</div>
 				</div>

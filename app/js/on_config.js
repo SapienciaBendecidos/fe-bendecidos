@@ -36,12 +36,6 @@ function OnConfig($stateProvider, $locationProvider, $urlRouterProvider, $compil
     controller: 'ClientController as ctrl',
     templateUrl: 'cliente.html',
     title: 'Clientes',
-    resolve: {
-      services: function(ServicesService) {
-        'ngInject'
-        return ServicesService.getServices();
-      }
-    }    
   })
   .state('Rutas', {
     url: '/rutas',
@@ -56,13 +50,6 @@ function OnConfig($stateProvider, $locationProvider, $urlRouterProvider, $compil
     controller: 'UsersController as ctrl',
     templateUrl: 'usuarios.html',
     title: 'Usuarios'
-  })
-  .state('Servicios', {
-    url: '/servicios',
-    params: { redirected: false },
-    controller: 'ServicesController as ctrl',
-    templateUrl: 'services.html',
-    title: 'Servicios'
   })
   .state('Cards', {
     url: '/clientes/:clientId/tarjetas',
