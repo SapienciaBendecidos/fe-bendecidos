@@ -14,7 +14,14 @@ const karmaBaseConfig = {
     'test/**/*.js': ['browserify']
   },
 
-  browsers: ['Chrome'],
+  plugins: [
+    require( 'karma-jasmine' ),
+    require( 'karma-phantomjs-launcher' ),
+    require( 'karma-remap-istanbul' ),
+    require( 'angular-cli/plugins/karma' )
+  ],
+
+  browsers: [ 'PhantomJS' ],
 
   reporters: ['progress', 'coverage'],
 

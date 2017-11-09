@@ -4,7 +4,7 @@ node_js:
 sudo: false
 
 script:
-  - ./test/unit/controlles example_spec
+  - node ./node_modules/.bin/eslint ./app/js/constants.js
 
 cache:
   directories:
