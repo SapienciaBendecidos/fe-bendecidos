@@ -8,11 +8,6 @@ FROM livingdocs/nvm
 WORKDIR /app
 ADD ./ /app
 RUN bash -c '. /usr/share/nvm/nvm.sh && cd /app && nvm install v6.4 && nvm use v6.4'
-RUN npm install
-
-ENV EBENEZER_API_URL 'backend'
-ENV EBENEZER_API_PORT 3000
-
-EXPOSE 3001
+RUN npm install && npm rebuild node-sass
 
 CMD ["npm", "run", "dev"]
