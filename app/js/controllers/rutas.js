@@ -30,7 +30,6 @@ function RutasController (RutasService, $q) {
   }
 
   vm.delete = () => {
-    console.log(vm.focusedRoute);
     let promise = vm.deleteById(vm.focusedRoute.id);
     promise.then(() => {
       Materialize.toast('Ruta eliminada exitosamente', 5000);
@@ -70,8 +69,6 @@ function RutasController (RutasService, $q) {
     if(active.toLowerCase() === 'false')
     return;
 
-    console.log(active)
-
     let control = event.currentTarget.attributes['data-control'].value;
     let page = parseInt(vm.activePage);
     vm.activePage = control === 'foward' ? page + 1 : page - 1;
@@ -107,10 +104,8 @@ function RutasController (RutasService, $q) {
         name: name,
         description: description
       };
-
-      console.log(ruta);
-
       let promise = vm.postRuta(ruta);
+
       promise.then(() => {
         Materialize.toast('Ruta agregada exitosamente', 5000);
         vm.loadRutas();
