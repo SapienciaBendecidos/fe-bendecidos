@@ -31,7 +31,7 @@ function RutasController (RutasService, $q) {
 
   vm.delete = () => {
     console.log(vm.focusedRoute);
-    let promise = vm.deleteById(vm.focusedRoute.idRuta);
+    let promise = vm.deleteById(vm.focusedRoute.id);
     promise.then(() => {
       Materialize.toast('Ruta eliminada exitosamente', 5000);
       vm.loadRutas();
@@ -46,13 +46,12 @@ function RutasController (RutasService, $q) {
 
   vm.getRouteById = id => {
     for (let i = 0; i < vm.rutas.length; ++i)
-      if(vm.rutas[i].idRuta == id) {
+      if(vm.rutas[i].id == id) {
           let ruta = vm.rutas[i];
           return {
-            idRuta: ruta.idRuta,
-            nombre: ruta.nombre,
-            descripcion: ruta.descripcion,
-            costo: ruta.costo
+            id: ruta.id,
+            name: ruta.name,
+            description: ruta.description
           }
       }
   }
@@ -71,6 +70,8 @@ function RutasController (RutasService, $q) {
     if(active.toLowerCase() === 'false')
     return;
 
+    console.log(active)
+
     let control = event.currentTarget.attributes['data-control'].value;
     let page = parseInt(vm.activePage);
     vm.activePage = control === 'foward' ? page + 1 : page - 1;
@@ -84,15 +85,15 @@ function RutasController (RutasService, $q) {
 
   vm.getRutasCount = () => RutasService.countRutas();
   vm.postRuta = (ruta) => RutasService.postRuta(ruta);
-  vm.putRuta = (ruta) => RutasService.putRuta(ruta.idRuta, ruta);
+  vm.putRuta = (ruta) => RutasService.putRuta(ruta.id, ruta);
 
   vm.searchRutas = () => {
     let regexp = `/${vm.search}/`;
     let where =
     { or :
       [
-        { nombre: { regexp } },
-        { descripcion: { regexp } }
+        { name: { regexp } },
+        { description: { regexp } }
       ]
     };
     let promise = RutasService.getRutas({where});
@@ -101,11 +102,10 @@ function RutasController (RutasService, $q) {
   };
 
   vm.submitRuta = () => {
-      let { name, description, costo } = vm.post;
+      let { name, description } = vm.post;
       let ruta = {
-        nombre: name,
-        descripcion: description,
-        costo: costo
+        name: name,
+        description: description
       };
 
       console.log(ruta);
