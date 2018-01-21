@@ -22,7 +22,7 @@ function UserService($http) {
     return $http.get(`${apiUrl}UserAccounts?filter[include]=roles&filter=${JSON.stringify(filter)}`);
   }
 
-  service.getRoles = () => {return ['movil', 'cajero', 'admin'];}
+  service.getRoles = () => {return ['movil', 'admin'];}
 
   service.postUser = (user) => $http.post(`${apiUrl}UserAccounts`, user);
   service.updateUser = (user) => $http.put(`${apiUrl}UserAccounts/${user.id}`, user);
