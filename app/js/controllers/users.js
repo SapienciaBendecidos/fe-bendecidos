@@ -118,7 +118,7 @@ function UsersController(UserService, $q) {
       type: rol,
       emailVerified: true,
       status: 'desactive',
-      password:newPassword,
+      password: newPassword,
       username: newUsername
     };
 

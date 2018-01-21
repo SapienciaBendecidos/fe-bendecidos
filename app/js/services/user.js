@@ -25,7 +25,7 @@ function UserService($http) {
   service.getRoles = () => {return ['movil', 'admin'];}
 
   service.postUser = (user) => $http.post(`${apiUrl}UserAccounts`, user);
-  service.updateUser = (user) => $http.put(`${apiUrl}UserAccounts/${user.id}`, user);
+  service.updateUser = (user) => $http.patch(`${apiUrl}UserAccounts/${user.id}`, user);
   service.activateUser = (email) => $http.post(`${apiUrl}UserAccounts/activate?email=${email}`);
   service.desactivateUser = (email) => $http.post(`${apiUrl}UserAccounts/desactivate?email=${email}`);
   service.deleteById = id => $http.delete(`${apiUrl}UserAccounts/${id}`);
