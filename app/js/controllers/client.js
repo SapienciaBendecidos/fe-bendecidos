@@ -31,7 +31,7 @@ function ClientController(ClientService, $q) {
   };
 
   vm.delete = () => {
-    let promise = vm.deleteById(vm.focusedClient.idCliente);
+    let promise = vm.deleteById(vm.focusedClient.id);
     promise.then(() => {
       Materialize.toast('Cliente eliminado exitosamente', 5000);
       vm.loadClients();
@@ -48,15 +48,16 @@ function ClientController(ClientService, $q) {
 
   vm.getClientById = id => {
     for (let i = 0; i < vm.clients.length; ++i)
-      if(vm.clients[i].idCliente == id) {
+      if(vm.clients[i].id == id) {
           let client = vm.clients[i];
           console.log(client);
           return  {
-            idCliente: client.idCliente,
-            identidad: client.identidad,
-            nombres: client.nombres,
-            colonia: client.colonia,
-            telefono: client.telefono
+            id: client.id,
+            names: client.names,
+            email: client.email,
+            phone: client.phone,
+            card_number: client.card_number,
+            account_number: client.account_number
           }
       }
   };
@@ -147,25 +148,27 @@ function ClientController(ClientService, $q) {
     let regexp = `${vm.search}`.split(' ').join('[ a-zA-Z ]*');
     let or =
     [
-      { idCliente: {regexp}},
-      { nombres: {regexp}},
-      { telefono: {regexp}},
-      { identidad: {regexp}},
-      { colonia: {regexp}}
+      // { id: {regexp}},
+      { names: {regexp}},
+      { phone: {regexp}},
+      { card_number: {regexp}},
+      { account_number: {regexp}},
+      { email: {regexp}}
     ];
     vm.filter = {or};
-    let promise = ClientService.getClients(vm.perPage,vm.perPage*vm.page,{or});
+    let promise = ClientService.getClients(vm.perPage,vm.perPage*vm.pages,{or});
     promise.then( response =>  vm.clients = response.data);
     promise.catch( () => Materialize.toast('Error al realizar busqueda', 5000));
   };
 
   vm.submitClient = () => {
-    let {identity, name, address, phone } = vm.post;
+    let { account_number, card_number, names, email, phone } = vm.post;
     let client = {
-      nombres: name,
-      telefono: phone,
-      identidad: identity,
-      colonia: address
+      names: names,
+      phone: phone,
+      card_number: card_number,
+      account_number: account_number,
+      email: email
     };
 
     let promise = vm.postClient(client);

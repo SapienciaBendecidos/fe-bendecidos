@@ -5,25 +5,25 @@ function ClientService($http) {
 
   const service = {};
 
-  service.countClients = () => $http.get(`${apiUrl}clientes/count`);
+  service.countClients = () => $http.get(`${apiUrl}students/count`);
 
   service.getClients = (limit, skip, filter) => {
     if(filter === '' || !filter)
-      return $http.get(`${apiUrl}clientes?filter[limit]=${limit}&filter[skip]=${skip}`);
-    return $http.get(`${apiUrl}clientes?filter=${JSON.stringify(filter)}&filter[limit]=${limit}&filter[skip]=${skip}`);
+      return $http.get(`${apiUrl}students?filter[limit]=${limit}&filter[skip]=${skip}`);
+    return $http.get(`${apiUrl}students?filter=${JSON.stringify(filter)}&filter[limit]=${limit}&filter[skip]=${skip}`);
   }
 
-  service.postClient = (client) => $http.post(`${apiUrl}clientes/`, client);
-  service.deleteById = id => $http.delete(`${apiUrl}clientes/${id}`);
+  service.postClient = (client) => $http.post(`${apiUrl}students/`, client);
+  service.deleteById = id => $http.delete(`${apiUrl}students/${id}`);
 
   service.sortClients = (limit, skip, filter, prop, dir) => {
     if(filter === '' || !filter)
-      return $http.get(`${apiUrl}clientes?filter[limit]=${limit}&filter[skip]=${skip}&filter[order]=${prop} ${dir}`);
-    return $http.get(`${apiUrl}clientes?filter=${JSON.stringify(filter)}&filter[limit]=${limit}&filter[skip]=${skip}&filter[order]=${prop} ${dir}`);
+      return $http.get(`${apiUrl}students?filter[limit]=${limit}&filter[skip]=${skip}&filter[order]=${prop} ${dir}`);
+    return $http.get(`${apiUrl}students?filter=${JSON.stringify(filter)}&filter[limit]=${limit}&filter[skip]=${skip}&filter[order]=${prop} ${dir}`);
   };
-  service.updateClient = (client) => $http.patch(`${apiUrl}clientes/`, client);
-  service.getClientById = id => $http.get(`${apiUrl}clientes/${id}`);
-  service.getCards = id => $http.get(`${apiUrl}clientes/${id}/tarjetas`);
+  service.updateClient = (client) => $http.patch(`${apiUrl}students/`, client);
+  service.getClientById = id => $http.get(`${apiUrl}students/${id}`);
+  service.getCards = id => $http.get(`${apiUrl}students/${id}/tarjetas`);
   return service;
 }
 
