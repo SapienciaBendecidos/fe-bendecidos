@@ -86,7 +86,7 @@ function ClientController(ClientService, $q) {
   vm.getClients = (page) => {
     let skip = page * vm.perPage,
         limit = vm.perPage;
-    return ClientService.getClients(limit,skip, vm.filter);
+    return ClientService.getClients(limit, skip, vm.filter);
   };
 
   vm.loadClients = () => {
@@ -145,7 +145,7 @@ function ClientController(ClientService, $q) {
       return;
     }
 
-    let regexp = `${vm.search}`.split(' ').join('[ a-zA-Z ]*');
+    let regexp = `/.*${`${vm.search}`.split(' ').join('[ a-zA-Z ]*')}.*/i`;
     let or =
     [
       // { id: {regexp}},
@@ -156,7 +156,7 @@ function ClientController(ClientService, $q) {
       { email: {regexp}}
     ];
     vm.filter = {or};
-    let promise = ClientService.getClients(vm.perPage,vm.perPage*vm.pages,{or});
+    let promise = ClientService.getClients(vm.perPage,vm.perPage*vm.activePage,{or});
     promise.then( response =>  vm.clients = response.data);
     promise.catch( () => Materialize.toast('Error al realizar busqueda', 5000));
   };

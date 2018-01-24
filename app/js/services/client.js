@@ -8,9 +8,10 @@ function ClientService($http) {
   service.countClients = () => $http.get(`${apiUrl}students/count`);
 
   service.getClients = (limit, skip, filter) => {
+    const filters = {where: filter, limit, skip}
     if(filter === '' || !filter)
       return $http.get(`${apiUrl}students?filter[limit]=${limit}&filter[skip]=${skip}`);
-    return $http.get(`${apiUrl}students?filter=${JSON.stringify(filter)}&filter[limit]=${limit}&filter[skip]=${skip}`);
+    return $http.get(`${apiUrl}students?filter=${JSON.stringify(filters)}`);
   }
 
   service.postClient = (client) => $http.post(`${apiUrl}students/`, client);
