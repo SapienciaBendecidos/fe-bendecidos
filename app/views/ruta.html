@@ -14,33 +14,40 @@
   </div>
 
     <div class="col s9">
-      <h3 class="thin">Rutas</h3>
+     <h3 class="thin">Rutas</h3>
+     </div>
+
+      <table style="width:7%">
+    <tr>
+      <th>
       <div class="add-button">
-        <a class="modal-trigger btn-floating btn-large waves-effect waves-light blue-grey" href="#agregar">
-          <i class="material-icons">add</i>
-        </a>
+        <a class="modal-trigger btn-floating btn-small waves-effect waves-light blue-grey" href="#agregar">
+          <i class="material-icons">add</i> </a>
       </div>
+      </th>
+      </tr>
+      </table>
 
       <table class="bordered centered highlight striped">
           <thead>
             <tr>
                 <th data-field="nombre">Nombre</th>
                 <th data-field="descripcion">Descripcion</th>
-                <th data-field="costo">Costo</th>
+                <th data-field="editar">Editar</th>
+                <th data-field="borrar">Borrar</th>
             </tr>
           </thead>
           <tbody>
             <tr ng-repeat="ruta in ctrl.rutas">
-              <td>{{ruta.nombre}}</td>
-              <td>{{ruta.descripcion}}</td>
-              <td>Lps. {{ruta.costo}}.00</td>
+              <td>{{ruta.name}}</td>
+              <td>{{ruta.description}}</td>
               <td>
-                <a class="btn-floating btn-large waves-effect waves-light  blue darken-4 modal-trigger" href="#editar" ng-click="ctrl.setFocusedRoute(ruta.idRuta)">
+                <a class="btn-floating btn-small waves-effect waves-light  blue darken-4 modal-trigger" href="#editar" ng-click="ctrl.setFocusedRoute(ruta.id)">
                   <i class="material-icons">mode_edit</i>
                 </a>
               </td>
             <td>
-              <a class="btn-floating btn-large waves-effect waves-light  red darken-2 modal-trigger" href="#eliminar" ng-click="ctrl.setFocusedRoute(ruta.idRuta)">
+              <a class="btn-floating btn-small waves-effect waves-light  red darken-2 modal-trigger" href="#eliminar" ng-click="ctrl.setFocusedRoute(ruta.id)">
                 <i class="material-icons">
                   delete
                 </i>
@@ -77,8 +84,8 @@
         <div class="modal-content">
           <h3 class="Grey thin">Ingresar Ruta</h3>
 
-            <div class="row">
-              <div class="input-field col s6">
+            <div class="m-0 row">
+              <div class="input-field col s12">
                 <input type='text'
                        name='name' id='name' ng-model="ctrl.post.name" required
                        class="validate">
@@ -86,21 +93,12 @@
               </div>
             </div>
 
-            <div class="row">
-              <div class="input-field col s6">
+            <div class="m-0 row">
+              <div class="input-field col s12">
                 <input type='text'
                        name='description' id='description' ng-model="ctrl.post.description" required
                        class="validate">
                <label for="description">Descripcion</label>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="input-field col s6">
-                <input type='text'
-                       name='costo' id='costo' ng-model="ctrl.post.costo" required
-                       class="validate">
-               <label for="costo">Costo</label>
               </div>
             </div>
 
@@ -121,13 +119,13 @@
           <row>
             <div class="input-field col s12">
               <i class="material-icons prefix">directions_bus</i>
-              <input placeholder="Ruta" id="nombre" type="text" class="validate" ng-model="ctrl.focusedRoute.nombre">
+              <input placeholder="Ruta" id="nombre" type="text" class="validate" ng-model="ctrl.focusedRoute.name">
             </div>
           </row>
           <row>
             <div class="input-field col s12">
               <i class="material-icons prefix">assignment</i>
-              <input placeholder="Zona" id="descripcion" type="text" class="validate" ng-model="ctrl.focusedRoute.descripcion">
+              <input placeholder="Descripcion" id="descripcion" type="text" class="validate" ng-model="ctrl.focusedRoute.description">
             </div>
           </row>
         </div>
@@ -146,13 +144,13 @@
           <row>
             <div class="col s12">
               <label>
-                <i class="material-icons prefix">directions_bus </i> <span style="color:black; font-size:1.5rem;"> {{ctrl.focusedRoute.nombre}} </span> </label>
+                <i class="material-icons prefix">directions_bus </i> <span style="color:black; font-size:1.5rem;"> {{ctrl.focusedRoute.name}} </span> </label>
             </div>
           </row>
           <row>
             <div class="col s12">
               <label>
-                <i class="material-icons prefix">assignment </i> <span style="color:black; font-size:1.5rem;"> {{ctrl.focusedRoute.descripcion}} </span></label>
+                <i class="material-icons prefix">assignment </i> <span style="color:black; font-size:1.5rem;"> {{ctrl.focusedRoute.description}} </span></label>
             </div>
           </row>
         </div>

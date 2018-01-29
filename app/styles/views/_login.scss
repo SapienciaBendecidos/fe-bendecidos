@@ -1,6 +1,11 @@
 .vw-login {
-	width: 100%;
+	width: 100% !important;
+  left: 0 !important;
   label {
     text-align: left
+  }
+
+  .padding-logo {
+  	padding: 6% 0 2%;
   }
 }

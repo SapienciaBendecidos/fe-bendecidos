@@ -15,13 +15,13 @@ function UsersController(UserService, $q) {
   console.log(vm.roles);
 
   vm.getFullName = (user) => {
-    return user.firstName + ' ' + user.firstSurname;
+    return user.name;
   };
 
   vm.setFocusedUser = id => vm.focusedUser = vm.getUserById(id);
 
   vm.edit = () => {
-    let promise = vm.postUser(vm.focusedUser);
+    let promise = vm.updateUser(vm.focusedUser);
     promise.then(() => {
       Materialize.toast('Usuario editado exitosamente',5000);
       vm.loadUsers();
@@ -53,10 +53,7 @@ function UsersController(UserService, $q) {
           console.log(user)
           return  {
             id: user.id,
-            firstName: user.firstName,
-            secondName: user.secondName,
-            firstSurname: user.firstSurname,
-            secondSurname: user.secondSurname,
+            name: user.name,
             email: user.email,
             type: user.roles[0].name,
             username: user.username
@@ -91,19 +88,37 @@ function UsersController(UserService, $q) {
 
   vm.getUserCount = () => UserService.countUsers();
   vm.postUser = (user) => UserService.postUser(user);
+  vm.updateUser = (user) => UserService.updateUser(user);
+
+  vm.changeUserState = (user) => {
+    let change = (user.status == 'active')?'desactivado':'activado';
+    let callFunc = (user.status == 'active')?vm.desactivateUser:vm.activateUser;
+
+    let promise = callFunc(user.email)
+
+    promise.then(() => {
+      Materialize.toast('Usuario '+change+' exitosamente', 5000);
+      vm.loadUsers();
+    })
+
+    promise.catch(() => {
+      Materialize.toast('Usuario no pudo ser '+change, 5000);
+      vm.loadUsers();
+    })
+  }
+
+  vm.activateUser = (email) => UserService.activateUser(email)
+  vm.desactivateUser = (email) => UserService.desactivateUser(email)
 
   vm.submitUser = () => {
-    let { firstname, middlename, lastname, secondLastname, email, rol, newPassword, newUsername } = vm.post;
+    let { name, email, rol, newPassword, newUsername } = vm.post;
     let user = {
-      firstName: firstname,
-      secondName: middlename ? middlename : '',
-      firstSurname: lastname,
-      secondSurname: secondLastname ? secondLastname : '',
+      name: name,
       email: email,
       type: rol,
       emailVerified: true,
-      status: 'disable',
-      password:newPassword,
+      status: 'desactive',
+      password: newPassword,
       username: newUsername
     };
 
